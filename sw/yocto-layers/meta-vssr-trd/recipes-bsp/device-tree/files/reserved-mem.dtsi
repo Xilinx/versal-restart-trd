@@ -1,0 +1,33 @@
+/******************************************************************************
+*
+* Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+*
+******************************************************************************/
+
+/ {
+	reserved-memory {
+		#address-cells = <0x2>;
+		#size-cells = <0x2>;
+		ranges;
+		/* PLM Reserved area for image store = 4MB */
+		plm_reserved: plm_resrv@3e000000 {
+			no-map;
+			reg = <0x0 0x3e000000 0x0 0x00400000>;
+		};
+		/* Shared memory communication for libmetal = 1MB */
+		lm_shm_reserved: lm_shm_resrv@3e400000 {
+			no-map;
+			reg = <0x0 0x3e400000 0x0 0x00100000>;
+		};
+		/* RPU Private Persistent Area = 1MB */
+		rpu_prv_reserved: rpu_prv_resrv@3e500000 {
+			no-map;
+			reg = <0x0 0x3e500000 0x0 0x00100000>;
+		};
+		/* RPU Execution Area = 2MB */
+		rproc_0_reserved: rproc@3e6000000 {
+			no-map;
+			reg = <0x0 0x3e600000 0x0 0x00200000>;
+		};
+	};
+};
