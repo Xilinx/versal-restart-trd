@@ -1,0 +1,215 @@
+#*****************************************************************************
+#
+# Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+#******************************************************************************
+marker	0x64	"Subsystem"
+# subsystem_apu
+pm_add_subsystem 0x1c000003
+# subsystem_rpu_ls
+pm_add_subsystem 0x1c000004
+# subsystem_apu can enact only non-secure ops upon subsystem_rpu_ls
+pm_add_requirement 0x1c000003 0x1c000004 0x7
+# subsystem_rpu_ls can enact only non-secure ops upon subsystem_apu
+pm_add_requirement 0x1c000004 0x1c000003 0x7
+# subsystem_apu can enact only non-secure system-reset (rst_pmc)
+pm_add_requirement 0x1c000003 0xc410002 0x1
+# subsystem_rpu_ls can enact only non-secure system-reset (rst_pmc)
+pm_add_requirement 0x1c000004 0xc410002 0x1
+
+# subsystem_apu can perform non-secure read/write ggs_0
+pm_add_requirement 0x1c000003 0x18248000 0x3
+# subsystem_apu can perform non-secure read/write ggs_1
+pm_add_requirement 0x1c000003 0x18248001 0x3
+# subsystem_apu can perform non-secure read/write ggs_2
+pm_add_requirement 0x1c000003 0x18248002 0x3
+# subsystem_apu can perform non-secure read/write ggs_3
+pm_add_requirement 0x1c000003 0x18248003 0x3
+# subsystem_apu can perform non-secure read/write pggs_0
+pm_add_requirement 0x1c000003 0x1824c004 0x3
+# subsystem_apu can perform non-secure read/write pggs_1
+pm_add_requirement 0x1c000003 0x1824c005 0x3
+# subsystem_apu can perform non-secure read/write pggs_2
+pm_add_requirement 0x1c000003 0x1824c006 0x3
+# subsystem_apu can perform non-secure read/write pggs_3
+pm_add_requirement 0x1c000003 0x1824c007 0x3
+
+# subsystem_rpu_ls can perform non-secure read/write ggs_0
+pm_add_requirement 0x1c000004 0x18248000 0x3
+# subsystem_rpu_ls can perform non-secure read/write ggs_1
+pm_add_requirement 0x1c000004 0x18248001 0x3
+# subsystem_rpu_ls can perform non-secure read/write ggs_2
+pm_add_requirement 0x1c000004 0x18248002 0x3
+# subsystem_rpu_ls can perform non-secure read/write ggs_3
+pm_add_requirement 0x1c000004 0x18248003 0x3
+# subsystem_rpu_ls can perform non-secure read/write pggs_0
+pm_add_requirement 0x1c000004 0x1824c004 0x3
+# subsystem_rpu_ls can perform non-secure read/write pggs_1
+pm_add_requirement 0x1c000004 0x1824c005 0x3
+# subsystem_rpu_ls can perform non-secure read/write pggs_2
+pm_add_requirement 0x1c000004 0x1824c006 0x3
+# subsystem_rpu_ls can perform non-secure read/write pggs_3
+pm_add_requirement 0x1c000004 0x1824c007 0x3
+
+# subsystem_apu dev_ocm_bank_0
+pm_add_requirement 0x1c000003 0x18314007 0x44 0xfffff 0x3 0x64
+# subsystem_apu dev_ocm_bank_1
+pm_add_requirement 0x1c000003 0x18314008 0x44 0xfffff 0x3 0x64
+# subsystem_apu dev_ocm_bank_2
+pm_add_requirement 0x1c000003 0x18314009 0x44 0xfffff 0x3 0x64
+# subsystem_apu dev_ocm_bank_3
+pm_add_requirement 0x1c000003 0x1831400a 0x44 0xfffff 0x3 0x64
+# subsystem_apu dev_ams_root
+pm_add_requirement 0x1c000003 0x18224055 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_acpu_0
+pm_add_requirement 0x1c000003 0x1810c003 0x44 0xfffff 0x1 0x64
+# subsystem_apu dev_acpu_1
+pm_add_requirement 0x1c000003 0x1810c004 0x44 0xfffff 0x1 0x64
+# subsystem_apu dev_gem_0
+pm_add_requirement 0x1c000003 0x18224019 0x46 0xfffff 0x7 0x64
+# subsystem_apu dev_gem_1
+pm_add_requirement 0x1c000003 0x1822401a 0x46 0xfffff 0x7 0x64
+# subsystem_apu dev_sdio_0
+pm_add_requirement 0x1c000003 0x1822402e 0x46 0xfffff 0x11 0x64
+# subsystem_apu dev_sdio_1
+pm_add_requirement 0x1c000003 0x1822402f 0x44 0xfffff 0x11 0x64
+# subsystem_apu dev_can_fd_0
+pm_add_requirement 0x1c000003 0x1822401f 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_i2c_0
+pm_add_requirement 0x1c000003 0x1822401d 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_spi_0
+pm_add_requirement 0x1c000003 0x1822401b 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_can_fd_1
+pm_add_requirement 0x1c000003 0x18224020 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_i2c_1
+pm_add_requirement 0x1c000003 0x1822401e 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_spi_1
+pm_add_requirement 0x1c000003 0x1822401c 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_uart_1
+pm_add_requirement 0x1c000003 0x18224022 0x7 0xfffff 0x0 0x64
+# subsystem_apu dev_gpio_pmc
+pm_add_requirement 0x1c000003 0x1822402c 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_swdt_fpd
+pm_add_requirement 0x1c000003 0x18224029 0x7 0xfffff 0x0 0x64
+# subsystem_apu dev_usb_0
+pm_add_requirement 0x1c000003 0x18224018 0x7 0xfffff 0x0 0x64
+# subsystem_apu dev_l2_bank_0
+pm_add_requirement 0x1c000003 0x1831c00f 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ddr_0
+pm_add_requirement 0x1c000003 0x18320010 0x7 0xfffff 0x0 0x64
+# subsystem_apu dev_gpio
+pm_add_requirement 0x1c000003 0x18224023 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ttc_0
+pm_add_requirement 0x1c000003 0x18224024 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_rtc
+pm_add_requirement 0x1c000003 0x18224034 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_0
+pm_add_requirement 0x1c000003 0x18224035 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_1
+pm_add_requirement 0x1c000003 0x18224036 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_2
+pm_add_requirement 0x1c000003 0x18224037 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_3
+pm_add_requirement 0x1c000003 0x18224038 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_4
+pm_add_requirement 0x1c000003 0x18224039 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_5
+pm_add_requirement 0x1c000003 0x1822403a 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_6
+pm_add_requirement 0x1c000003 0x1822403b 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_adma_7
+pm_add_requirement 0x1c000003 0x1822403c 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ipi_0
+pm_add_requirement 0x1c000003 0x1822403d 0x44 0xfffff 0x1 0x64
+# subsystem_apu dev_ipi_1
+pm_add_requirement 0x1c000003 0x1822403e 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ipi_2
+pm_add_requirement 0x1c000003 0x1822403f 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ipi_3
+pm_add_requirement 0x1c000003 0x18224040 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ipi_4
+pm_add_requirement 0x1c000003 0x18224041 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ipi_5
+pm_add_requirement 0x1c000003 0x18224042 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_ipi_6
+pm_add_requirement 0x1c000003 0x18224043 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_tcm_0_a
+pm_add_requirement 0x1c000003 0x1831800b 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_tcm_0_b
+pm_add_requirement 0x1c000003 0x1831800c 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_tcm_1_a
+pm_add_requirement 0x1c000003 0x1831800d 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_tcm_1_b
+pm_add_requirement 0x1c000003 0x1831800e 0x4 0xfffff 0x0 0x64
+# subsystem_apu dev_uart_0
+pm_add_requirement 0x1c000003 0x18224021 0x45 0xfffff 0x0 0x64
+# subsystem_apu dev_qspi
+pm_add_requirement 0x1c000003 0x1822402b 0x44 0xfffff 0x11 0x64
+# subsystem_apu dev_aie
+pm_add_requirement 0x1c000003 0x18224072 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_rpu0_0
+pm_add_requirement 0x1c000004 0x18110005 0x44 0xfffff 0x1 0x64
+# subsystem_rpu_ls dev_rtc
+pm_add_requirement 0x1c000004 0x18224034 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_tcm_0_a
+pm_add_requirement 0x1c000004 0x1831800b 0x44 0xfffff 0x3 0x64
+# subsystem_rpu_ls dev_tcm_0_b
+pm_add_requirement 0x1c000004 0x1831800c 0x44 0xfffff 0x3 0x64
+# subsystem_rpu_ls dev_tcm_1_a
+pm_add_requirement 0x1c000004 0x1831800d 0x44 0xfffff 0x3 0x64
+# subsystem_rpu_ls dev_tcm_1_b
+pm_add_requirement 0x1c000004 0x1831800e 0x44 0xfffff 0x3 0x64
+# subsystem_rpu_ls dev_swdt_lpd
+pm_add_requirement 0x1c000004 0x18224028 0x7 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_uart_1
+pm_add_requirement 0x1c000004 0x18224022 0x47 0xfffff 0x7 0x64
+# subsystem_rpu_ls dev_ttc_2
+pm_add_requirement 0x1c000004 0x18224026 0x7 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_ipi_0
+pm_add_requirement 0x1c000004 0x1822403d 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_ipi_1
+pm_add_requirement 0x1c000004 0x1822403e 0x44 0xfffff 0x1 0x64
+# subsystem_rpu_ls dev_ipi_2
+pm_add_requirement 0x1c000004 0x1822403f 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_ipi_3
+pm_add_requirement 0x1c000004 0x18224040 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_ipi_4
+pm_add_requirement 0x1c000004 0x18224041 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_ipi_5
+pm_add_requirement 0x1c000004 0x18224042 0x4 0xfffff 0x0 0x64
+# subsystem_rpu_ls dev_ipi_6
+pm_add_requirement 0x1c000004 0x18224043 0x4 0xfffff 0x0 0x64
+
+# Healthy Boot configuration for APU subsystem
+#Add HB_MON_0 to APU subsystem. Timeout(last argument) = 120000ms (0x1D4C0)
+pm_add_requirement 0x1c000003 0x18250000 0x46 0xFFFFF 0x1 0x1D4C0
+#Set the error action (SRST) for HB_MON_0 in case of subsystem not healthy
+#Second Argument = error action; POR=0x1; SRST=0x2; ERR_OUT=0x4;
+em_set_action 0x28110000 0x2 0x1
+
+# Healthy Boot configuration for RPU subsystem
+#Add HB_MON_1 to RPU_LS subsystem. Timeout(last argument) = 20000ms (0x4E20)
+pm_add_requirement 0x1c000004 0x18250001 0x46 0xFFFFF 0x1 0x4E20
+#Set the error action (POR) for HB_MON_1 in case of subsystem not healthy
+#Second Argument = error action; POR=0x1; SRST=0x2; ERR_OUT=0x4;
+em_set_action 0x28110000 0x1 0x2
+
+marker 0x65	"Subsystem"
