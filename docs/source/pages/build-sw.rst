@@ -106,7 +106,7 @@ This produces
 
 Run :code:`make help` in *$REPO_SRC* directory to see various build options.
 
-For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md>`_ file in the repository.
+For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#makefiles>`_ file in the repository.
 
 Build without Makefile
 ----------------------

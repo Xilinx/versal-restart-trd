@@ -171,7 +171,7 @@ The reference design package contains of 2 parts:
 
   * Pre-built binaries
 
-  * Available in `zip file`_
+  * Available in `zip file`_ for each board variant
 
 
 * Sources
@@ -309,5 +309,5 @@ You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
 use of the design and any third party files supplied with the design.
 
-.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links
+.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#prebuilt-images
 

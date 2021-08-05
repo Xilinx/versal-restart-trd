@@ -10,7 +10,7 @@ Prerequisites
 
 * SD card image.
 
-  * Download `Prebuilt Images <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links>`_ and use the prebuilt petalinux-sdimage.wic.xz
+  * Download `Prebuilt Images <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#prebuilt-images>`_ and use the prebuilt petalinux-sdimage.wic.xz
 
   * Alternatively build the petalinux-sdimage.wic.xz from the build tutorial.
 
