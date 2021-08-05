@@ -184,59 +184,42 @@ The reference design package contains of 2 parts:
 Binaries
 --------
 
-Download the `zip file`_ from Xilinx.com.
+Download the `zip file`_ from Xilinx.com, for the specific board variant.
 
 It has the following contents:
 
-* Documentation (html webpages)
+* Pre-built SD card image
 
-* Pre-built SD card image for all board variants
-
-* Artifacts from hardware and software builds for all board variants.
+* Artifacts from hardware and software builds for all board variants under *reference_images/*
 
 * README file
 
-The zip contents are as follow::
+The zip contents for **vck190-prod** are as follow ::
 
- versal-restart-trd-pre-built-2021.1.zip
+ vssr-trd-pb-vck190-prod-2021.1.zip
  │
- versal-restart-trd-pre-built-2021.1
- ├── docs
- │   ├── ...doc-files
- │   └── index.html
+ vssr-trd-vck190-prod
  ├── LICENSE
  ├── prebuilt
- │   ├── vck190-es1-base
- │   │   ├── petalinux-sdimage.wic.xz
- │   │   └── reference_images/
- │   ├── vck190-prod-base
- │   │   ├── petalinux-sdimage.wic.xz
- │   │   └── reference_images/
- │   ├── vmk180-es1-base
- │   │   ├── petalinux-sdimage.wic.xz
- │   │   └── reference_images/
- │   └── vmk180-prod-base
- │       ├── petalinux-sdimage.wic.xz
- │       └── reference_images/
+ │   ├── petalinux-sdimage.wic.xz
+ │   └── reference_images/
+ │       ├── bl31.elf
+ │       ├── boot.bif
+ │       ├── BOOT.BIN
+ │       ├── boot.scr
+ │       ├── Image
+ │       ├── plm.elf
+ │       ├── psmfw.elf
+ │       ├── ramdisk.cpio.gz.u-boot
+ │       ├── rootfs.tar.gz
+ │       ├── rpu_app.elf
+ │       ├── system.dtb
+ │       ├── u-boot.elf
+ │       ├── versal_restart_trd_wrapper.pdi
+ │       └── versal_restart_trd_wrapper.xsa
  └── README
 
-Following are contents of reference_images/ for each variant in prebuilt directory::
-
- reference_images/
- ├── bl31.elf
- ├── boot.bif
- ├── BOOT.BIN
- ├── boot.scr
- ├── Image
- ├── plm.elf
- ├── psmfw.elf
- ├── ramdisk.cpio.gz.u-boot
- ├── rootfs.tar.gz
- ├── rpu_app.elf
- ├── system.dtb
- ├── u-boot.elf
- ├── versal_restart_trd_wrapper.pdi
- └── versal_restart_trd_wrapper.xsa
+Same file structure is available for other 3 variants (vck190-es1, vmk180-prod, vmk180-es1) as well.
 
 Sources
 -------
