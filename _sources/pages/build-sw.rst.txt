@@ -133,94 +133,108 @@ Build RPU Application
 
 #. From the Welcome screen or *File -> New* menu select *Create Application Project*
 
-   .. image:: images/rpu_app_build/01_welcome.png
-     :width: 500
+   .. figure:: images/rpu_app_build/01_welcome.png
+     :width: 50%
      :align: center
      :alt: vitis_welcome
 
 #. Platform: Select *Create a new platform from hardware (XSA)*, then browse and select the hardware XSA file to be used and press *Next*.
 
-   |platform_1| |platform_2| |platform_3|
+   .. figure:: images/rpu_app_build/03_platform_1.png
+     :width: 50%
+     :align: center
+     :alt: create_new_platform
 
-   .. |platform_1| image:: images/rpu_app_build/03_platform_1.png
-     :width: 30%
+   .. figure:: images/rpu_app_build/03_platform_2.png
+     :width: 50%
+     :align: center
+     :alt: browse_xsa
 
-   .. |platform_2| image:: images/rpu_app_build/03_platform_2.png
-     :width: 30%
-
-   .. |platform_3| image:: images/rpu_app_build/03_platform_3.png
-     :width: 32%
+   .. figure:: images/rpu_app_build/03_platform_3.png
+     :width: 50%
+     :align: center
+     :alt: pick_xsa
 
 #. Application Project Details: Add application name and select r5_0 for the target processor.
 
-   .. image:: images/rpu_app_build/05_app_details.png
-     :width: 500
+   .. figure:: images/rpu_app_build/05_app_details.png
+     :width: 50%
      :align: center
      :alt: Application_Details
 
 #. Domain Selection: Create new domain for r5 application to run standalone operating system (default).
 
-   .. image:: images/rpu_app_build/06_domain.png
-     :width: 500
+   .. figure:: images/rpu_app_build/06_domain.png
+     :width: 50%
      :align: center
      :alt: Domain_Details
 
 #. Application Template: Choose *Empty Application(C)* and click *Finish*
 
-   .. image:: images/rpu_app_build/07_app_template.png
-     :width: 500
+   .. figure:: images/rpu_app_build/07_app_template.png
+     :width: 50%
      :align: center
      :alt: Template
 
 #. Navigate to BSP Settings and click *Modify BSP Settings*.
 
-   |bsp_setting_1| |bsp_setting_2|
+   .. figure:: images/rpu_app_build/08_bsp_nav.png
+      :width: 50%
+      :align: center
+      :alt: bsp_nav
 
-   .. |bsp_setting_1| image:: images/rpu_app_build/08_bsp_nav.png
-     :width: 40%
-
-   .. |bsp_setting_2| image:: images/rpu_app_build/09_bsp_page.png
-     :width: 40%
+   .. figure:: images/rpu_app_build/09_bsp_page.png
+      :width: 50%
+      :align: center
+      :alt: bsp_page
 
 #. Select *libmetal* and *xilpm* libraries from the overview tab.
 
-   .. image:: images/rpu_app_build/10_lib_select.png
-     :width: 500
+   .. figure:: images/rpu_app_build/10_lib_select.png
+     :width: 50%
      :align: center
      :alt: lib
 
 #. Change *stdin* and *stdout* to use UART1 instead of UART0 and press Ok to exit bsp settings.
 
-   .. image:: images/rpu_app_build/11_uart_select.png
-     :width: 500
+   .. figure:: images/rpu_app_build/11_uart_select.png
+     :width: 50%
      :align: center
      :alt: uart
 
 #. Import Sources: Right click rpu_app and select *Import Sources...* (or do *File -> import* ) and import sources from ${REPO_SRC}/sw/standalone-srcs/rpu_app/src/ and click Finish.
 
-   |import_src_1| |import_src_2| |import_src_3| |import_src_4|
+   .. figure:: images/rpu_app_build/12_import_src_1.png
+     :width: 50%
+     :align: center
+     :alt: import_sources
 
-   .. |import_src_1| image:: images/rpu_app_build/12_import_src_1.png
-     :width: 20%
+   .. figure:: images/rpu_app_build/12_import_src_2.png
+     :width: 50%
+     :align: center
+     :alt: browse_sources
 
-   .. |import_src_2| image:: images/rpu_app_build/12_import_src_2.png
-     :width: 15%
+   .. figure:: images/rpu_app_build/12_import_src_3.png
+     :width: 50%
+     :align: center
+     :alt: select_sources
 
-   .. |import_src_3| image:: images/rpu_app_build/12_import_src_3.png
-     :width: 20%
-
-   .. |import_src_4| image:: images/rpu_app_build/12_import_src_4.png
-     :width: 20%
+   .. figure:: images/rpu_app_build/12_import_src_4.png
+     :width: 50%
+     :align: center
+     :alt: import_sources_checkbox
 
 #. Build all the projects (platform bsp and rpu_app) by clicking the build icon or by right clicking *rpu_app* in explorer pan and selecting *Build Project*
 
-   |build_1| |build_2|
+   .. figure:: images/rpu_app_build/13_build_1.png
+     :width: 50%
+     :align: center
+     :alt: build_select_icon
 
-   .. |build_1| image:: images/rpu_app_build/13_build_1.png
-     :width: 55%
-
-   .. |build_2| image:: images/rpu_app_build/13_build_2.png
-     :width: 30%
+   .. figure:: images/rpu_app_build/13_build_2.png
+     :width: 50%
+     :align: center
+     :alt: build_select_menu
 
 #. The application will be generated at::
 
@@ -254,17 +268,20 @@ Generate Petalinux Image
      VMK180   versal-vmk180-reva-x-ebm-01-reva
      ======== ============
 
-     |plnx_config_1|
+     .. figure:: images/plnx_build/plnx_config_1.png
+       :width: 50%
+       :align: center
+       :alt: plnx_config_1
 
-     |plnx_config_2|
+     .. figure:: images/plnx_build/plnx_config_2.png
+       :width: 50%
+       :align: center
+       :alt: plnx_config_2
 
-     |plnx_config_3|
-
-     .. |plnx_config_1| image:: images/plnx_build/plnx_config_1.png
-
-     .. |plnx_config_2| image:: images/plnx_build/plnx_config_2.png
-
-     .. |plnx_config_3| image:: images/plnx_build/plnx_config_3.png
+     .. figure:: images/plnx_build/plnx_config_3.png
+       :width: 50%
+       :align: center
+       :alt: plnx_config_3
 
    * Save and Exit petalinux configuration
 
@@ -275,11 +292,17 @@ Generate Petalinux Image
 
    * Select *Subsystem AUTO Hardware Settings ---> Ethernet Settings ---> Primary Ethernet ---> ethernet_0*
 
-   .. image:: images/plnx_build/plnx_ip_config_1.png
+   .. figure:: images/plnx_build/plnx_ip_config_1.png
+     :width: 50%
+     :align: center
+     :alt: plnx_ip_config_1
 
    * Unselect *Obtain IP address automatically* and set the static IP
 
-   .. image:: images/plnx_build/plnx_ip_config_2.png
+   .. figure:: images/plnx_build/plnx_ip_config_2.png
+     :width: 50%
+     :align: center
+     :alt: plnx_ip_config_2
 
    * Save and Exit petalinux configuration
 
@@ -293,13 +316,15 @@ Generate Petalinux Image
 
    * Add new user layer and enter the layer path at *Yocto Settings ---> User Layers ---> user layer 0*
 
-     |layer_list| |layer_add|
+     .. figure:: images/plnx_build/plnx_layer_add_2.png
+       :width: 50%
+       :align: center
+       :alt: plnx_layer_add_2
 
-     .. |layer_list| image:: images/plnx_build/plnx_layer_add_2.png
-       :width: 40%
-
-     .. |layer_add| image:: images/plnx_build/plnx_layer_add_3.png
-       :width: 40%
+     .. figure:: images/plnx_build/plnx_layer_add_3.png
+       :width: 50%
+       :align: center
+       :alt: plnx_layer_add_3
 
    * Save and Exit petalinux configuration
 
@@ -348,6 +373,6 @@ Following step create a SD card wic image which can be flashed on the sd card fo
 
 The resulting build artifacts will be available in the *images/linux/*
 
-Refer the "Run the Prebuilt Image" section for how to flash the SD Card and boot the TRD images.
+Refer the "Run Images on Target" section for how to flash the SD Card and boot the TRD images.
 
 For more detailed information on how to use Petalinux, please refer to the `Petalinux Tool Reference Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1144-petalinux-tools-reference-guide.pdf>`_.

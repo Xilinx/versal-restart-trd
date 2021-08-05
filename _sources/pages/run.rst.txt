@@ -10,7 +10,7 @@ Prerequisites
 
 * SD card image.
 
-  * Use the prebuilt petalinux-sdimage.wic.xz from prebuilt directory in the downloaded versal-restart-trd.zip
+  * Download `Prebuilt Images <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links>`_ and use the prebuilt petalinux-sdimage.wic.xz
 
   * Alternatively build the petalinux-sdimage.wic.xz from the build tutorial.
 
@@ -61,8 +61,10 @@ SD Card Creation
 
     * Click flash to write the image.
 
-.. image:: images/run/flasher.png
-  :width: 40%
+.. figure:: images/run/flasher.png
+  :width: 50%
+  :align: center
+  :alt: flasher
 
 
 Board Setup
@@ -70,8 +72,9 @@ Board Setup
 
 The following figure shows how to set up the VCK190 or VMK180 evaluation boards.
 
-.. image:: images/run/vck190-setup-no-router.jpg
-  :width: 70%
+.. figure:: images/run/vck190-setup-no-router.jpg
+  :width: 50%
+  :align: center
   :alt: VCK190 Board Setup
 
 
@@ -138,15 +141,15 @@ Note the Ethernet adapter name given, then type::
 
 where ``.xxx`` can be anything other than ``.10`` which would conflict with the JupyterLab server.
 
-.. image:: images/run/ifconfig_linux.png
-  :width: 500
+.. figure:: images/run/ifconfig_linux.png
+  :width: 50%
   :align: center
   :alt: ifconfig_linux
 
 On Windows, set the IP address from Control Panel as shown below.
 
-.. image:: images/run/set_ip_windows.png
-  :width: 800
+.. figure:: images/run/set_ip_windows.png
+  :width: 50%
   :align: center
   :alt: set_ip_windows
 
@@ -195,8 +198,9 @@ laptop.
 
     http://192.168.0.10:8888
 
-  .. image:: images/run/password.png
-    :width: 500
+  .. figure:: images/run/password.png
+    :width: 50%
+    :align: center
     :alt: Jupyter Login
 
 * Enter the password ``vssr-trd``
@@ -225,13 +229,15 @@ Start the Notebook
 
 #. Select menu **Run > Run All Cells**. This will start the TRD dashboard.
 
-   |jupyter_open|   |jupyter_run|
+   .. figure:: images/run/jupyter-open.png
+     :width: 50%
+     :align: center
+     :alt: jupyter-open
 
-   .. |jupyter_open| image:: images/run/jupyter-open.png
-     :width: 45%
-
-   .. |jupyter_run| image:: images/run/jupyter-runall.png
-     :width: 45%
+   .. figure:: images/run/jupyter-runall.png
+     :width: 50%
+     :align: center
+     :alt: jupyter-runall
 
 This will start the TRD dashboard in the notebook.
 
@@ -240,17 +246,18 @@ Using the Notebook
 
 The notebook is laid out in a dashboard which allows to choose various TRD operations.
 
-.. image:: images/run/dashboard.png
-
-|
+.. figure:: images/run/dashboard.png
+   :width: 100%
+   :align: center
+   :alt: dashboard
 
 * The top half of the notebook presents the general information about the notebook with
   links to documentation and sources.
 
-  .. image:: images/run/dashboard-top.png
+  .. figure:: images/run/dashboard-top.png
     :width: 75%
-
-|
+    :align: center
+    :alt: dashboard-top
 
 * The bottom half of the notebook has 2 panes
 
@@ -268,8 +275,10 @@ The notebook is laid out in a dashboard which allows to choose various TRD opera
 
     * Observation and what to expect.
 
-  .. image:: images/run/rpu-ss.png
+  .. figure:: images/run/rpu-ss.png
     :width: 75%
+    :align: center
+    :alt: rpu-ss
 
 
 Control Selections

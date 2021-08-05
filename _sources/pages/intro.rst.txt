@@ -48,9 +48,9 @@ Features:
 
 * Supports multiple platforms:
 
-  * VCK190 Evaluation boards (both Early Silicon and Production Silicon)
+  * `VCK190 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vck190.html>`_ (both Early Silicon and Production Silicon)
 
-  * VMK180 Evaluation boards (both Early Silicon and Production Silicon)
+  * `VMK180 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vmk180.html>`_ (both Early Silicon and Production Silicon)
 
 Hardware Design
 ***************
@@ -69,8 +69,8 @@ the design version in the PL.
 
 
 
-.. image:: images/intro/base_subsystem_restart_concept_diagram.png
-    :width: 600px
+.. figure:: images/intro/base_subsystem_restart_concept_diagram.png
+    :width: 50%
     :align: center
     :alt: System Design Block Diagram
 
@@ -148,7 +148,10 @@ This section list the software pieces involved in demonstrating the TRD features
 
 Below diagram shows relationship and interaction between above pieces:
 
-.. image:: images/intro/sw_stack.png
+.. figure:: images/intro/sw_stack.png
+   :width: 50%
+   :align: center
+   :alt: SW Stack
 
 Please refer `Versal ACAP System Software Developers Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1304-versal-acap-ssdg.pdf>`_ for more details on software stack and detailed development guide for each component.
 
@@ -191,7 +194,9 @@ It has the following contents:
 
 The zip contents are as follow::
 
- versal-restart-trd.zip
+ versal-restart-trd-pre-built-2021.1.zip
+ │
+ versal-restart-trd-pre-built-2021.1
  ├── docs
  │   ├── ...doc-files
  │   └── index.html
@@ -285,25 +290,20 @@ The repository directory structure is as follow::
 Licenses
 ********
 
-Todo: Update licensing information.
-
 The design includes files licensed by Xilinx and third parties under the terms
 of the GNU General Public License, GNU Lesser General Public License,
 BSD License, MIT License, and other licenses.
 
-Licenses for image.ub files are included in the /usr/share/licenses directory when
+Licenses for rootfs files are included in the /usr/share/licenses directory when
 the image file is built. DNF package manager can be used to list all packages in the
 image as well as download all the sources for all the packages.
 
-Information on how users can find the relevant source code and licensing information
-for Board Support Packages (BSPs) is located on a Wiki site:
-https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/185401379/Licenses+and+Source+Code+Information+for+PetaLinux+BSPs
+LICENSE file included the prebuilt image's `zip file`_ details the licenses of the packages
+used in the prebuilt images.
 
 You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
 use of the design and any third party files supplied with the design.
 
-.. todo: update the link
-
-.. _`zip file`: http://xilinx.com
+.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links
 

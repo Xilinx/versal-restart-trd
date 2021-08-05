@@ -503,7 +503,9 @@ vivado -source ./scripts/build_proj.tcl
 </div>
 <p>A Vivado cockpit as shown below will open with Restart TRD project
 populated.</p>
-<a class="reference internal image-reference" href="../_images/base_vivado.png"><img alt="Vivado cockpit" class="align-center" src="../_images/base_vivado.png" style="width: 1200px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/base_vivado.png"><img alt="Vivado cockpit" src="../_images/base_vivado.png" style="width: 100%;" /></a>
+</div>
 </li>
 <li><p class="first">Look at the block design</p>
 <p>In the Flow Navigator pane on the left-hand side under IP Integrator, click
@@ -511,7 +513,9 @@ on <em>Open Block Design</em>. An IP Integrator (IPI) block design
 (<em>versal_restart_trd.bd</em>) becomes visible that contains the
 Control, Interface and Processing System (CIPS) IP, NOC IP and
 simple programmable logic design.</p>
-<a class="reference internal image-reference" href="../_images/base_block_diagram.png"><img alt="IPI Block Design" class="align-center" src="../_images/base_block_diagram.png" style="width: 1200px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/base_block_diagram.png"><img alt="IPI Block Design" src="../_images/base_block_diagram.png" style="width: 100%;" /></a>
+</div>
 </li>
 <li><p class="first">(Recommended) Run the implementation script</p>
 <p>To automatically run Vivado all the way through to Write Device Image
@@ -544,22 +548,30 @@ then skip to the next section:</p>
 </ul>
 </li>
 <li><p class="first">(Alternate) When new PDI is done, click on <em>Open Implemented Design</em>.</p>
-<a class="reference internal image-reference" href="../_images/base_open_implemented_design.png"><img alt="Open Implemented Design" class="align-center" src="../_images/base_open_implemented_design.png" style="width: 1200px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/base_open_implemented_design.png"><img alt="Open Implemented Design" src="../_images/base_open_implemented_design.png" style="width: 100%;" /></a>
+</div>
 </li>
 <li><p class="first">(Alternate) Create the XSA</p>
-<p>To create the XSA, click on <em>File → Export → Export hardware</em>. A
-window pops up. Click Next.</p>
-<a class="reference internal image-reference" href="../_images/base_export.png"><img alt="Export hardware Options" class="align-center" src="../_images/base_export.png" style="width: 600px;" /></a>
 <ul class="simple">
+<li>To create the XSA, click on <em>File → Export → Export hardware</em>. A window pops up. Click Next.</li>
 <li>Select <em>Include Device Image</em>. Click Next.</li>
-<li>Change Export path to
-<em>$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1</em>. Click Next.</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/base_export.png"><img alt="Export hardware Options" src="../_images/base_export.png" style="width: 50%;" /></a>
+</div>
+<ul class="simple">
+<li>Change Export path to <em>$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1</em>. Click Next.</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/base_export_project_dir.jpeg"><img alt="Export Hardware Path" src="../_images/base_export_project_dir.jpeg" style="width: 50%;" /></a>
+</div>
+<ul class="simple">
 <li>Click on <em>Finish</em>.</li>
 </ul>
-<p>The file <em>versal_restart_trd_wrapper.xsa</em> will be available in <em>$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/</em></p>
-<a class="reference internal image-reference" href="../_images/base_export_project_dir.jpeg"><img alt="Export Hardware Path" class="align-center" src="../_images/base_export_project_dir.jpeg" style="width: 600px;" /></a>
 </li>
 </ol>
+<p>The file <em>versal_restart_trd_wrapper.xsa</em> will be available in <em>$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/</em></p>
 </div>
 </div>
 </div>
@@ -593,7 +605,7 @@ window pops up. Click Next.</p>
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on July 26, 2021.
+        Last updated on August 04, 2021.
       </span>
 
     </p>

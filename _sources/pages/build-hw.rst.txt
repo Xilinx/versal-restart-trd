@@ -94,8 +94,8 @@ To run the Vivado portion manually, follow the instructions in this section.
    A Vivado cockpit as shown below will open with Restart TRD project
    populated.
 
-   .. image:: images/base_vivado/base_vivado.png
-     :width: 1200
+   .. figure:: images/base_vivado/base_vivado.png
+     :width: 100%
      :align: center
      :alt: Vivado cockpit
 
@@ -107,8 +107,8 @@ To run the Vivado portion manually, follow the instructions in this section.
    Control, Interface and Processing System (CIPS) IP, NOC IP and
    simple programmable logic design.
 
-   .. image:: images/base_vivado/base_block_diagram.png
-     :width: 1200
+   .. figure:: images/base_vivado/base_block_diagram.png
+     :width: 100%
      :align: center
      :alt: IPI Block Design
 
@@ -144,32 +144,30 @@ To run the Vivado portion manually, follow the instructions in this section.
 
 #. (Alternate) When new PDI is done, click on *Open Implemented Design*.
 
-   .. image:: images/base_vivado/base_open_implemented_design.png
-     :width: 1200
+   .. figure:: images/base_vivado/base_open_implemented_design.png
+     :width: 100%
      :align: center
      :alt: Open Implemented Design
 
 #. (Alternate) Create the XSA
 
-   To create the XSA, click on *File → Export → Export hardware*. A
-   window pops up. Click Next.
-
-   .. image:: images/base_vivado/base_export.png
-     :width: 600
-     :align: center
-     :alt: Export hardware Options
+   * To create the XSA, click on *File → Export → Export hardware*. A window pops up. Click Next.
 
    * Select *Include Device Image*. Click Next.
 
-   * Change Export path to
-     *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1*. Click Next.
+   .. figure:: images/base_vivado/base_export.png
+     :width: 50%
+     :align: center
+     :alt: Export hardware Options
 
-   * Click on *Finish*.
+   * Change Export path to *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1*. Click Next.
 
-   The file *versal_restart_trd_wrapper.xsa* will be available in *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/*
-
-   .. image:: images/base_vivado/base_export_project_dir.jpeg
-     :width: 600
+   .. figure:: images/base_vivado/base_export_project_dir.jpeg
+     :width: 50%
      :align: center
      :alt: Export Hardware Path
+
+   * Click on *Finish*.  
+  
+The file *versal_restart_trd_wrapper.xsa* will be available in *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/*
 

@@ -428,7 +428,7 @@
 <span id="id1"></span><h2>3.1. Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>SD card image.<ul>
-<li>Use the prebuilt petalinux-sdimage.wic.xz from prebuilt directory in the downloaded versal-restart-trd.zip</li>
+<li>Download <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">Prebuilt Images</a> and use the prebuilt petalinux-sdimage.wic.xz</li>
 <li>Alternatively build the petalinux-sdimage.wic.xz from the build tutorial.</li>
 </ul>
 </li>
@@ -523,12 +523,16 @@
 </ul>
 </li>
 </ul>
-<a class="reference internal image-reference" href="../_images/flasher.png"><img alt="../_images/flasher.png" src="../_images/flasher.png" style="width: 40%;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/flasher.png"><img alt="flasher" src="../_images/flasher.png" style="width: 50%;" /></a>
+</div>
 </div>
 <div class="section" id="board-setup">
 <h2>3.3. Board Setup<a class="headerlink" href="#board-setup" title="Permalink to this headline">¶</a></h2>
 <p>The following figure shows how to set up the VCK190 or VMK180 evaluation boards.</p>
-<a class="reference internal image-reference" href="../_images/vck190-setup-no-router.jpg"><img alt="VCK190 Board Setup" src="../_images/vck190-setup-no-router.jpg" style="width: 70%;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/vck190-setup-no-router.jpg"><img alt="VCK190 Board Setup" src="../_images/vck190-setup-no-router.jpg" style="width: 50%;" /></a>
+</div>
 <p><strong>Board jumper and switch settings</strong></p>
 <p>This is a onetime setup and the board should have been delivered to you with
 this default settings, but it is good to double check for the first time when
@@ -576,9 +580,13 @@ needs to be on the same subnet.</p>
 </pre></div>
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">.xxx</span></code> can be anything other than <code class="docutils literal notranslate"><span class="pre">.10</span></code> which would conflict with the JupyterLab server.</p>
-<a class="reference internal image-reference" href="../_images/ifconfig_linux.png"><img alt="ifconfig_linux" class="align-center" src="../_images/ifconfig_linux.png" style="width: 500px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/ifconfig_linux.png"><img alt="ifconfig_linux" src="../_images/ifconfig_linux.png" style="width: 50%;" /></a>
+</div>
 <p>On Windows, set the IP address from Control Panel as shown below.</p>
-<a class="reference internal image-reference" href="../_images/set_ip_windows.png"><img alt="set_ip_windows" class="align-center" src="../_images/set_ip_windows.png" style="width: 800px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/set_ip_windows.png"><img alt="set_ip_windows" src="../_images/set_ip_windows.png" style="width: 50%;" /></a>
+</div>
 </div>
 <div class="section" id="connect-to-the-jupyterlab-server">
 <h2>3.4. Connect to the JupyterLab Server<a class="headerlink" href="#connect-to-the-jupyterlab-server" title="Permalink to this headline">¶</a></h2>
@@ -624,7 +632,9 @@ laptop.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">0.10</span><span class="p">:</span><span class="mi">8888</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/password.png"><img alt="Jupyter Login" src="../_images/password.png" style="width: 500px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/password.png"><img alt="Jupyter Login" src="../_images/password.png" style="width: 50%;" /></a>
+</div>
 </li>
 <li><p class="first">Enter the password <code class="docutils literal notranslate"><span class="pre">vssr-trd</span></code></p>
 </li>
@@ -651,7 +661,12 @@ laptop.</p>
 <li><p class="first">On the left pane (File browser pane)  of the browser, double-click vssr-trd-widgets.ipynb to open the notebook.</p>
 </li>
 <li><p class="first">Select menu <strong>Run &gt; Run All Cells</strong>. This will start the TRD dashboard.</p>
-<p><a class="reference internal" href="../_images/jupyter-open.png"><img alt="jupyter_open" src="../_images/jupyter-open.png" style="width: 45%;" /></a>   <a class="reference internal" href="../_images/jupyter-runall.png"><img alt="jupyter_run" src="../_images/jupyter-runall.png" style="width: 45%;" /></a></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/jupyter-open.png"><img alt="jupyter-open" src="../_images/jupyter-open.png" style="width: 50%;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/jupyter-runall.png"><img alt="jupyter-runall" src="../_images/jupyter-runall.png" style="width: 50%;" /></a>
+</div>
 </li>
 </ol>
 <p>This will start the TRD dashboard in the notebook.</p>
@@ -659,20 +674,16 @@ laptop.</p>
 <div class="section" id="using-the-notebook">
 <h3>3.5.2. Using the Notebook<a class="headerlink" href="#using-the-notebook" title="Permalink to this headline">¶</a></h3>
 <p>The notebook is laid out in a dashboard which allows to choose various TRD operations.</p>
-<img alt="../_images/dashboard.png" src="../_images/dashboard.png" />
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dashboard.png"><img alt="dashboard" src="../_images/dashboard.png" style="width: 100%;" /></a>
 </div>
 <ul>
 <li><p class="first">The top half of the notebook presents the general information about the notebook with
 links to documentation and sources.</p>
-<a class="reference internal image-reference" href="../_images/dashboard-top.png"><img alt="../_images/dashboard-top.png" src="../_images/dashboard-top.png" style="width: 75%;" /></a>
-</li>
-</ul>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dashboard-top.png"><img alt="dashboard-top" src="../_images/dashboard-top.png" style="width: 75%;" /></a>
 </div>
-<ul>
+</li>
 <li><p class="first">The bottom half of the notebook has 2 panes</p>
 <ul class="simple">
 <li><strong>Control &amp; Status pane on the right</strong>: Which allows to perform various TRD actions and
@@ -686,7 +697,9 @@ This is updated dynamically when the selection in Control pane changes. The foll
 </ul>
 </li>
 </ul>
-<a class="reference internal image-reference" href="../_images/rpu-ss.png"><img alt="../_images/rpu-ss.png" src="../_images/rpu-ss.png" style="width: 75%;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/rpu-ss.png"><img alt="rpu-ss" src="../_images/rpu-ss.png" style="width: 75%;" /></a>
+</div>
 </li>
 </ul>
 </div>
@@ -780,7 +793,7 @@ cookies are enabled in your browser.</li>
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on July 26, 2021.
+        Last updated on August 04, 2021.
       </span>
 
     </p>

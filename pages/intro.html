@@ -453,8 +453,8 @@ software components to demonstrate different restart scenarios.</p>
 </ul>
 </li>
 <li>Supports multiple platforms:<ul>
-<li>VCK190 Evaluation boards (both Early Silicon and Production Silicon)</li>
-<li>VMK180 Evaluation boards (both Early Silicon and Production Silicon)</li>
+<li><a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190 Evaluation boards</a> (both Early Silicon and Production Silicon)</li>
+<li><a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/vmk180.html">VMK180 Evaluation boards</a> (both Early Silicon and Production Silicon)</li>
 </ul>
 </li>
 </ul>
@@ -472,7 +472,9 @@ alive.  The pl_alive module takes this pulse signal and toggles an output port o
 can be read by the APU to see that the PL is responding to the pulse signal. There is also an
 AXI GPIO module that has a fixed unique value for the software to read, which is used to detect
 the design version in the PL.</p>
-<a class="reference internal image-reference" href="../_images/base_subsystem_restart_concept_diagram.png"><img alt="System Design Block Diagram" class="align-center" src="../_images/base_subsystem_restart_concept_diagram.png" style="width: 600px;" /></a>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/base_subsystem_restart_concept_diagram.png"><img alt="System Design Block Diagram" src="../_images/base_subsystem_restart_concept_diagram.png" style="width: 50%;" /></a>
+</div>
 </div>
 <div class="section" id="subsystem-definition">
 <h2>2.3. Subsystem Definition<a class="headerlink" href="#subsystem-definition" title="Permalink to this headline">¶</a></h2>
@@ -600,7 +602,9 @@ communication channel with APU.</td>
 above as they don’t actively participates in TRD demonstration.</p>
 </div>
 <p>Below diagram shows relationship and interaction between above pieces:</p>
-<img alt="../_images/sw_stack.png" src="../_images/sw_stack.png" />
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/sw_stack.png"><img alt="SW Stack" src="../_images/sw_stack.png" style="width: 50%;" /></a>
+</div>
 <p>Please refer <a class="reference external" href="https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1304-versal-acap-ssdg.pdf">Versal ACAP System Software Developers Guide</a> for more details on software stack and detailed development guide for each component.</p>
 <p>Refer to <strong>Restart Use Cases</strong> section in the <a class="reference internal" href="appendix.html#appendix"><span class="std std-ref">Appendix</span></a> for details on each of the TRD use cases and the software components involved.</p>
 </div>
@@ -610,7 +614,7 @@ above as they don’t actively participates in TRD demonstration.</p>
 <ul class="simple">
 <li>Binaries<ul>
 <li>Pre-built binaries</li>
-<li>Available in <a class="reference external" href="http://xilinx.com">zip file</a></li>
+<li>Available in <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">zip file</a></li>
 </ul>
 </li>
 <li>Sources<ul>
@@ -621,7 +625,7 @@ above as they don’t actively participates in TRD demonstration.</p>
 </ul>
 <div class="section" id="binaries">
 <h3>2.5.1. Binaries<a class="headerlink" href="#binaries" title="Permalink to this headline">¶</a></h3>
-<p>Download the <a class="reference external" href="http://xilinx.com">zip file</a> from Xilinx.com.</p>
+<p>Download the <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">zip file</a> from Xilinx.com.</p>
 <p>It has the following contents:</p>
 <ul class="simple">
 <li>Documentation (html webpages)</li>
@@ -630,7 +634,9 @@ above as they don’t actively participates in TRD demonstration.</p>
 <li>README file</li>
 </ul>
 <p>The zip contents are as follow:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>versal-restart-trd.zip
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>versal-restart-trd-pre-built-2021.1.zip
+│
+versal-restart-trd-pre-built-2021.1
 ├── docs
 │   ├── ...doc-files
 │   └── index.html
@@ -719,16 +725,14 @@ It provides:</p>
 </div>
 <div class="section" id="licenses">
 <h2>2.6. Licenses<a class="headerlink" href="#licenses" title="Permalink to this headline">¶</a></h2>
-<p>Todo: Update licensing information.</p>
 <p>The design includes files licensed by Xilinx and third parties under the terms
 of the GNU General Public License, GNU Lesser General Public License,
 BSD License, MIT License, and other licenses.</p>
-<p>Licenses for image.ub files are included in the /usr/share/licenses directory when
+<p>Licenses for rootfs files are included in the /usr/share/licenses directory when
 the image file is built. DNF package manager can be used to list all packages in the
 image as well as download all the sources for all the packages.</p>
-<p>Information on how users can find the relevant source code and licensing information
-for Board Support Packages (BSPs) is located on a Wiki site:
-<a class="reference external" href="https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/185401379/Licenses+and+Source+Code+Information+for+PetaLinux+BSPs">https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/185401379/Licenses+and+Source+Code+Information+for+PetaLinux+BSPs</a></p>
+<p>LICENSE file included the prebuilt image’s <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">zip file</a> details the licenses of the packages
+used in the prebuilt images.</p>
 <p>You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
 use of the design and any third party files supplied with the design.</p>
@@ -764,7 +768,7 @@ use of the design and any third party files supplied with the design.</p>
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on July 26, 2021.
+        Last updated on August 04, 2021.
       </span>
 
     </p>
