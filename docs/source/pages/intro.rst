@@ -48,9 +48,13 @@ Features:
 
 * Supports multiple platforms:
 
-  * `VCK190 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vck190.html>`_ (both Early Silicon and Production Silicon)
+  * `VCK190 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vck190.html>`_
 
-  * `VMK180 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vmk180.html>`_ (both Early Silicon and Production Silicon)
+  * `VCK190 Evaluation boards HeadStart Early Access (ES1) <https://www.xilinx.com/member/vck190_headstart.html>`_
+
+  * `VMK180 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vmk180.html>`_
+
+  * `VMK180 Evaluation boards HeadStart Early Access (ES1) <https://www.xilinx.com/member/vmk180_headstart.html>`_
 
 Hardware Design
 ***************
