@@ -2,7 +2,7 @@
 
 This function demonstrates the APU subsystem performing a self restart.
 
-The APU subsystem in this design includes the PS peripherals needed to run Linux and either a simple PL design in the Baseline hardware design, or a PL accelerator used for accelerating bzip2 engine in the BZip hardware design.
+The APU subsystem in this design includes the PS peripherals needed to run Linux and a simple PL design in the Baseline hardware design.
 
 To perform subsystem restart from Linux, write `subsystem` to shutdown_scope sysfs file. A `reboot` command anytime after this, will perform the subsystem restart.
 
@@ -19,7 +19,7 @@ PLM remembers the subsystem through the cdo commands during the system boot. Whe
 
 In case of Linux, the scope for the restart is recorded and remembered by ATF through sysfs entry update. During the Linux reboot call, the ATF issues `PmSystemShutdown` call to PLM with `subsystem` as an argument for restart type.
 
-> Note: Currently Idling/Reset of the PL peripherals is not supported by PLM. This demo relies on Linux drivers and application to idle the ongoing traffic from PL periperhals.
+> Note: Currently Idling/Reset of the PL peripherals is not supported by PLM. This demo relies on Linux drivers and application to idle the ongoing traffic from PL peripherals.
 
 #### Python Module & Jupyter wrapper.
 This operation can be performed from the python module vssr_trd, which is used by this notebook.

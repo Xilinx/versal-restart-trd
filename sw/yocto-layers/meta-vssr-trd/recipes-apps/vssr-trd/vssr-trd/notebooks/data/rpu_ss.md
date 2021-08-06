@@ -11,7 +11,7 @@ PLM remembers the subsystem through the CDO commands during the system boot. Whe
 
 RPU application of the TRD waits for the command from APU over libmetal. When it receives subsystem restart request it will call XilPm API `XPm_SystemShutdown` with `subsystem` as argument to perform self restart.
 
-Note: There is deliberate 3 second delay in the start of R5 application for the demo purpose. While the R5 is down, the alive stautus of the R5 is changed to off.
+Note: There is deliberate 3 second delay in the start of R5 application for the demo purpose. While the R5 is down, the alive status of the R5 is changed to off.
 
 There is no PL peripheral for RPU subsystem, hence nothing extra needs to be done for idling/resetting the PL peripherals.
 
@@ -27,4 +27,4 @@ trd.SetControl(1,0)
 ```
 
 #### Observation
-Observe RPU subsystem dead for 3 seconds and getting restarted, above the control panel on rigth side. Also observe the rpu applicaiton restarting the counter in the serial terminal.
+Observe RPU subsystem dead for 3 seconds and getting restarted, above the control panel on rigth side. Also observe the RPU application restarting the counter in the serial terminal.

@@ -2,9 +2,9 @@
 
 This function demonstrates the system recovery through APU subsystem healthy boot feature.
 
-If the APU subsystem fails to boot fully within __120 seconds__, the PLM will mark this event as unhealthy boot and it wil trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.
+If the APU subsystem fails to boot fully within __120 seconds__, the PLM will mark this event as unhealthy boot and it will trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.
 
-To test this feature, interrupt the u-boot and stop at u-boot during the linux boot. Wait for 120 seconds, and system wide reset should appear.
+To test this feature, interrupt the u-boot and stop at u-boot during the Linux boot. Wait for 120 seconds, and system wide reset should appear.
 
 
 #### Behind the scene
@@ -19,7 +19,7 @@ pm_add_requirement 0x1c000003 0x18250000 0x46 0xFFFFF 0x1 0x1D4C0
 em_set_action 0x28110000 0x2 0x1
 ```
 
-This configures the healthy boot monitoring for APU subsystem by PLM. The minimum timeout value for which PLM will wait to allow subsytem mark itself healthy is configured for 120 seconds in this case. If the subsystem fails to mark itself healthy with in 120 seconds, PLM assumes that the subsystem failed to boot properly and triggers SRST (system wide reset)
+This configures the healthy boot monitoring for APU subsystem by PLM. The minimum timeout value for which PLM will wait to allow subsystem mark itself healthy is configured for 120 seconds in this case. If the subsystem fails to mark itself healthy with in 120 seconds, PLM assumes that the subsystem failed to boot properly and triggers SRST (system wide reset)
 
 The subsystem marks itself healthy by issuing `XPm_InitFinalize` . The Linux system, when complete all the boot activities, calls XPm_InitFinalize to finalize its PM requirements. When Linux fails (or is not allowed) to boot, this never called and hence PLM will trigger the recovery.
 
