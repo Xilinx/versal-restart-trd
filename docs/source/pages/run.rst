@@ -269,7 +269,7 @@ The notebook is laid out in a dashboard which allows to choose various TRD opera
 
     * Introduction and how the agent will normally perform this operation.
 
-    * Behind the scene operation done by plm and other intermediate layers.
+    * Behind the scene operation done by PLM and other intermediate layers.
 
     * How this operation can be triggered using the python module
 
@@ -291,7 +291,7 @@ Following TRD operations can be selected using the control pane.
 +===========+====================+=================================================+
 | APU       |  Subsystem Restart | APU performs self (subsystem only) restart      |
 |           +--------------------+-------------------------------------------------+
-|           |  Watchdog Recovery | APU kills fpd watchdog to demonstrate recovery  |
+|           |  Watchdog Recovery | APU kills FPD watchdog to demonstrate recovery  |
 |           +--------------------+-------------------------------------------------+
 |           |  System Restart    | APU performs full system restart                |
 |           +--------------------+-------------------------------------------------+
@@ -299,7 +299,7 @@ Following TRD operations can be selected using the control pane.
 +-----------+--------------------+-------------------------------------------------+
 | RPU       |  Subsystem Restart | RPU performs self (subsystem only) restart      |
 |           +--------------------+-------------------------------------------------+
-|           |  Watchdog Recovery | RPU kills lpd watchdog to demonstrate recovery  |
+|           |  Watchdog Recovery | RPU kills LPD watchdog to demonstrate recovery  |
 |           +--------------------+-------------------------------------------------+
 |           |  System Restart    | RPU performs full system restart                |
 |           +--------------------+-------------------------------------------------+

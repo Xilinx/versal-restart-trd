@@ -14,7 +14,7 @@ software components to demonstrate different restart scenarios.
 Features:
 *********
 
-* Subsytem definitions
+* Subsystem definitions
 
   * APU subsystem running Linux
 
@@ -83,18 +83,18 @@ Subsystem Definition
 
 The subsystem definition is important for the PLM to:
 
-* Identify a subsytem by its ID
+* Identify a subsystem by its ID
 
 * Track the access permission of various peripheral for the subsystem
 
-* Make sure the pre-alloc peripherals are available when the subsytem is loaded.
+* Make sure the pre-alloced peripherals are available when the subsystem is loaded.
 
 * Enable healthy boot monitoring for the subsystem.
 
-The TRD defines two subsytems, **APU Subsystem** running Linux on SMP Cortex A72 cores and **RPU Subsystem**
+The TRD defines two subsystems, **APU Subsystem** running Linux on SMP Cortex A72 cores and **RPU Subsystem**
 running standalone application on Lock-Step Cortex R5 cores.
 
-Following table describes example of some peripheral permission for subsytems in the TRD:
+Following table describes example of some peripheral permission for subsystems in the TRD:
 
 +-----------------+---------------+-------------+-------------------+
 | Peripheral      | Subsystem     | Pre-alloced | Access Permission |
@@ -141,7 +141,7 @@ This section list the software pieces involved in demonstrating the TRD features
 |                      |               | It also manages various APU peripherals, including FPD WDT       |
 |                      |               | through the respective drivers. Linux Runs on ARM EL2.           |
 +----------------------+---------------+------------------------------------------------------------------+
-|  Standalone App      |  RPU-LS       | PM aware application with standalone OS. It uses standalone      |
+|  Standalone App      |  RPU LS       | PM aware application with standalone OS. It uses standalone      |
 |                      |               | drivers to control various peripherals, like UART and LPD WDT.   |
 |                      |               | It also establish and uses libmetal shared memory based          |
 |                      |               | communication channel with APU.                                  |
@@ -190,7 +190,7 @@ It has the following contents:
 
 * Pre-built SD card image
 
-* Artifacts from hardware and software builds for all board variants under *reference_images/*
+* Artifacts from hardware and software builds under *reference_images/*
 
 * README file
 
@@ -224,12 +224,12 @@ Same file structure is available for other 3 variants (vck190-es1, vmk180-prod, 
 Sources
 -------
 
-Sources for the trd are available in the git repository.
+Sources for the TRD are available in the git repository.
 It provides:
 
 * Sources for the hardware design
 
-* Sources for the TRD yocto layer (used in petalinux)
+* Sources for the TRD yocto layer (used in Petalinux)
 
 * Sources for the standalone rpu application
 

@@ -357,9 +357,9 @@ Perform the following steps in a Linux shell with Petalinux environment configur
 Create Create SD card wic image
 *******************************
 
-Following step create a SD card wic image which can be flashed on the sd card for the target board.
+Following step create a SD card wic image which can be flashed on the uSD card for the target board.
 
-#. Navigate to petalinux project root::
+#. Navigate to Petalinux project root::
 
         cd ${VSSR_WS}/plnx-vssr-trd/
 
