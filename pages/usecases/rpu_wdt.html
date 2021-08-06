@@ -437,7 +437,7 @@
 <p>To test the recovery, when the rpu application receives the request, it stops kicking the watchdog, and allow it to expire after 10 seconds.</p>
 <div class="section" id="behind-the-scene">
 <h2>6.1.7.1. Behind the scene<a class="headerlink" href="#behind-the-scene" title="Permalink to this headline">¶</a></h2>
-<p>During the BOOT image creation, <code class="docutils literal notranslate"><span class="pre">config_lpd_wdt_por.cdo</span></code> added in boot.bif will configure the expiry action of the fpd wdt to <em>Power-On-Reset (POR) restart</em>. PLM configures this action in the error management module. Whenever fpd wdt expires, the PLM gets the notification to perform the configured action.</p>
+<p>During the BOOT image creation, <code class="docutils literal notranslate"><span class="pre">config_lpd_wdt_por.cdo</span></code> added in boot.bif will configure the expiry action of the LPD WDT to <em>Power-On-Reset (POR) restart</em>. PLM configures this action in the error management module. Whenever LPD WDT expires, the PLM gets the notification to perform the configured action.</p>
 <p>RPU application of the TRD waits for the command from APU over libmetal. When it receives ‘Kill Watchdog’ request it will set a flag to stop the watchdog kicks. This will result in the watchdog expiry after the configured time. And hence PLM will perform <strong>Power-On-Reset</strong>.</p>
 </div>
 <div class="section" id="python-module-jupyter-wrapper">
@@ -452,7 +452,7 @@
 </div>
 <div class="section" id="observation">
 <h2>6.1.7.3. Observation<a class="headerlink" href="#observation" title="Permalink to this headline">¶</a></h2>
-<p>Observe the system recovery happing after a countdown of about 10 seconds. Linux killed in the APU terminal and RPU application dead in it’s terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.</p>
+<p>Observe the system recovering after a countdown of about 10 seconds. Linux killed in the APU terminal and RPU application dead in it’s terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.</p>
 <blockquote>
 <div>Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases just a browser refresh is enough to reconnect the notebook after reboot.</div></blockquote>
 </div>
@@ -487,7 +487,7 @@
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on August 04, 2021.
+        Last updated on August 06, 2021.
       </span>
 
     </p>

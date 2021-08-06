@@ -432,7 +432,7 @@
   <div class="section" id="apu-wdt-recovery">
 <h1>6.1.3. APU - WDT Recovery<a class="headerlink" href="#apu-wdt-recovery" title="Permalink to this headline">¶</a></h1>
 <p>This function demonstrates the system recovery through FPD Watchdog.</p>
-<p>The Linux, running on APU subsystem, launches the trd application <code class="docutils literal notranslate"><span class="pre">watchdog-daemon</span></code> as daemon using the init script <code class="docutils literal notranslate"><span class="pre">watchdog-daemon-init</span></code>. This application is responsible for configuring and kicking the FPD Watchdog in the system for infinite time.</p>
+<p>The Linux, running on APU subsystem, launches the TRD application <code class="docutils literal notranslate"><span class="pre">watchdog-daemon</span></code> as daemon using the init script <code class="docutils literal notranslate"><span class="pre">watchdog-daemon-init</span></code>. This application is responsible for configuring and kicking the FPD Watchdog in the system for infinite time.</p>
 <p>The watchdog is configured with the timeout value of <strong>20 seconds</strong> and is kicked every <strong>5 seconds</strong>.</p>
 <p>To test the recovery, in Linux start the watchdog-daemon (automatically done at boot) and simulate a hang by killing the watchdog-daemon application.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start the Watchdog</span>
@@ -446,8 +446,8 @@
 </div>
 <div class="section" id="behind-the-scene">
 <h2>6.1.3.1. Behind the scene<a class="headerlink" href="#behind-the-scene" title="Permalink to this headline">¶</a></h2>
-<p>During the BOOT image creation, <code class="docutils literal notranslate"><span class="pre">config_fpd_wdt_srst.cdo</span></code> added in boot.bif will configure the expiry action of the fpd wdt to <em>system restart</em>. PLM configures this action in the error management module. Whenever fpd wdt expires, the PLM gets the notification to perform the configured action.</p>
-<p>In Linux system, the watchdog driver is enabled by default. The linux device tree has the fpd wdt node enabled. So the fpd watchdog is populated as hardware watchdog device. The <code class="docutils literal notranslate"><span class="pre">watchdog-daemon</span></code> opens this device and configure it for 20 seconds. Then this applicaiton is running an infinte loop to kick the watchdog every 5 seconds.</p>
+<p>During the BOOT image creation, <code class="docutils literal notranslate"><span class="pre">config_fpd_wdt_srst.cdo</span></code> added in boot.bif will configure the expiry action of the FPD WDT to <em>system restart</em>. PLM configures this action in the error management module. Whenever FPD WDT expires, the PLM gets the notification to perform the configured action.</p>
+<p>In Linux system, the watchdog driver is enabled by default. The Linux device tree has the FPD WDT node enabled. So the FPD watchdog is populated as hardware watchdog device. The <code class="docutils literal notranslate"><span class="pre">watchdog-daemon</span></code> opens this device and configure it for 20 seconds. Then this application is running an infinite loop to kick the watchdog every 5 seconds.</p>
 <p>When this application is killed or hanged, the watchdog stops receiving the kick (heartbeats), resulting in watchdog expiry. And hence PLM will perform system restart.</p>
 </div>
 <div class="section" id="python-module-jupyter-wrapper">
@@ -462,7 +462,7 @@
 </div>
 <div class="section" id="observation">
 <h2>6.1.3.3. Observation<a class="headerlink" href="#observation" title="Permalink to this headline">¶</a></h2>
-<p>Observe the system recovery happing after a countdown of about 20 seconds. Linux killed in the APU terminal and RPU application dead in it’s terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.</p>
+<p>Observe the system recovering after a countdown of about 15 to 20 seconds. Linux killed in the APU terminal and RPU application dead in it’s terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.</p>
 <blockquote>
 <div>Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases just a browser refresh is enough to reconnect the notebook after reboot.</div></blockquote>
 </div>
@@ -497,7 +497,7 @@
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on August 04, 2021.
+        Last updated on August 06, 2021.
       </span>
 
     </p>

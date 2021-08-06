@@ -432,8 +432,8 @@
   <div class="section" id="apu-healthy-boot-test">
 <h1>6.1.4. APU - Healthy Boot Test<a class="headerlink" href="#apu-healthy-boot-test" title="Permalink to this headline">¶</a></h1>
 <p>This function demonstrates the system recovery through APU subsystem healthy boot feature.</p>
-<p>If the APU subsystem fails to boot fully within <strong>120 seconds</strong>, the PLM will mark this event as unhealthy boot and it wil trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.</p>
-<p>To test this feature, interrupt the u-boot and stop at u-boot during the linux boot. Wait for 120 seconds, and system wide reset should appear.</p>
+<p>If the APU subsystem fails to boot fully within <strong>120 seconds</strong>, the PLM will mark this event as unhealthy boot and it will trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.</p>
+<p>To test this feature, interrupt the u-boot and stop at u-boot during the Linux boot. Wait for 120 seconds, and system wide reset should appear.</p>
 <div class="section" id="behind-the-scene">
 <h2>6.1.4.1. Behind the scene<a class="headerlink" href="#behind-the-scene" title="Permalink to this headline">¶</a></h2>
 <p>During the subsystem definition following line are added in the cdo for the APU subsystem:</p>
@@ -445,7 +445,7 @@
 <span class="n">em_set_action</span> <span class="mh">0x28110000</span> <span class="mh">0x2</span> <span class="mh">0x1</span>
 </pre></div>
 </div>
-<p>This configures the healthy boot monitoring for APU subsystem by PLM. The minimum timeout value for which PLM will wait to allow subsytem mark itself healthy is configured for 120 seconds in this case. If the subsystem fails to mark itself healthy with in 120 seconds, PLM assumes that the subsystem failed to boot properly and triggers SRST (system wide reset)</p>
+<p>This configures the healthy boot monitoring for APU subsystem by PLM. The minimum timeout value for which PLM will wait to allow subsystem mark itself healthy is configured for 120 seconds in this case. If the subsystem fails to mark itself healthy with in 120 seconds, PLM assumes that the subsystem failed to boot properly and triggers SRST (system wide reset)</p>
 <p>The subsystem marks itself healthy by issuing <code class="docutils literal notranslate"><span class="pre">XPm_InitFinalize</span></code> . The Linux system, when complete all the boot activities, calls XPm_InitFinalize to finalize its PM requirements. When Linux fails (or is not allowed) to boot, this never called and hence PLM will trigger the recovery.</p>
 </div>
 <div class="section" id="python-module-jupyter-wrapper">
@@ -495,7 +495,7 @@
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on August 04, 2021.
+        Last updated on August 06, 2021.
       </span>
 
     </p>

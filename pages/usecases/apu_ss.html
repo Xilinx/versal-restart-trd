@@ -432,7 +432,7 @@
   <div class="section" id="apu-subsystem-restart">
 <h1>6.1.1. APU - Subsystem Restart<a class="headerlink" href="#apu-subsystem-restart" title="Permalink to this headline">¶</a></h1>
 <p>This function demonstrates the APU subsystem performing a self restart.</p>
-<p>The APU subsystem in this design includes the PS peripherals needed to run Linux and either a simple PL design in the Baseline hardware design, or a PL accelerator used for accelerating bzip2 engine in the BZip hardware design.</p>
+<p>The APU subsystem in this design includes the PS peripherals needed to run Linux and a simple PL design in the Baseline hardware design.</p>
 <p>To perform subsystem restart from Linux, write <code class="docutils literal notranslate"><span class="pre">subsystem</span></code> to shutdown_scope sysfs file. A <code class="docutils literal notranslate"><span class="pre">reboot</span></code> command anytime after this, will perform the subsystem restart.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="n">subsystem</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">platform</span><span class="o">/</span><span class="n">firmware</span><span class="p">:</span><span class="n">versal</span><span class="o">-</span><span class="n">firmware</span><span class="o">/</span><span class="n">shutdown_scope</span>
 </pre></div>
@@ -444,7 +444,7 @@
 <p>PLM remembers the subsystem through the cdo commands during the system boot. When it receives the request for SystemShutdown with subsystem as argument, it releases all the peripheral nodes requested / allocated to the subsystem. If the nodes are not used by any other subsystem, then those nodes are idled and reset as well. PLM reloads the subsystem after pre-allocting (automatic node request) of necessary nodes for the subsystem to start or init. The subsystem itself will request the rest of the nodes when needed.</p>
 <p>In case of Linux, the scope for the restart is recorded and remembered by ATF through sysfs entry update. During the Linux reboot call, the ATF issues <code class="docutils literal notranslate"><span class="pre">PmSystemShutdown</span></code> call to PLM with <code class="docutils literal notranslate"><span class="pre">subsystem</span></code> as an argument for restart type.</p>
 <blockquote>
-<div>Note: Currently Idling/Reset of the PL peripherals is not supported by PLM. This demo relies on Linux drivers and application to idle the ongoing traffic from PL periperhals.</div></blockquote>
+<div>Note: Currently Idling/Reset of the PL peripherals is not supported by PLM. This demo relies on Linux drivers and application to idle the ongoing traffic from PL peripherals.</div></blockquote>
 </div>
 <div class="section" id="python-module-jupyter-wrapper">
 <h2>6.1.1.2. Python Module &amp; Jupyter wrapper.<a class="headerlink" href="#python-module-jupyter-wrapper" title="Permalink to this headline">¶</a></h2>
@@ -493,7 +493,7 @@
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on August 04, 2021.
+        Last updated on August 06, 2021.
       </span>
 
     </p>

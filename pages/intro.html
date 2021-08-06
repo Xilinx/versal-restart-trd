@@ -432,7 +432,7 @@ software components to demonstrate different restart scenarios.</p>
 <div class="section" id="features">
 <h2>2.1. Features:<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Subsytem definitions<ul>
+<li>Subsystem definitions<ul>
 <li>APU subsystem running Linux</li>
 <li>RPU Lockstep running a PM-aware standalone application.</li>
 </ul>
@@ -453,8 +453,10 @@ software components to demonstrate different restart scenarios.</p>
 </ul>
 </li>
 <li>Supports multiple platforms:<ul>
-<li><a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190 Evaluation boards</a> (both Early Silicon and Production Silicon)</li>
-<li><a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/vmk180.html">VMK180 Evaluation boards</a> (both Early Silicon and Production Silicon)</li>
+<li><a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/vck190.html">VCK190 Evaluation boards</a></li>
+<li><a class="reference external" href="https://www.xilinx.com/member/vck190_headstart.html">VCK190 Evaluation boards HeadStart Early Access (ES1)</a></li>
+<li><a class="reference external" href="https://www.xilinx.com/products/boards-and-kits/vmk180.html">VMK180 Evaluation boards</a></li>
+<li><a class="reference external" href="https://www.xilinx.com/member/vmk180_headstart.html">VMK180 Evaluation boards HeadStart Early Access (ES1)</a></li>
 </ul>
 </li>
 </ul>
@@ -480,14 +482,14 @@ the design version in the PL.</p>
 <h2>2.3. Subsystem Definition<a class="headerlink" href="#subsystem-definition" title="Permalink to this headline">¶</a></h2>
 <p>The subsystem definition is important for the PLM to:</p>
 <ul class="simple">
-<li>Identify a subsytem by its ID</li>
+<li>Identify a subsystem by its ID</li>
 <li>Track the access permission of various peripheral for the subsystem</li>
-<li>Make sure the pre-alloc peripherals are available when the subsytem is loaded.</li>
+<li>Make sure the pre-alloced peripherals are available when the subsystem is loaded.</li>
 <li>Enable healthy boot monitoring for the subsystem.</li>
 </ul>
-<p>The TRD defines two subsytems, <strong>APU Subsystem</strong> running Linux on SMP Cortex A72 cores and <strong>RPU Subsystem</strong>
+<p>The TRD defines two subsystems, <strong>APU Subsystem</strong> running Linux on SMP Cortex A72 cores and <strong>RPU Subsystem</strong>
 running standalone application on Lock-Step Cortex R5 cores.</p>
-<p>Following table describes example of some peripheral permission for subsytems in the TRD:</p>
+<p>Following table describes example of some peripheral permission for subsystems in the TRD:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%" />
@@ -588,7 +590,7 @@ It also manages various APU peripherals, including FPD WDT
 through the respective drivers. Linux Runs on ARM EL2.</td>
 </tr>
 <tr class="row-even"><td>Standalone App</td>
-<td>RPU-LS</td>
+<td>RPU LS</td>
 <td>PM aware application with standalone OS. It uses standalone
 drivers to control various peripherals, like UART and LPD WDT.
 It also establish and uses libmetal shared memory based
@@ -614,7 +616,7 @@ above as they don’t actively participates in TRD demonstration.</p>
 <ul class="simple">
 <li>Binaries<ul>
 <li>Pre-built binaries</li>
-<li>Available in <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">zip file</a></li>
+<li>Available in <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#prebuilt-images">zip file</a> for each board variant</li>
 </ul>
 </li>
 <li>Sources<ul>
@@ -625,64 +627,47 @@ above as they don’t actively participates in TRD demonstration.</p>
 </ul>
 <div class="section" id="binaries">
 <h3>2.5.1. Binaries<a class="headerlink" href="#binaries" title="Permalink to this headline">¶</a></h3>
-<p>Download the <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">zip file</a> from Xilinx.com.</p>
+<p>Download the <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#prebuilt-images">zip file</a> from Xilinx.com, for the specific board variant.</p>
 <p>It has the following contents:</p>
 <ul class="simple">
-<li>Documentation (html webpages)</li>
-<li>Pre-built SD card image for all board variants</li>
-<li>Artifacts from hardware and software builds for all board variants.</li>
+<li>Pre-built SD card image</li>
+<li>Artifacts from hardware and software builds under <em>reference_images/</em></li>
 <li>README file</li>
 </ul>
-<p>The zip contents are as follow:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>versal-restart-trd-pre-built-2021.1.zip
+<p>The zip contents for <strong>vck190-prod</strong> are as follow</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>vssr-trd-pb-vck190-prod-2021.1.zip
 │
-versal-restart-trd-pre-built-2021.1
-├── docs
-│   ├── ...doc-files
-│   └── index.html
+vssr-trd-vck190-prod
 ├── LICENSE
 ├── prebuilt
-│   ├── vck190-es1-base
-│   │   ├── petalinux-sdimage.wic.xz
-│   │   └── reference_images/
-│   ├── vck190-prod-base
-│   │   ├── petalinux-sdimage.wic.xz
-│   │   └── reference_images/
-│   ├── vmk180-es1-base
-│   │   ├── petalinux-sdimage.wic.xz
-│   │   └── reference_images/
-│   └── vmk180-prod-base
-│       ├── petalinux-sdimage.wic.xz
-│       └── reference_images/
+│   ├── petalinux-sdimage.wic.xz
+│   └── reference_images/
+│       ├── bl31.elf
+│       ├── boot.bif
+│       ├── BOOT.BIN
+│       ├── boot.scr
+│       ├── Image
+│       ├── plm.elf
+│       ├── psmfw.elf
+│       ├── ramdisk.cpio.gz.u-boot
+│       ├── rootfs.tar.gz
+│       ├── rpu_app.elf
+│       ├── system.dtb
+│       ├── u-boot.elf
+│       ├── versal_restart_trd_wrapper.pdi
+│       └── versal_restart_trd_wrapper.xsa
 └── README
 </pre></div>
 </div>
-<p>Following are contents of reference_images/ for each variant in prebuilt directory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>reference_images/
-├── bl31.elf
-├── boot.bif
-├── BOOT.BIN
-├── boot.scr
-├── Image
-├── plm.elf
-├── psmfw.elf
-├── ramdisk.cpio.gz.u-boot
-├── rootfs.tar.gz
-├── rpu_app.elf
-├── system.dtb
-├── u-boot.elf
-├── versal_restart_trd_wrapper.pdi
-└── versal_restart_trd_wrapper.xsa
-</pre></div>
-</div>
+<p>Same file structure is available for other 3 variants (vck190-es1, vmk180-prod, vmk180-es1) as well.</p>
 </div>
 <div class="section" id="sources">
 <h3>2.5.2. Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h3>
-<p>Sources for the trd are available in the git repository.
+<p>Sources for the TRD are available in the git repository.
 It provides:</p>
 <ul class="simple">
 <li>Sources for the hardware design</li>
-<li>Sources for the TRD yocto layer (used in petalinux)</li>
+<li>Sources for the TRD yocto layer (used in Petalinux)</li>
 <li>Sources for the standalone rpu application</li>
 <li>Sources for the documentation</li>
 <li>Makefiles and Scripts to build all the sources</li>
@@ -731,7 +716,7 @@ BSD License, MIT License, and other licenses.</p>
 <p>Licenses for rootfs files are included in the /usr/share/licenses directory when
 the image file is built. DNF package manager can be used to list all packages in the
 image as well as download all the sources for all the packages.</p>
-<p>LICENSE file included the prebuilt image’s <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#links">zip file</a> details the licenses of the packages
+<p>LICENSE file included the prebuilt image’s <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#prebuilt-images">zip file</a> details the licenses of the packages
 used in the prebuilt images.</p>
 <p>You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
@@ -768,7 +753,7 @@ use of the design and any third party files supplied with the design.</p>
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on August 04, 2021.
+        Last updated on August 06, 2021.
       </span>
 
     </p>

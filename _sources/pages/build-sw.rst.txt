@@ -106,7 +106,7 @@ This produces
 
 Run :code:`make help` in *$REPO_SRC* directory to see various build options.
 
-For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md>`_ file in the repository.
+For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#makefiles>`_ file in the repository.
 
 Build without Makefile
 ----------------------
@@ -357,9 +357,9 @@ Perform the following steps in a Linux shell with Petalinux environment configur
 Create Create SD card wic image
 *******************************
 
-Following step create a SD card wic image which can be flashed on the sd card for the target board.
+Following step create a SD card wic image which can be flashed on the uSD card for the target board.
 
-#. Navigate to petalinux project root::
+#. Navigate to Petalinux project root::
 
         cd ${VSSR_WS}/plnx-vssr-trd/
 

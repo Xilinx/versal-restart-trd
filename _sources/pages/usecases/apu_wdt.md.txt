@@ -2,7 +2,7 @@
 
 This function demonstrates the system recovery through FPD Watchdog.
 
-The Linux, running on APU subsystem, launches the trd application `watchdog-daemon` as daemon using the init script `watchdog-daemon-init`. This application is responsible for configuring and kicking the FPD Watchdog in the system for infinite time.
+The Linux, running on APU subsystem, launches the TRD application `watchdog-daemon` as daemon using the init script `watchdog-daemon-init`. This application is responsible for configuring and kicking the FPD Watchdog in the system for infinite time.
 
 The watchdog is configured with the timeout value of __20 seconds__ and is kicked every __5 seconds__.
 
@@ -19,9 +19,9 @@ To test the recovery, in Linux start the watchdog-daemon (automatically done at 
 ```
 
 #### Behind the scene
-During the BOOT image creation, `config_fpd_wdt_srst.cdo` added in boot.bif will configure the expiry action of the fpd wdt to *system restart*. PLM configures this action in the error management module. Whenever fpd wdt expires, the PLM gets the notification to perform the configured action.
+During the BOOT image creation, `config_fpd_wdt_srst.cdo` added in boot.bif will configure the expiry action of the FPD WDT to *system restart*. PLM configures this action in the error management module. Whenever FPD WDT expires, the PLM gets the notification to perform the configured action.
 
-In Linux system, the watchdog driver is enabled by default. The linux device tree has the fpd wdt node enabled. So the fpd watchdog is populated as hardware watchdog device. The `watchdog-daemon` opens this device and configure it for 20 seconds. Then this applicaiton is running an infinte loop to kick the watchdog every 5 seconds.
+In Linux system, the watchdog driver is enabled by default. The Linux device tree has the FPD WDT node enabled. So the FPD watchdog is populated as hardware watchdog device. The `watchdog-daemon` opens this device and configure it for 20 seconds. Then this application is running an infinite loop to kick the watchdog every 5 seconds.
 
 When this application is killed or hanged, the watchdog stops receiving the kick (heartbeats), resulting in watchdog expiry. And hence PLM will perform system restart.
 
@@ -37,6 +37,6 @@ trd.SetControl(0,4)
 ```
 
 #### Observation
-Observe the system recovery happing after a countdown of about 20 seconds. Linux killed in the APU terminal and RPU application dead in it's terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.
+Observe the system recovering after a countdown of about 15 to 20 seconds. Linux killed in the APU terminal and RPU application dead in it's terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.
 
 > Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases just a browser refresh is enough to reconnect the notebook after reboot.

@@ -431,8 +431,8 @@
   <div class="section" id="rpu-healthy-boot-test">
 <h1>6.1.8. RPU - Healthy Boot Test<a class="headerlink" href="#rpu-healthy-boot-test" title="Permalink to this headline">¶</a></h1>
 <p>This function demonstrates the system recovery through RPU subsystem healthy boot feature.</p>
-<p>If the RPU subsystem fails to boot fully within <strong>20 seconds</strong>, the PLM will mark this event as unhealthy boot and it wil trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.</p>
-<p>To test this feature, there is a hook in the rpu application, which will not issue XPm_InitFinalize on next boot. This is achieved by writting a BAD_BOOT_KEY in a specific persistant memory; followed by subsystem restart.</p>
+<p>If the RPU subsystem fails to boot fully within <strong>20 seconds</strong>, the PLM will mark this event as unhealthy boot and it will trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.</p>
+<p>To test this feature, there is a hook in the rpu application, which will not issue XPm_InitFinalize on next boot. This is achieved by writing a BAD_BOOT_KEY in a specific persistent memory; followed by subsystem restart.</p>
 <div class="section" id="behind-the-scene">
 <h2>6.1.8.1. Behind the scene<a class="headerlink" href="#behind-the-scene" title="Permalink to this headline">¶</a></h2>
 <p>During the subsystem definition following line are added in the cdo for the RPU subsystem:</p>
@@ -444,9 +444,9 @@
 <span class="n">em_set_action</span> <span class="mh">0x28110000</span> <span class="mh">0x1</span> <span class="mh">0x2</span>
 </pre></div>
 </div>
-<p>This configures the healthy boot monitoring for RPU subsystem by PLM. The minimum timeout value for which PLM will wait to allow subsytem mark itself healthy is configured for 20 seconds in this case. If the subsystem fails to mark itself healthy with in 20 seconds, PLM assumes that the subsystem failed to boot properly and triggers POR (system wide <strong>Power-On-reset</strong>)</p>
+<p>This configures the healthy boot monitoring for RPU subsystem by PLM. The minimum timeout value for which PLM will wait to allow subsystem mark itself healthy is configured for 20 seconds in this case. If the subsystem fails to mark itself healthy with in 20 seconds, PLM assumes that the subsystem failed to boot properly and triggers POR (system wide <strong>Power-On-reset</strong>)</p>
 <p>The subsystem marks itself healthy by issuing <code class="docutils literal notranslate"><span class="pre">XPm_InitFinalize</span></code> . The RPU application in the TRD, calls XPm_InitFinalize to finalize its PM requirements after initialization, if BAD BOOT KEY is not marked.</p>
-<p>RPU application of the TRD waits for the command from APU over libmetal. When it receives request to test the healthy boot, it will mark BAD BOOT Key and perform subsytem restart by calling XilPm API <code class="docutils literal notranslate"><span class="pre">XPm_SystemShutdown</span></code> with <code class="docutils literal notranslate"><span class="pre">subsystem</span></code> as argument to perform self restart. On next boot, RPU application skips <code class="docutils literal notranslate"><span class="pre">XPm_InitFinalize</span></code>, hence recovery is trigger after 20 seconds.</p>
+<p>RPU application of the TRD waits for the command from APU over libmetal. When it receives request to test the healthy boot, it will mark BAD BOOT Key and perform subsystem restart by calling XilPm API <code class="docutils literal notranslate"><span class="pre">XPm_SystemShutdown</span></code> with <code class="docutils literal notranslate"><span class="pre">subsystem</span></code> as argument to perform self restart. On next boot, RPU application skips <code class="docutils literal notranslate"><span class="pre">XPm_InitFinalize</span></code>, hence recovery is trigger after 20 seconds.</p>
 </div>
 <div class="section" id="python-module-jupyter-wrapper">
 <h2>6.1.8.2. Python Module &amp; Jupyter wrapper.<a class="headerlink" href="#python-module-jupyter-wrapper" title="Permalink to this headline">¶</a></h2>
@@ -460,7 +460,7 @@
 </div>
 <div class="section" id="observation">
 <h2>6.1.8.3. Observation<a class="headerlink" href="#observation" title="Permalink to this headline">¶</a></h2>
-<p>Observe RPU subsystem dead for 3 seconds and getting restarted, above the control panel on rigth side. Also observe the message <strong>BAD BOOT</strong>, during rpu applicaiton relaunch. Linux and everything else should be working fine. Wait for 20 seconds, observe the system recovery. Linux dead in the APU terminal and RPU application dead in it’s own terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.</p>
+<p>Observe RPU subsystem dead for 3 seconds and getting restarted, above the control panel on right side. Also observe the message <strong>BAD BOOT</strong>, during rpu application relaunch. Linux and everything else should be working fine. Wait for 20 seconds, observe the system recovery. Linux dead in the APU terminal and RPU application dead in it’s own terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.</p>
 <blockquote>
 <div>Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases just a browser refresh is enough to reconnect the notebook after reboot.</div></blockquote>
 </div>
@@ -493,7 +493,7 @@
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on August 04, 2021.
+        Last updated on August 06, 2021.
       </span>
 
     </p>
