@@ -19,15 +19,22 @@ This repository provides all the sources of TRD and their build infrastructure.
 ### [Documentation](https://xilinx.github.io/versal-restart-trd)
 
 ### Prebuilt Images
-Board   | Silicon        | Download Link 
+#### Prebuilt Images for Production Silicon
+Board   | Silicon        | Download Link
 --------|----------------|--------------
-VCK190  | Production     | [vssr-trd-pb-vck190-prod-2021.1.zip]()
-VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2021.1.zip]()
-VCK190  | Early Access   | [vssr-trd-pb-vck190-es1-2021.1.zip]()
-VMk180  | Early Access   | [vssr-trd-pb-vmk180-es1-2021.1.zip]()
+VCK190  | Production     | [vssr-trd-pb-vck190-prod-2021.1.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vck190-prod-2021.1.zip)
+VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2021.1.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vmk180-prod-2021.1.zip)
 
-#### Licenses for Prebuilt Images : [vssr-trd-pb-license-2021.1.tar.gz]()
- 
+#### Prebuilt Images for ES Silicon
+Board   | Silicon            | Download Link
+--------|--------------------|--------------
+VCK190  | Engineering Sample | [vssr-trd-pb-vck190-es1-2021.1.zip](https://www.xilinx.com/member/vck190_headstart/vssr-trd-pb-vck190-es1-2021.1.zip)
+VMk180  | Engineering Sample | [vssr-trd-pb-vmk180-es1-2021.1.zip](https://www.xilinx.com/member/vmk180_headstart/vssr-trd-pb-vmk180-es1-2021.1.zip)
+
+> Engineering Samples or ES (including es1) refers to early access silicon which can only be given out to customers with a valid NDA.  Access to ES Documentation and Designs is only available on the VCK190 and VMK180 HeadStart Lounge web pages.  These pages require a special login for those customers with a valid NDA.
+
+#### Licenses for Prebuilt Images : [vssr-trd-pb-license-2021.1.tar.gz](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-licenses-2021.1.tar.gz)
+
 ### Xilinx Tools
 Tools       | Download Link
 ------------|--------------
@@ -88,8 +95,8 @@ Hardware  | Vivado: To build hardware design
 Software  | Petalinux: To build petalinux project and sd card images<br> Vitis/Vivado: To invoke xsct for RPU application build
 Documentations | Sphinx
 
-- Vivado: Source the `settings.sh` script from the Vivado installation path.
-- Petalinux: Source the `settings.sh` script from the Petalinux installation path.
+- Vivado: Source the `settings64.sh` script from the Vivado installation path.
+- Petalinux: Source the `settings64.sh` script from the Petalinux installation path.
 - Sphinx: Install [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html) & [recommonmark](https://recommonmark.readthedocs.io/en/latest/)
 
 ### Makefiles
@@ -231,4 +238,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ```
-
