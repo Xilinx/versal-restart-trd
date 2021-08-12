@@ -1,5 +1,5 @@
 # Versal Restart TRD
-[![Docs](https://img.shields.io/badge/-Documention-blue)](https://xilinx.github.io/versal-restart-trd)
+[![Docs](https://img.shields.io/badge/-Documention-blue)](https://xilinx.github.io/versal-restart-trd/)
 [![prebuilt](https://img.shields.io/badge/-Prebuilt_Images-blueviolet)](#prebuilt-images)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2021.1-orange)](https://www.xilinx.com/)
@@ -16,7 +16,7 @@ This repository provides all the sources of TRD and their build infrastructure.
 
 ## Links
 
-### [Documentation](https://xilinx.github.io/versal-restart-trd)
+### [Documentation](https://xilinx.github.io/versal-restart-trd/)
 
 ### Prebuilt Images
 #### Prebuilt Images for Production Silicon
