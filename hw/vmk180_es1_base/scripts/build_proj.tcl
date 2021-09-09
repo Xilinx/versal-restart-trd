@@ -30,7 +30,7 @@ set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx
 
 create_project -force vivado/versal_restart_trd . -part xcvm1802-vsva2197-2MP-e-S-es1
 
-set_property board_part xilinx.com:vmk180_es:part0:1.3 [current_project]
+set_property board_part xilinx.com:vmk180_es:part0:1.4 [current_project]
 set_property  ip_repo_paths  ../ip_repo [current_project]
 update_ip_catalog
 

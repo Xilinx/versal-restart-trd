@@ -25,7 +25,7 @@
 
 create_project -force vivado/versal_restart_trd . -part xcvc1902-vsva2197-2MP-e-S
 
-set_property board_part xilinx.com:vck190:part0:2.2 [current_project]
+set_property board_part xilinx.com:vck190:part0:2.3 [current_project]
 set_property  ip_repo_paths  ../ip_repo [current_project]
 update_ip_catalog
 
