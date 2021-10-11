@@ -20,4 +20,5 @@ RDEPENDS_${PN} = "  \
 	vssr-trd-notebooks \
 	watchdog-daemon \
 	watchdog-daemon-init \
+	vssr-test \
 	"
