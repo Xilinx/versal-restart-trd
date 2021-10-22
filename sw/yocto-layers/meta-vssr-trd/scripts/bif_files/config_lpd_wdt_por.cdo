@@ -22,5 +22,5 @@
 #
 #******************************************************************************
 
-# Assign WDT expiry action(POR) for LPD WDT
-em_set_action 0x2810C000 0x1 0x1
+# Assign WDT expiry action(subsystem restart) for LPD WDT
+em_set_action 0x2810C000 0x6 0x1
