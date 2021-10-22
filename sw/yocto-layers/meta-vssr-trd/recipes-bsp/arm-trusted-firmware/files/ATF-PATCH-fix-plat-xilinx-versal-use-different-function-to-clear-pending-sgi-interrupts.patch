@@ -1,0 +1,13 @@
+diff --git a/plat/xilinx/versal/pm_service/pm_svc_main.c b/plat/xilinx/versal/pm_service/pm_svc_main.c
+index 5abedf5..4dcc739 100644
+--- a/plat/xilinx/versal/pm_service/pm_svc_main.c
++++ b/plat/xilinx/versal/pm_service/pm_svc_main.c
+@@ -54,7 +54,7 @@ static uint64_t __unused __dead2 versal_sgi_irq_handler(uint32_t id,
+ 
+ 	VERBOSE("Entering wfi %d\n", cpu_id);
+ 
+-	plat_ic_clear_interrupt_pending(id);
++	gicv3_clear_interrupt_pending(id, cpu_id);
+ 
+ 	dsb();
+ 
