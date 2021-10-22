@@ -13,14 +13,14 @@ image {
 }
 image {
 	id = 0x1c000003, name=apu_subsystem
-	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_fpd_wdt_srst.cdo }
+	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_fpd_wdt.cdo }
 	{ type=raw, load=0x00001000, file=images/linux/system.dtb }
 	{ core=a72-0, exception_level=el-3, trustzone, file=images/linux/bl31.elf }
 	{ core=a72-0, exception_level=el-2, file=images/linux/u-boot.elf }
 }
 image {
 	id = 0x1c000004, name=rpu_subsystem, copy = 0x3e000000
-	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_lpd_wdt_por.cdo }
+	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_lpd_wdt.cdo }
 	{ core=r5-lockstep,  file=./rpu_app.elf }
 }
 }
