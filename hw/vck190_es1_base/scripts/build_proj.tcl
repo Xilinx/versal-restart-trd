@@ -27,9 +27,10 @@ xhub::install [xhub::get_xitems *vck190*]
 
 set_param board.repoPaths [get_property LOCAL_ROOT_DIR [xhub::get_xstores xilinx_board_store]]
 
-create_project -force vivado/versal_restart_trd . -part xcvc1902-vsva2197-2MP-e-S-es1
+set my_board [get_board_parts xilinx.com:vck190_es:part0:* -latest_file_version]
+create_project -force vivado/versal_restart_trd . -part [get_property PART_NAME [get_board_parts $my_board]]
+set_property board_part $my_board [current_project]
 
-set_property board_part xilinx.com:vck190_es:part0:1.4 [current_project]
 set_property  ip_repo_paths  ../ip_repo [current_project]
 update_ip_catalog
 
