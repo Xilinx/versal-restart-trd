@@ -1,5 +1,11 @@
 Revision History
 ================
+**2021.2 v2.1.0**
+
+* Updated for 2021.2
+
+  * Added APU and RPU Subsystem Recovery with WDT
+
 **2021.1 v2.0.0**
 
 * Updated for 2021.1

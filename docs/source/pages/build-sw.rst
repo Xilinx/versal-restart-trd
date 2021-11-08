@@ -6,9 +6,9 @@ Build Software
 Prerequisites
 -------------
 
-* Vitis Unified Software Platform 2021.1
+* Vitis Unified Software Platform 2021.2
 
-* PetaLinux Tools 2021.1
+* PetaLinux Tools 2021.2
 
 * Linux host machine (All instructions are with Linux host machine)
 
@@ -28,9 +28,9 @@ Clone the git repository for the current release tag.
   mkdir -p </path/to/source/repo>
   cd </path/to/source/repo>
 
-  # clone and switch to current release tag (xilinx-v2021.1)
+  # clone and switch to current release tag (xilinx-v2021.2)
   git clone https://github.com/Xilinx/versal-restart-trd.git
-  git checkout -b xilinx-v2021.1 xilinx-v2021.1
+  git checkout -b xilinx-v2021.2 xilinx-v2021.2
 
 For rest of the documentation, path to the root of this repository will be referred as $REPO_SRC.
 
@@ -106,7 +106,7 @@ This produces
 
 Run :code:`make help` in *$REPO_SRC* directory to see various build options.
 
-For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#makefiles>`_ file in the repository.
+For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.2/README.md#makefiles>`_ file in the repository.
 
 Build without Makefile
 ----------------------
@@ -241,7 +241,7 @@ Build RPU Application
    $VSSR_WS/rpu_ws/rpu_app/Debug/rpu_app.elf
 
 
-For more detailed information on how to use Vitis, please refer to the `Vitis Documentation <http://www.xilinx.com/html_docs/xilinx2021_1/vitis_doc/>`_.
+For more detailed information on how to use Vitis, please refer to the `Vitis Documentation <http://www.xilinx.com/html_docs/xilinx2021_2/vitis_doc/>`_.
 
 Generate Petalinux Image
 ************************
@@ -375,4 +375,4 @@ The resulting build artifacts will be available in the *images/linux/*
 
 Refer the "Run Images on Target" section for how to flash the SD Card and boot the TRD images.
 
-For more detailed information on how to use Petalinux, please refer to the `Petalinux Tool Reference Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1144-petalinux-tools-reference-guide.pdf>`_.
+For more detailed information on how to use Petalinux, please refer to the `Petalinux Tool Reference Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_2/ug1144-petalinux-tools-reference-guide.pdf>`_.

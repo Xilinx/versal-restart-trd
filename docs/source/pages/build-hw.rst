@@ -6,7 +6,7 @@ Build the Vivado Design
 Prerequisites
 -------------
 
-* Vivado Design Suite 2021.1
+* Vivado Design Suite 2021.2
 
 * Linux host machine (only Linux supported)
 
@@ -27,9 +27,9 @@ Clone the Git Repository for the current release tag.
 	mkdir -p </path/to/source/repo>
 	cd </path/to/source/repo>
 
-	# clone and switch to current release tag (xilinx-v2021.1)
+	# clone and switch to current release tag (xilinx-v2021.2)
 	git clone https://github.com/Xilinx/versal-restart-trd.git
-	git checkout -b xilinx-v2021.1 xilinx-v2021.1
+	git checkout -b xilinx-v2021.2 xilinx-v2021.2
 
 For the rest of the documentation, path to the root of this repository will be referred to as $REPO_SRC.
 
@@ -167,7 +167,7 @@ To run the Vivado portion manually, follow the instructions in this section.
      :align: center
      :alt: Export Hardware Path
 
-   * Click on *Finish*.  
-  
+   * Click on *Finish*.
+
 The file *versal_restart_trd_wrapper.xsa* will be available in *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/*
 

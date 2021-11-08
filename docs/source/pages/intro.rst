@@ -157,7 +157,7 @@ Below diagram shows relationship and interaction between above pieces:
    :align: center
    :alt: SW Stack
 
-Please refer `Versal ACAP System Software Developers Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_1/ug1304-versal-acap-ssdg.pdf>`_ for more details on software stack and detailed development guide for each component.
+Please refer `Versal ACAP System Software Developers Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_2/ug1304-versal-acap-ssdg.pdf>`_ for more details on software stack and detailed development guide for each component.
 
 
 Refer to **Restart Use Cases** section in the :ref:`Appendix` for details on each of the TRD use cases and the software components involved.
@@ -196,7 +196,7 @@ It has the following contents:
 
 The zip contents for **vck190-prod** are as follow ::
 
- vssr-trd-pb-vck190-prod-2021.1.zip
+ vssr-trd-pb-vck190-prod-2021.2.zip
  │
  vssr-trd-vck190-prod
  ├── LICENSE
@@ -244,9 +244,9 @@ Clone the git repository for the current release tag.
   mkdir -p </path/to/source/repo>
   cd </path/to/source/repo>
 
-  # clone and switch to current release tag (xilinx-v2021.1)
+  # clone and switch to current release tag (xilinx-v2021.2)
   git clone https://github.com/Xilinx/versal-restart-trd.git
-  git checkout -b xilinx-v2021.1 xilinx-v2021.1
+  git checkout -b xilinx-v2021.2 xilinx-v2021.2
 
 From the cloned area, run :code:`make help` to see various build options.
 
@@ -292,5 +292,5 @@ You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
 use of the design and any third party files supplied with the design.
 
-.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.1/README.md#prebuilt-images
+.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.2/README.md#prebuilt-images
 
