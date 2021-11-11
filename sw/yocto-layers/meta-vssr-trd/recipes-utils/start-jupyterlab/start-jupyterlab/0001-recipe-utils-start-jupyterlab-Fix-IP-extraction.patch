@@ -1,0 +1,29 @@
+From a91128d1170d77d5d126f4b1744b7a4d0c62e4fd Mon Sep 17 00:00:00 2001
+From: Pallav Joshi <pallav.joshi@xilinx.com>
+Date: Thu, 11 Nov 2021 14:45:41 -0800
+Subject: [PATCH 1/2] recipe-utils: start-jupyterlab: Fix IP extraction
+
+use ip command instead of ifconfig to get more consistent
+formatting across various platforms.
+
+Signed-off-by: Pallav Joshi <pallav.joshi@xilinx.com>
+---
+ .../start-jupyterlab/start-jupyterlab/jupyterlab-server         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/jupyterlab-server b/jupyterlab-server
+index ef3edd1..7bd30c3 100755
+--- a/jupyterlab-server
++++ b/jupyterlab-server
+@@ -28,7 +28,7 @@ queryip() {
+     for i in {1..20}
+     do
+         echo -n "."
+-        ip=`ifconfig eth0 | grep -oP 'inet \d+\.\d+\.\d+\.\d+' | cut -d ' ' -f2`
++        ip=`ip -4 addr show eth0  | grep -oP "(?<=inet )[\d\.]+(?=/)"`
+         [ ! -z "$ip" ] && break
+         sleep 2
+     done
+--
+2.25.1
+

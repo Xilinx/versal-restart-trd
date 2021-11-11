@@ -7,11 +7,13 @@ SUMMARY = "Start Jupyter-lab server at system boot"
 FILESEXTRAPATHS_prepend := "${THISDIR}/start-jupyterlab:"
 
 SRC_URI_append = " \
+	file://0001-recipe-utils-start-jupyterlab-Fix-IP-extraction.patch \
+	file://0002-recipe-utils-start-jupyterlab-Update-to-root-user.patch \
 	file://jupyter_lab_config.py \
 	file://overrides-vssr.json \
 	"
 
-do_install_append() { 
+do_install_append() {
 	rm -f ${D}${sysconfdir}/jupyter/jupyter_notebook_config.py
 
 	install -d ${D}${sysconfdir}/jupyter/

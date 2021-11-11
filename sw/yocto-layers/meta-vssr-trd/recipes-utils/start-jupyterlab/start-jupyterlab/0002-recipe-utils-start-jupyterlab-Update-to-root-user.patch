@@ -1,0 +1,36 @@
+From 153562ab6bf956916042845a22e3cce418e89ec6 Mon Sep 17 00:00:00 2001
+From: Pallav Joshi <pallav.joshi@xilinx.com>
+Date: Thu, 11 Nov 2021 14:53:05 -0800
+Subject: [PATCH 2/2] recipe-utils: start jupyterlab: Update to root user
+
+Currently only root user is used in the rootfs.
+- Use root user for launching jupyterlab instead of petalinux user.
+- Set the Notebook directory to point vssr-trd.
+
+Signed-off-by: Pallav Joshi <pallav.joshi@xilinx.com>
+---
+ .../start-jupyterlab/start-jupyterlab/jupyterlab-server   | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/jupyterlab-server b/jupyterlab-server
+index 7bd30c3..a9a69b1 100755
+--- a/jupyterlab-server
++++ b/jupyterlab-server
+@@ -8,10 +8,10 @@
+ # Short-Description: Start Jupyter Lab server as petalinux user
+ ### END INIT INFO
+
+-OWNER="petalinux"
+-GROUP="petalinux"
+-HOME=`(cd ~petalinux && pwd) || echo 'none'`
+-NBDIR="${HOME}/notebooks"
++OWNER="root"
++GROUP="root"
++HOME=`(cd ~root && pwd) || echo 'none'`
++NBDIR="/usr/share/notebooks/vssr-trd"
+ 
+ DAEMON_PATH="/usr/bin/jupyter-lab"
+ DAEMON_ARGS="--no-browser --notebook-dir=$NBDIR"
+--
+2.25.1
+
