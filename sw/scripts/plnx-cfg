@@ -214,4 +214,7 @@ fi
 config_machine_name
 config_ip
 
+# Image packaging format should be initramfs
+echo "CONFIG_SUBSYSTEM_INITRAMFS_IMAGE_NAME=\"petalinux-initramfs-image\"" >> ${_PLNX_PATH}/project-spec/configs/config
+
 # unset in reverse order
