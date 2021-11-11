@@ -38,7 +38,7 @@ _IP_GATEWAY=192.168.0.1
 _SUPPORTED_BOARD="vck190 vmk180"
 _SUPPORTED_MODULE="ebm-01 ebm-02 ebm-03 none"
 
-_CACHE_PATH="/opt/cache/plnx/2021.1"
+_CACHE_PATH="/scratch/cache/plnx/2021.2"
 _do_cache=0
 
 function print_help() {
