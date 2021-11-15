@@ -280,7 +280,6 @@ The notebook is laid out in a dashboard which allows to choose various TRD opera
     :align: center
     :alt: rpu-ss
 
-
 Control Selections
 ******************
 
@@ -309,6 +308,19 @@ Following TRD operations can be selected using the control pane.
 After the selection **Perform Action** button triggers the selected action.
 
 Refer to **Restart Use Cases** section in the :ref:`Appendix` for more details on each of the use cases.
+
+Terminal based Testing
+----------------------
+
+All the use cases can be tested even without Jupyter Notebook, through the terminal.
+A python script `vssr-test` provides menu based selection for variou use cases.
+
+From the Uart0 terminal just type `vssr-test` to execute this python script.
+
+  .. figure:: images/run/terminal-test.png
+    :width: 50%
+    :align: center
+    :alt: terminal-test
 
 
 Troubleshooting
