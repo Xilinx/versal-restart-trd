@@ -4,7 +4,11 @@ This function demonstrates the system recovery through APU subsystem healthy boo
 
 If the APU subsystem fails to boot fully within __120 seconds__, the PLM will mark this event as unhealthy boot and it will trigger a system restart to recover. PLM considers a subsystem to be healthy, if the subsystem issues XPm_InitFinalize.
 
-To test this feature, interrupt the u-boot and stop at u-boot during the Linux boot. Wait for 120 seconds, and system wide reset should appear.
+#### How to Test
+
+The __Perform Action__ button will just trigger the subsystem restart. To test Healthy Boot feature, one has to interrupt the u-boot during this subsystem restart.
+
+Stop at u-boot during the Linux boot by pressing any key. Wait for 120 seconds, and system wide reset should appear.
 
 
 #### Behind the scene
