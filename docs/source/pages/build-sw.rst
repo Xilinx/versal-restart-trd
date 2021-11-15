@@ -283,6 +283,23 @@ Generate Petalinux Image
        :align: center
        :alt: plnx_config_3
 
+   * Change INITRAMFS/INITRD Image name to *petalinux-initramfs-image*. This will ensure to switch to rootfs on the sd card after initial boot from initramfs.
+
+     .. figure:: images/plnx_build/plnx_img_pkg_1.png
+       :width: 50%
+       :align: center
+       :alt: plnx_img_pkg_1
+
+     .. figure:: images/plnx_build/plnx_img_pkg_2.png
+       :width: 50%
+       :align: center
+       :alt: plnx_img_pkg_2
+
+     .. figure:: images/plnx_build/plnx_img_pkg_3.png
+       :width: 50%
+       :align: center
+       :alt: plnx_config_3
+
    * Save and Exit petalinux configuration
 
 #. Configure Static IP using petalinux config, Petalinux Ethernet IP configuration (Optional. Default=DHCP)
