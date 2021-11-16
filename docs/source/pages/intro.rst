@@ -42,9 +42,9 @@ Features:
 
   * System recovery due to bad boot during Standalone RPU boot.
 
-  * System recovery due to Linux hang (by forcing FPD watchdog expiry)
+  * Subsystem recovery due to Linux hang (by forcing FPD watchdog expiry)
 
-  * System recovery due to RPU hang (by forcing LPD watchdog expiry)
+  * Subsystem recovery due to RPU hang (by forcing LPD watchdog expiry)
 
 * Supports multiple platforms:
 
