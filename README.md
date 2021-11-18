@@ -2,7 +2,7 @@
 [![Docs](https://img.shields.io/badge/-Documention-blue)](https://xilinx.github.io/versal-restart-trd/)
 [![prebuilt](https://img.shields.io/badge/-Prebuilt_Images-blueviolet)](#prebuilt-images)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2021.1-orange)](https://www.xilinx.com/)
+[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2021.2-orange)](https://www.xilinx.com/)
 
 The Versal System and Subsystem Restart TRD (**VSSR TRD**), also referred to as
 **Versal Restart TRD**, demonstrates how to restart various components of a system.
@@ -22,25 +22,25 @@ This repository provides all the sources of TRD and their build infrastructure.
 #### Prebuilt Images for Production Silicon
 Board   | Silicon        | Download Link
 --------|----------------|--------------
-VCK190  | Production     | [vssr-trd-pb-vck190-prod-2021.1.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vck190-prod-2021.1.zip)
-VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2021.1.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vmk180-prod-2021.1.zip)
+VCK190  | Production     | [vssr-trd-pb-vck190-prod-2021.2.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vck190-prod-2021.2.zip)
+VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2021.2.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vmk180-prod-2021.2.zip)
 
 #### Prebuilt Images for ES Silicon
 Board   | Silicon            | Download Link
 --------|--------------------|--------------
-VCK190  | Engineering Sample | [vssr-trd-pb-vck190-es1-2021.1.zip](https://www.xilinx.com/member/vck190_headstart/vssr-trd-pb-vck190-es1-2021.1.zip)
-VMk180  | Engineering Sample | [vssr-trd-pb-vmk180-es1-2021.1.zip](https://www.xilinx.com/member/vmk180_headstart/vssr-trd-pb-vmk180-es1-2021.1.zip)
+VCK190  | Engineering Sample | [vssr-trd-pb-vck190-es1-2021.2.zip](https://www.xilinx.com/member/forms/download/trd-license-versal.html?filename=vssr-trd-pb-vck190-es1-2021.2.zip)
+VMk180  | Engineering Sample | [vssr-trd-pb-vmk180-es1-2021.2.zip](https://www.xilinx.com/member/forms/download/trd-license-versal.html?filename=vssr-trd-pb-vmk180-es1-2021.2.zip)
 
 > Engineering Samples or ES (including es1) refers to early access silicon which can only be given out to customers with a valid NDA.  Access to ES Documentation and Designs is only available on the VCK190 and VMK180 HeadStart Lounge web pages.  These pages require a special login for those customers with a valid NDA.
 
-#### Licenses for Prebuilt Images : [vssr-trd-pb-license-2021.1.tar.gz](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-licenses-2021.1.tar.gz)
+#### Licenses for Prebuilt Images : [vssr-trd-pb-license-2021.2.tar.gz](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-licenses-2021.2.tar.gz)
 
 ### Xilinx Tools
 Tools       | Download Link
 ------------|--------------
-Vivado      | [2021.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2021-1.html)
-Vitis       | [2021.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2021-1.html)
-Petalinux   | [2021.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2021-1.html)
+Vivado      | [2021.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2021-2.html)
+Vitis       | [2021.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2021-2.html)
+Petalinux   | [2021.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2021-2.html)
 
 
 ## Directory Structure
@@ -96,7 +96,7 @@ Software  | Petalinux: To build petalinux project and sd card images<br> Vitis/V
 Documentations | Sphinx
 
 - Vivado: Source the `settings64.sh` script from the Vivado installation path.
-- Petalinux: Source the `settings64.sh` script from the Petalinux installation path.
+- Petalinux: Source the `settings.sh` script from the Petalinux installation path.
 - Sphinx: Install [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html) & [recommonmark](https://recommonmark.readthedocs.io/en/latest/)
 
 ### Makefiles
