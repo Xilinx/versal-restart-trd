@@ -7,8 +7,6 @@ SUMMARY = "Start Jupyter-lab server at system boot"
 FILESEXTRAPATHS:prepend := "${THISDIR}/start-jupyterlab:"
 
 SRC_URI:append = " \
-	file://0001-recipe-utils-start-jupyterlab-Fix-IP-extraction.patch \
-	file://0002-recipe-utils-start-jupyterlab-Update-to-root-user.patch \
 	file://jupyter_lab_config.py \
 	file://overrides-vssr.json \
 	"
