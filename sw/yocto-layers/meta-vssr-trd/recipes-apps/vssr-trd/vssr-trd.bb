@@ -8,7 +8,7 @@ SECTION = "PETALINUX/apps"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d5d667b6456b8f66689c5e3ae6f2287a"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	libvssr-trd \
 	libapu-shmem \
 	"
@@ -30,6 +30,6 @@ do_install() {
 	cp -r ${S}/notebooks/* ${D}/${NOTEBOOK_DIR}/${PN}
 }
 
-FILES_${PN}-notebooks += "${NOTEBOOK_DIR}"
+FILES:${PN}-notebooks += "${NOTEBOOK_DIR}"
 PACKAGES += "${PN}-notebooks"
 
