@@ -2,7 +2,7 @@ DESCRIPTION = "Versal SubSystem Restart TRD related Packages"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "  \
+RDEPENDS:${PN} = "  \
 	packagegroup-petalinux-python-modules \
 	python3 \
 	python3-dev \

@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI += " \
 			file://vssr.dtsi \
@@ -6,6 +6,6 @@ SRC_URI += " \
 			file://libmetal-shm.dtsi \
 			"
 
-do_configure_append() {
+do_configure:append() {
 	echo "/include/ \"vssr.dtsi\"" >> ${WORKDIR}/system-user.dtsi
 }

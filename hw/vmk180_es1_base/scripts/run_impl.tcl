@@ -32,7 +32,7 @@ cd vivado/versal_restart_trd.runs/impl_1
 exec -ignorestderr bootgen -arch versal -image versal_restart_trd_wrapper.bif -overlay_cdo ../../../overlay/subsystem.cdo -w -o versal_restart_trd_wrapper.pdi
 
 open_run impl_1
-write_hw_platform -fixed -include_bit -force -file versal_restart_trd_wrapper.xsa
+write_hw_platform -fixed -force -file versal_restart_trd_wrapper.xsa
 
 
 

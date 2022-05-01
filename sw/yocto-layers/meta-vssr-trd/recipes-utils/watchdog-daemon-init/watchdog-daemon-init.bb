@@ -10,7 +10,7 @@ SRC_URI = "file://watchdog-daemon-init \
  "
 S = "${WORKDIR}"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit update-rc.d
 
