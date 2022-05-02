@@ -6,9 +6,9 @@ Build Software
 Prerequisites
 -------------
 
-* Vitis Unified Software Platform 2021.2
+* Vitis Unified Software Platform 2022.1
 
-* PetaLinux Tools 2021.2
+* PetaLinux Tools 2022.1
 
 * Linux host machine (All instructions are with Linux host machine)
 
@@ -82,13 +82,13 @@ Here is the output for the above build.
 It is also possible to provide the XSA file explicitly by XSA_FILE option.
 ::
 
-  make BOARD=vmk180 SIL=es1 XSA_FILE=/scratch/build-area/hw/new.xsa'
+  make BOARD=vmk180 SIL=prod XSA_FILE=/scratch/build-area/hw/new.xsa'
 
 This produces
 ::
 
   output/
-  └── vmk180-es1-base
+  └── vmk180-prod-base
       ├── petalinux-sdimage.wic.xz
       └── reference_images
           ├── bl31.elf
@@ -246,6 +246,8 @@ For more detailed information on how to use Vitis, please refer to the `Vitis Do
 Generate Petalinux Image
 ************************
 
+#. On Linux, set up the Petalinux environment in a terminal window by sourcing <Petalinux_install_path>/settings.sh
+
 #. Create a new Petalinux project with versal template. Name it as plnx-vssr-trd
    ::
 
@@ -344,6 +346,10 @@ Generate Petalinux Image
        :alt: plnx_layer_add_3
 
    * Save and Exit petalinux configuration
+
+#. Add layer to include artifacts in the build::
+
+   ./project-spec/meta-vssr-trd/scripts/add-layer.sh
 
 #. Build the Petalinux project::
 
