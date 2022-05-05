@@ -32,6 +32,7 @@ Clone the Git Repository for the current release tag.
 
 Switch to the current release tag
 ::
+
         cd <versal-restart-trd>
         git checkout -b xilinx-v2021.2 xilinx-v2021.2
 
@@ -70,9 +71,7 @@ To run the Vivado portion manually, follow the instructions in this section.
 #. Copy the hardware sources to a filesystem with > 15GB space, called $VSSR_WS in this document.  Create a subdirectory for the hardware under $VSSR_WS, called hw_ws.  Copy the sources to this directory (fill in board and silicon type)::
 
 	cp -r $REPO_SRC/hw/<board>_<sil>_base $VSSR_WS/hw_ws
-	cp -r $REPO_SRC/hw/ip_repo $VSSR_WS/hw_ws
-::     
-        cp -r $REPO_SRC/hw/common $VSSR_WS/hw_ws
+	cp -r $REPO_SRC/hw/{ip_repo,common} $VSSR_WS/hw_ws
 
 #. Open the Vivado GUI
 
@@ -105,7 +104,7 @@ To run the Vivado portion manually, follow the instructions in this section.
      :alt: IPI Block Design
 
 
-*At this point you can opt for 2 options to Write Device Image and generate .xsa*  
+*At this point you can opt for 2 options to Write Device Image and generate .xsa*
 
 Option 1 (Recommended)
 
