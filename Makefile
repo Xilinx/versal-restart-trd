@@ -40,7 +40,7 @@ export BOARD SIL DESIGN
 # Internal Variables
 # Valid Option Lists
 _BOARD_LIST		:= vck190 vmk180
-_SIL_LIST		:= prod es1
+_SIL_LIST		:= prod
 _DESIGN_LIST	:= base
 
 # Workspaces
@@ -133,14 +133,14 @@ help:
 	@echo '    Generates hw and sw images for vmk180-prod-base build config'
 	@echo '           make BOARD=vmk180'
 	@echo ''
-	@echo '    Generates hw images for vmk180-es1-base build config'
-	@echo '           make build_hw BOARD=vmk180 SIL=es1'
+	@echo '    Generates hw images for vck190-prod-base build config'
+	@echo '           make build_hw BOARD=vck190'
 	@echo ''
 	@echo '    Generates sphinx documentation'
 	@echo '           make build_docs'
 	@echo ''
-	@echo '    Generates hw and sw images for vck190-es1-base build config, but use the /tmp/build-area'
-	@echo '           make BOARD=vck190 SIL=es1 BUILD_DIR=/tmp/build-area'
+	@echo '    Generates hw and sw images for vck190-prod-base build config, but use the /tmp/build-area'
+	@echo '           make BOARD=vck190 SIL=prod BUILD_DIR=/tmp/build-area'
 	@echo ''
 	@echo '    Generates sw images for vmk180-prod-base build config using the pre generated custom xsa file'
 	@echo '           make BOARD=vmk180 DESIGN=base XSA_FILE=/scratch/build-area/hw/new.xsa'
