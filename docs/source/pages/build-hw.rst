@@ -33,7 +33,7 @@ Clone the Git Repository for the current release tag.
 Switch to the current release tag
 ::
 
-        cd <versal-restart-trd>
+        cd versal-restart-trd
         git checkout -b xilinx-v2021.2 xilinx-v2021.2
 
 
