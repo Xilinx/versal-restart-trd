@@ -182,14 +182,17 @@ Follow these steps to boot the board into Linux.
 
 Follow these steps to connect to the jupyter-server using Chrome browser on the laptop.
 
-* Enable the juputer service after first boot. The service will start automatically a subsequent reboots/restarts.
+* If you are using Static IP address please be sure to disable the Network Time Synchronization service at first boot.
+
+  Enter the following command to disbale::
+            
+        sudo systemctl disable systemd-timesyncd.service
+
+* Enable and start the juputer service after first boot. The service will start automatically after subsequent reboots/restarts.
+
   Enter following command ::
 
-        sudo systemctl enable jupyter-setup.service
-
-* Start the service::
-
-        sudo systemctl start jupyter-setup.service
+        sudo systemctl enable --now jupyter-setup.service
 
 * Check status of the service::
 
