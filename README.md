@@ -2,7 +2,7 @@
 [![Docs](https://img.shields.io/badge/-Documention-blue)](https://xilinx.github.io/versal-restart-trd/)
 [![prebuilt](https://img.shields.io/badge/-Prebuilt_Images-blueviolet)](#prebuilt-images)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2021.2-orange)](https://www.xilinx.com/)
+[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2022.1-orange)](https://www.xilinx.com/)
 
 The Versal System and Subsystem Restart TRD (**VSSR TRD**), also referred to as
 **Versal Restart TRD**, demonstrates how to restart various components of a system.
@@ -26,22 +26,16 @@ VCK190  | Production     | [vssr-trd-pb-vck190-prod-2021.2.zip](https://www.xili
 VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2021.2.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vmk180-prod-2021.2.zip)
 
 #### Prebuilt Images for ES Silicon
-Board   | Silicon            | Download Link
---------|--------------------|--------------
-VCK190  | Engineering Sample | [vssr-trd-pb-vck190-es1-2021.2.zip](https://www.xilinx.com/member/forms/download/trd-license-versal.html?filename=vssr-trd-pb-vck190-es1-2021.2.zip)
-VMk180  | Engineering Sample | [vssr-trd-pb-vmk180-es1-2021.2.zip](https://www.xilinx.com/member/forms/download/trd-license-versal.html?filename=vssr-trd-pb-vmk180-es1-2021.2.zip)
-
-> Engineering Samples or ES (including es1) refers to early access silicon which can only be given out to customers with a valid NDA.  Access to ES Documentation and Designs is only available on the VCK190 and VMK180 HeadStart Lounge web pages.  These pages require a special login for those customers with a valid NDA.
+> Engineering Samples or ES (including es1) design support is dropped in this release. Use [previous release 2021.2](https://github.com/Xilinx/versal-restart-trd/tree/xilinx-v2021.2) for ES1 silicon.
 
 #### Licenses for Prebuilt Images : [vssr-trd-pb-license-2021.2.tar.gz](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-licenses-2021.2.tar.gz)
 
 ### Xilinx Tools
 Tools       | Download Link
 ------------|--------------
-Vivado      | [2021.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2021-2.html)
-Vitis       | [2021.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2021-2.html)
-Petalinux   | [2021.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2021-2.html)
-
+Vivado      | [2022.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2022-1.html)
+Vitis       | [2022.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2022-1.html)
+Petalinux   | [2022.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2022-1.html)
 
 ## Directory Structure
 
@@ -61,9 +55,7 @@ hw
 ├── common             # Common files used across all designs
 ├── ip_repo            # Common files used across all designs
 ├── Makefile           # Makefile to build hardware designs
-├── vck190_es1_base    # Source files for specific board variant and design
 ├── vck190_prod_base   # Source files for specific board variant and design
-├── vmk180_es1_base    # Source files for specific board variant and design
 └── vmk180_prod_base   # Source files for specific board variant and design
 ```
 
@@ -109,10 +101,10 @@ make [<target>] [<Option1>=<val1> [<Option2>=<val2>]...]
 
 Each make invocation is with respect to specific build configuration. The build configuration is defined as combination of
 - Board (vck190, vmk180)
-- Silicon (production, es1)
+- Silicon (production)
 - Design (base)
 
-Currently there is only one design, but in future there can be more designs. Build configuration is selected using various make options.
+Currently there is only one design and one silicon, but in future there can be more. Build configuration is selected using various make options.
 
 To build the default image for vck190 board with production silicon, just run
 
@@ -146,7 +138,7 @@ nuke                     | Remove build and deploy(output) area completely for g
 Options       | Possible Values | Default | Description          | Applies to Target
 --------------|----------------|---------|----------------------|----------------------
 BOARD=\<val\>   | vck190, vmk180 | vck190  | Choose board variant | All, except build_docs
-SIL=\<val\>     | prod, es1      | prod    | Choose silicon variant | All, except build_docs
+SIL=\<val\>     | prod           | prod    | Choose silicon variant | All, except build_docs
 DESIGN=\<val\>  | base           | base    | Choose Design variant(for future) | All, except build_docs
 BUILD_DIR=\<path\> | Valid Absolute path | ./build | Choose custom build scratchpad area(Min 50GB) | All
 XSA_FILE=\<file\> | XSA file | generated xsa | Custom XSA file for sw build | build_sw<br>build_sdcard
@@ -175,13 +167,7 @@ Final deploy output will look as follow:
   ├── docs
   │   ├── ...doc-files
   │   └── index.html
-  ├── vck190-es1-base
-  │   ├── petalinux-sdimage.wic.xz
-  │   └── reference_images
   ├── vck190-prod-base
-  │   ├── petalinux-sdimage.wic.xz
-  │   └── reference_images
-  ├── vmk180-es1-base
   │   ├── petalinux-sdimage.wic.xz
   │   └── reference_images
   └── vmk180-prod-base
