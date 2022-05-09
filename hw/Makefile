@@ -42,12 +42,6 @@ PDI_FILE := $(BUILD_DIR)/vivado/versal_restart_trd.runs/impl_1/versal_restart_tr
 SRCS := $(_PWD)/$(BOARD)_$(SIL)_$(DESIGN)
 IP_REPO := $(_PWD)/ip_repo
 
-VCK190_ES1_DEVICE="xcvc1902-*"
-VMK180_ES1_DEVICE="xcvm1802-*"
-
-ES1_DEVICE_LIST=$(VCK190_ES1_DEVICE) $(VMK180_ES1_DEVICE)
-VIVADO_INIT_FILE=$(HOME)/.Xilinx/Vivado/Vivado_init.tcl
-
 # commands
 COPY := cp -rfL
 REMOVE := rm -rf
@@ -70,23 +64,13 @@ deploy: $(XSA_FILE) $(PDI_FILE) | $(DEST_DIR)
 build_design: $(XSA_FILE)
 $(XSA_FILE): $(PDI_FILE)
 
-$(PDI_FILE):  $(SRCS_DEP) | $(SRCS) $(BUILD_DIR) $(IP_REPO_LINK) check_env
+$(PDI_FILE):  $(SRCS_DEP) | $(SRCS) $(BUILD_DIR) $(IP_REPO_LINK)
 	@echo "Building hw design"
 	@$(COPY) $(SRCS)/* $(BUILD_DIR)
 	cd $(BUILD_DIR); vivado -mode batch -source scripts/build_all.tcl
 
 $(BUILD_DIR) $(DEST_DIR):
 	@mkdir -p $@
-
-.PHONY:
-check_env: $(ES1_DEVICE_LIST)
-
-$(ES1_DEVICE_LIST): $(VIVADO_INIT_FILE)
-	@grep -qxF "enable_beta_device $@" $(VIVADO_INIT_FILE) || echo "enable_beta_device $@" >> $(VIVADO_INIT_FILE)
-
-$(VIVADO_INIT_FILE):
-	@mkdir -p $(dir $(VIVADO_INIT_FILE))
-	@touch $(VIVADO_INIT_FILE)
 
 # Experimental. Replace softlink with copy or hardlink, if any issue.
 $(IP_REPO_LINK): $(IP_REPO)
