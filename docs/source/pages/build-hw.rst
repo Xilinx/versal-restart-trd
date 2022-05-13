@@ -27,17 +27,13 @@ Clone the Git Repository for the current release tag.
 	mkdir -p </path/to/source/repo>
 	cd </path/to/source/repo>
 
-	# clone
+	# clone git repo and switch to the current release tag
 	git clone https://github.com/Xilinx/versal-restart-trd.git
+	cd versal-restart-trd
+	git checkout -b xilinx-v2022.1 xilinx-v2022.1
+	export REPO_SRC = </path/to/source/repo>/veral-restart-trd
 
-Switch to the current release tag
-::
-
-        cd versal-restart-trd
-        git checkout -b xilinx-v2021.2 xilinx-v2021.2
-
-
-.. note:: REPO_SRC = </path/to/source/repo>/veral-restart-trd
+.. note:: refer REPO_SRC = </path/to/source/repo>/veral-restart-trd for rest of the documentation
 
 $REPO_SRC/hw directory provides sources to build the following components:
 
@@ -104,13 +100,11 @@ To run the Vivado portion manually, follow the instructions in this section.
      :alt: IPI Block Design
 
 
-*At this point you can opt for 2 options to Write Device Image and generate .xsa*
+#. *At this point you can opt for 2 options to Write Device Image and generate .xsa*
 
-Option 1 (Recommended)
+Option 1 (Recommended): Run the implementation script
 
-#. Run the implementation script
-
-   To automatically run Vivado all the way through to Write Device Image
+#. To automatically run Vivado all the way through to Write Device Image
    and generate the XSA, type the following in the Tcl Console window,
    then skip to the next section::
 
@@ -118,10 +112,7 @@ Option 1 (Recommended)
 
    When the script finishes, the file *versal_restart_trd_wrapper.xsa* will be available in *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1*
 
-Option 2 (Alternate)
-
-#. To run to run the steps in the ``run_impl.tcl`` script individually, follow the next
-   4 steps.
+Option 2 (Alternatively): Run the steps in the ``run_impl.tcl`` individually as below
 
 #. Implement the design
 
@@ -168,4 +159,7 @@ Option 2 (Alternate)
    * Click on *Finish*.
 
 The file *versal_restart_trd_wrapper.xsa* will be available in *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/*
+
+.. note:: Along with XSA, all the artifacts used by software tools (as part of handoff) are availabe in *$VSSR_WS/hw_ws/vivado/versal_restart_trd.runs/impl_1/*. Feel free to copy it as backup to regenerate PDI and xsa file later. This includes, pdi files, bif file to generate the pdi file and all the components of the pdi file like psm.elf, various cdo files, rnpi, etc.
+
 
