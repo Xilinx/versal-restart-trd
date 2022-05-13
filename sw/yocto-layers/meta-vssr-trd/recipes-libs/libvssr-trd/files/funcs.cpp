@@ -96,6 +96,13 @@ char const* SetControl(int a_agent, int a_a)
 		return "Killing APU Watchdog";
 	}
 	if (agent == E_AgentAPU && a == E_ActionTestHealthyBoot){
+		/*Issuing a Subsystem Restart for the user to enter u-boot. RPU will be alive in its
+		 *terminal. After stopping in u-boot for 120 ther will be system recovery.
+		 *APU and RPU dead in its terminals, then both terminals are getting reloaded with
+		 *respective subsystems
+		 */
+		system(LINUX_MARK_SUBSYSTEM_RESTART);
+		do_restart();
 		return "to test the healthy boot, press ok and stop at the u-boot hitting any key and wait for 120 seconds and observe system restart ";
 	}
 

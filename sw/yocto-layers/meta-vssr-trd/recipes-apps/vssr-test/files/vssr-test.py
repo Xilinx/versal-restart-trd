@@ -66,6 +66,11 @@ while choice != '0':
         Action = op[1]
         print (d_target[Target] + " will perform " + d_action[Action])
         trd.init()
+        if Target == 0 and Action == 2:
+            print("APU will perform Subsystem Restart.Enter u-boot and wait for 120 seconds for Healthy Boot Test")
+            for i in range(5,0,-1):
+                print(f"{i}", end="\r", flush=True)
+                time.sleep(1)
         trd.SetControl(Target,Action)
         trd.deinit()
     else:
