@@ -28,9 +28,9 @@ copyright = '2019-2022, Xilinx, Inc.'
 author = 'Xilinx, Inc.'
 
 # The short X.Y version
-version = '2.1.0'
+version = '2022.1'
 # The full version, including alpha/beta/rc tags
-release = 'v2021.2-2.1.0'
+release = 'v2022.1'
 html_last_updated_fmt = '%B %d, %Y'
 
 # -- General configuration ---------------------------------------------------
@@ -56,7 +56,7 @@ extensions = [
 	'sphinx_markdown_tables',
 	#'edit_on_github',
     # Auto-generate section labels.
-    'sphinx.ext.autosectionlabel',	
+    'sphinx.ext.autosectionlabel',
 	'rst2pdf.pdfbuilder'
 ]
 
@@ -99,7 +99,7 @@ source_suffix = {
 source_parsers = {
     '.md': CommonMarkParser,
 	# myst_parser testing
-	#'.md': 
+	#'.md':
 }
 
 # The master toctree document.

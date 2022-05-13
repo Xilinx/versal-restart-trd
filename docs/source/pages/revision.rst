@@ -1,5 +1,19 @@
 Revision History
 ================
+**2022.1**
+
+* Updated for 2022.1 toolchain
+
+  * Removed support for ES1 silicon
+
+  * Migrate to systemd as init system
+
+  * Subsystem definition's cdo file made more verbose
+
+  * Unify the subsystem cdo definition for all boards
+
+    * Removed AIE requirement from all the cores by default (can be added back by uncommenting)
+
 **2021.2 v2.1.0**
 
 * Updated for 2021.2
