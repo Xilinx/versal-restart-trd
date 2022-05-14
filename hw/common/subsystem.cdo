@@ -21,6 +21,38 @@
 # THE SOFTWARE.
 #
 #******************************************************************************
+#
+
+# This file overlays the subsystem definition of the system.
+#
+# Following subsystems are adding using the pm_add_subsystem command:
+#    - APU subsystem: 0x1c000003
+#    - RPU lockstep subsystem: 0x1c000004
+#
+# The subsystem is constructed by adding specific requirement to it.
+# pm_add_requirement command adds various devices/peripheral with associated
+# requirement to the subsystem.
+#
+# This command can have variable number of argument depending on the type of
+# device. Following is common command format used in this file.
+#
+# pm_add_requirement <subsystem-id> <device-id> <Access permissions> <master id mask> <prealloc access cap> <QoS>
+# subsystem-id : use id as defined in pm_add_subsystem.
+# device-id: can be obtained from xpm_nodeid.h file
+# Access permission: This defines policy for access permissions
+#                    bit [1:0] = Usage policy
+#                    			 0 = No Restriction
+#                    			 1 = Shared
+#                    			 2 = Exclusive
+#                    			 3 = Timeshared
+#                    bit [2] = Security policy [0 = secure / 1 = non-secure]
+#                    bit [3:5] = reserved
+#                    bit [6] = Prealloc  [1 = prealloced]. Specify if the device should be prealloced before boot.
+# master id mask : Used for protection. Currently default to 0xFFFFF
+# prealloc cap   : defines state of the preallocation ( 0 -Access, 1- Context, 2-Wakeup, 3-Unusable)
+# QoS            : used for timeout value of the healthy boot. Don't care for rest of the devices
+#
+
 marker	0x64	"Subsystem"
 # subsystem_apu
 pm_add_subsystem 0x1c000003
