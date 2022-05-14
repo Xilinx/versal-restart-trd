@@ -14,7 +14,7 @@ Prerequisites
 
 * VCK190 or VMK180 Evaluation Board
 
-.. note:: Instructions on this page are applicable to both VCK190 and VMK180 developement boards. Use appropriate XSA file for the build.
+.. note:: Instructions on this page are applicable to both VCK190 and VMK180 developement boards. Use appropriate board specific XSA file for the build.
 
 Sources
 -------
@@ -28,13 +28,14 @@ Clone the git repository for the current release tag.
   mkdir -p </path/to/source/repo>
   cd </path/to/source/repo>
 
-  # clone and switch to current release tag (xilinx-v2021.2)
+  # clone and switch to current release tag (xilinx-v2022.1)
   git clone https://github.com/Xilinx/versal-restart-trd.git
-  git checkout -b xilinx-v2021.2 xilinx-v2021.2
+  cd versal-restart-trd
+  git checkout -b xilinx-v2022.1 xilinx-v2022.1
 
-For rest of the documentation, path to the root of this repository will be referred as $REPO_SRC.
+  export REPO_SRC = </path/to/source/repo>/versal-restart-trd
 
-.. note:: REPO_SRC = </path/to/source/repo>/versal-restart-trd
+.. note:: For rest of the documentation, path to the root of this repository will be referred as $REPO_SRC.
 
 $REPO_SRC/sw directory provides sources to build following components:
 
@@ -53,7 +54,7 @@ Here is an example build command for vck190 production board.
 ::
 
   cd $REPO_SRC
-  make build_sw BAORD=vck190 SIL=prod DESIGN=base
+  make build_sw BAORD=vck190 DESIGN=base
 
 As the XSA file is not explicitly provided in above command, the build looks for the xsa file at *output/vck190-prod-base/reference_images/versal_restart_trd_wrapper.xsa*. If the file is not present here, the build triggers the hardware build to generate the xsa file before building the software.
 
@@ -82,7 +83,7 @@ Here is the output for the above build.
 It is also possible to provide the XSA file explicitly by XSA_FILE option.
 ::
 
-  make BOARD=vmk180 SIL=prod XSA_FILE=/scratch/build-area/hw/new.xsa'
+  make BOARD=vmk180 XSA_FILE=/scratch/build-area/hw/new.xsa'
 
 This produces
 ::
@@ -106,7 +107,7 @@ This produces
 
 Run :code:`make help` in *$REPO_SRC* directory to see various build options.
 
-For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.2/README.md#makefiles>`_ file in the repository.
+For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2022.1/README.md#makefiles>`_ file in the repository.
 
 Build without Makefile
 ----------------------
@@ -241,7 +242,7 @@ Build RPU Application
    $VSSR_WS/rpu_ws/rpu_app/Debug/rpu_app.elf
 
 
-For more detailed information on how to use Vitis, please refer to the `Vitis Documentation <http://www.xilinx.com/html_docs/xilinx2021_2/vitis_doc/>`_.
+For more detailed information on how to use Vitis, please refer to the `Vitis Documentation <https://docs.xilinx.com/v/u/en-US/ug1416-vitis-documentation>`_.
 
 Generate Petalinux Image
 ************************
@@ -398,4 +399,4 @@ The resulting build artifacts will be available in the *images/linux/*
 
 Refer the "Run Images on Target" section for how to flash the SD Card and boot the TRD images.
 
-For more detailed information on how to use Petalinux, please refer to the `Petalinux Tool Reference Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_2/ug1144-petalinux-tools-reference-guide.pdf>`_.
+For more detailed information on how to use Petalinux, please refer to the `Petalinux Tool Reference Guide <https://docs.xilinx.com/r/en-US/ug1144-petalinux-tools-reference-guide>`_.
