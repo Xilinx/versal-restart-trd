@@ -38,4 +38,4 @@ trd.SetControl(1,2)
 #### Observation
 Observe RPU subsystem dead for 3 seconds and getting restarted, above the control panel on right side. Also observe the message __BAD BOOT__, during rpu application relaunch. Linux and everything else should be working fine. Wait for 20 seconds, observe the system recovery. Linux dead in the APU terminal and RPU application dead in it's own terminal; then both APU and RPU terminals are getting reloaded with the respective subsystems.
 
-> Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases just a browser refresh is enough to reconnect the notebook after reboot.
+> Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases, after waiting for about 120-15- seconds, just a browser refresh is enough to reconnect the notebook after reboot.

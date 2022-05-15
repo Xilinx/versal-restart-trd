@@ -175,19 +175,48 @@ Follow these steps to boot the board into Linux.
 * On Versal UART0 terminal, Versal device boot messages should appear starting with the message
   "Xilinx Versal Platform Loader and Manager"
 
-* In about 60 seconds boot is complete. Observe the Linux prompt
-  *root@plnx-<board>-<sil>* and autostart of JupyterLab server as shown
-  in the example below::
+* In about 60 seconds boot is complete. The first boot will prompt for a login and password.
+  Enter "petalinux" as login and set a password of your choice.
 
-    root@plnx-vmk180-es1:~# [I 2038-02-17 10:13:21.707 ServerApp] jupyterlab | extension was successfully linked.
-    [I 2038-02-17 10:13:21.879 LabApp] JupyterLab extension loaded from /usr/lib/python3.8/site-packages/jupyterlab
+* Use the same credentials for subsequent reboots/restarts.
+
+Follow these steps to connect to the jupyter-server using Chrome browser on the laptop.
+
+* If you are using Static IP address please be sure to disable the Network Time Synchronization service at first boot.
+
+  Enter the following command to disbale::
+            
+        sudo systemctl disable systemd-timesyncd.service
+
+* Enable and start the juputer service after first boot. The service will start automatically after subsequent reboots/restarts.
+
+  Enter following command ::
+
+        sudo systemctl enable --now jupyter-setup.service
+
+* Check status of the service::
+
+        sudo systemctl status jupyter-setup.service
+
+* Status of server will be displayed::
+
+    plnx-vssr-trd:~$ jupyter-setup.service - jupyter setup scripts
+        Main PID: 712(start-jupyter.s)
+        Tasks:2 (limit: 9216)
+        Memory: 104.M
+        CGroup: /system.slice/jupyter-setup.service
+                -712 /bin/bash //sbin/start-jupyter.sh
+                -718 python3 /usr/nin/jupyter-lab --no-browser --allow-root --ip=192.168.0.10
+
+    [I 2022-03-24 21:31:59.626 LabApp] JupyterLab extension loaded from /usr/lib/python3.8/site-packages/jupyterlab
     [I 2038-02-17 10:13:21.879 LabApp] JupyterLab application directory is /usr/share/jupyter/lab
     [I 2038-02-17 10:13:21.896 ServerApp] jupyterlab | extension was successfully loaded.
     [I 2038-02-17 10:13:21.896 ServerApp] Serving notebooks from local directory: /usr/share/notebooks/vssr-trd
-    [I 2038-02-17 10:13:21.897 ServerApp] Jupyter Server 1.2.1 is running at:
+    [I 2038-02-17 10:13:21.897 ServerApp] Jupyter Server 1.13.5 is running at:
     [I 2038-02-17 10:13:21.897 ServerApp] http://192.168.0.10:8888/lab
     [I 2038-02-17 10:13:21.897 ServerApp]  or http://127.0.0.1:8888/lab
-    [I 2038-02-17 10:13:21.897 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+    [I 2038-02-17 10:13:21.897 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip
+    confirmation)
 
 Follow these steps to connect to the jupyter-server using Chrome browser on the
 laptop.
@@ -209,8 +238,8 @@ laptop.
 
   **Note:** To stop and restart the Jupyter server, use the following commands::
 
-    /etc/init.d/jupyterlab-server stop
-    /etc/init.d/jupyterlab-server start
+    sudo systemctl stop jupyter-setup.service
+    sudo systemctl start jupyter-setup.service
 
 * To look up the jupyter server IP address on the target, run::
 
@@ -315,19 +344,31 @@ Terminal based Testing
 All the use cases can be tested even without Jupyter Notebook, through the terminal.
 A python script `vssr-test` provides menu based selection for variou use cases.
 
-From the Uart0 terminal just type `vssr-test` to execute this python script.
+From the Uart0 terminal just type `sudo vssr-test` to execute this python script::
 
-  .. figure:: images/run/terminal-test.png
-    :width: 50%
-    :align: center
-    :alt: terminal-test
+        plnx-vssr-trd:~$ sudo vssr-test
+        Password:
+
+        Versal Restart TRD Testing. Choose the Test:
+
+        1. APU: Subsystem Restart
+        2. APU: System Restart
+        3. APU: Healthy Boot Test
+        4. APU: WDT Recovery
+        5. RPU: Subsystem Restart
+        6. RPU: System Restart
+        7. RPU: Healthy Boot Test
+        8. RPU: WDT Recovery
+        0. Exit
+
+        Enter your choice:
 
 
 Troubleshooting
 ---------------
 
-#. If after restarting the APU subsystem, the Jupyter notebook does not reconnect, try hitting
-   F5 key to refresh.
+#. If after restarting the APU subsystem, the Jupyter notebook does not reconnect,wait for around 120-150 seconds
+   and try hitting refresh (Normally `F5 key`).
 
 #. If the petalinux image is configured to have dynamic (static in tutorial), then enter the new
    ip address (if the board ip is reassigned) after each reboot in the browser.

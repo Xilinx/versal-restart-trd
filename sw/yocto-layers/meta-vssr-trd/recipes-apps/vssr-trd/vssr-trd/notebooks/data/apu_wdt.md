@@ -10,12 +10,12 @@ To test the recovery, in Linux start the watchdog-daemon (automatically done at 
 
 ```
 # Start the Watchdog
-/etc/init.d/watchdog-daemon-init start
+sudo systemctl start watchdog-daemon-init.service
 
 # Do normal operations
 
 #Kill the watchdog
-/etc/init.d/watchdog-daemon-init stop
+sudo systemctl stop watchdog-daemon-init.service
 ```
 
 #### Behind the scene
@@ -39,4 +39,4 @@ trd.SetControl(0,4)
 #### Observation
 Observe the system recovering after a countdown of about 15 to 20 seconds. Linux killed in the APU terminal and RPU application still running in it's terminal; Linux subsystem is reloaded thereafter.
 
-> Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases just a browser refresh is enough to reconnect the notebook after reboot.
+> Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases, after waiting for about 120-150 seconds, just a browser refresh is enough to reconnect the notebook after reboot.

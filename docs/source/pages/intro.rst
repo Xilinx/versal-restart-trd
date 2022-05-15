@@ -50,11 +50,7 @@ Features:
 
   * `VCK190 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vck190.html>`_
 
-  * `VCK190 Evaluation boards HeadStart Early Access (ES1) <https://www.xilinx.com/member/vck190_headstart.html>`_
-
   * `VMK180 Evaluation boards <https://www.xilinx.com/products/boards-and-kits/vmk180.html>`_
-
-  * `VMK180 Evaluation boards HeadStart Early Access (ES1) <https://www.xilinx.com/member/vmk180_headstart.html>`_
 
 Hardware Design
 ***************
@@ -118,6 +114,11 @@ Following table describes example of some peripheral permission for subsystems i
 
 Detail subsystem definition is available in the sources under *hw/common/subsystem.cdo* file.
 
+.. note:: Uart_0 is set to have *Shared* access permission as it is being shared with plm for initial boot messages.
+
+.. note:: Access permissions will be enforced both by hardware (using protection units) and software (using plm and pm permissions).
+
+
 Software Stack
 **************
 This section list the software pieces involved in demonstrating the TRD features.
@@ -157,7 +158,7 @@ Below diagram shows relationship and interaction between above pieces:
    :align: center
    :alt: SW Stack
 
-Please refer `Versal ACAP System Software Developers Guide <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2021_2/ug1304-versal-acap-ssdg.pdf>`_ for more details on software stack and detailed development guide for each component.
+Please refer `Versal ACAP System Software Developers Guide <https://docs.xilinx.com/r/en-US/ug1304-versal-acap-ssdg>`_ for more details on software stack and detailed development guide for each component.
 
 
 Refer to **Restart Use Cases** section in the :ref:`Appendix` for details on each of the TRD use cases and the software components involved.
@@ -196,7 +197,7 @@ It has the following contents:
 
 The zip contents for **vck190-prod** are as follow ::
 
- vssr-trd-pb-vck190-prod-2021.2.zip
+ vssr-trd-pb-vck190-prod-2022.1.zip
  │
  vssr-trd-vck190-prod
  ├── LICENSE
@@ -219,7 +220,7 @@ The zip contents for **vck190-prod** are as follow ::
  │       └── versal_restart_trd_wrapper.xsa
  └── README
 
-Same file structure is available for other 3 variants (vck190-es1, vmk180-prod, vmk180-es1) as well.
+Same file structure is available for other variants (vmk180-prod) as well.
 
 Sources
 -------
@@ -244,9 +245,10 @@ Clone the git repository for the current release tag.
   mkdir -p </path/to/source/repo>
   cd </path/to/source/repo>
 
-  # clone and switch to current release tag (xilinx-v2021.2)
+  # clone and switch to current release tag (xilinx-v2022.1)
   git clone https://github.com/Xilinx/versal-restart-trd.git
-  git checkout -b xilinx-v2021.2 xilinx-v2021.2
+  cd versal-restart-trd
+  git checkout -b xilinx-v2022.1 xilinx-v2022.1
 
 From the cloned area, run :code:`make help` to see various build options.
 
@@ -260,9 +262,7 @@ The repository directory structure is as follow::
  │   ├── common             # Common constraints and subsystem definition
  │   ├── ip_repo
  │   ├── Makefile           # Hardware Makefile
- │   ├── vck190_es1_base    # sources for each variants
- │   ├── vck190_prod_base
- │   ├── vmk180_es1_base
+ │   ├── vck190_prod_base   # sources for each variants
  │   └── vmk180_prod_base
  ├── LICENSE
  ├── Makefile               # Top level Makefile
@@ -290,7 +290,7 @@ used in the prebuilt images.
 
 You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
-use of the design and any third party files supplied with the design.
+use of the design sl-restart-trdss any third party files supplied with the design.
 
-.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.2/README.md#prebuilt-images
+.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2022.1/README.md#prebuilt-images
 
