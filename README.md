@@ -22,13 +22,13 @@ This repository provides all the sources of TRD and their build infrastructure.
 #### Prebuilt Images for Production Silicon
 Board   | Silicon        | Download Link
 --------|----------------|--------------
-VCK190  | Production     | [vssr-trd-pb-vck190-prod-2021.2.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vck190-prod-2021.2.zip)
-VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2021.2.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vmk180-prod-2021.2.zip)
+VCK190  | Production     | [vssr-trd-pb-vck190-prod-2022.1.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vck190-prod-2022.1.zip)
+VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2022.1.zip](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-vmk180-prod-2022.1.zip)
 
 #### Prebuilt Images for ES Silicon
 > Engineering Samples or ES (including es1) design support is dropped in this release. Use [previous release 2021.2](https://github.com/Xilinx/versal-restart-trd/tree/xilinx-v2021.2) for ES1 silicon.
 
-#### Licenses for Prebuilt Images : [vssr-trd-pb-license-2021.2.tar.gz](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-licenses-2021.2.tar.gz)
+#### Licenses for Prebuilt Images : [vssr-trd-pb-licenses-2022.1.tar.gz](https://www.xilinx.com/bin/public/openDownload?filename=vssr-trd-pb-licenses-2022.1.tar.gz)
 
 ### Xilinx Tools
 Tools       | Download Link
@@ -89,7 +89,7 @@ Documentations | Sphinx
 
 - Vivado: Source the `settings64.sh` script from the Vivado installation path.
 - Petalinux: Source the `settings.sh` script from the Petalinux installation path.
-- Sphinx: Install [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html) & [recommonmark](https://recommonmark.readthedocs.io/en/latest/)
+- Sphinx: Install [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html), [recommonmark](https://recommonmark.readthedocs.io/en/latest/), [sphinx-markdown-tables](https://pypi.org/project/sphinx-markdown-tables/) & [rst2pdf](https://rst2pdf.org/)
 
 ### Makefiles
 

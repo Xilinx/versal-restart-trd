@@ -154,8 +154,11 @@ On Windows, set the IP address from Control Panel as shown below.
   :alt: set_ip_windows
 
 
-Connect to the JupyterLab Server
---------------------------------
+First Boot configurations
+-------------------------
+
+Initial Boot
+************
 
 Follow these steps to boot the board into Linux.
 
@@ -175,38 +178,47 @@ Follow these steps to boot the board into Linux.
 * On Versal UART0 terminal, Versal device boot messages should appear starting with the message
   "Xilinx Versal Platform Loader and Manager"
 
-* In about 60 seconds boot is complete. The first boot will prompt for a login and password.
-  Enter "petalinux" as login and set a password of your choice.
+* Wait for about 60 seconds for boot to complete and login prompt to appear.
 
-* Use the same credentials for subsequent reboots/restarts.
+* Enter **petalinux** as ``login`` and set a password of your choice on first boot.
 
-Follow these steps to connect to the jupyter-server using Chrome browser on the laptop.
+* Use these credentials for subsequent boots and to gain sudo privileges.
 
-* If you are using Static IP address please be sure to disable the Network Time Synchronization service at first boot.
+Initial Configurations
+**********************
 
-  Enter the following command to disbale::
-            
-        sudo systemctl disable systemd-timesyncd.service
+Following one time configurations are required to setup envirnoment to run the trd tests.
+
+* In case of static IP address configuration (which is default prebuilt images & build scripts), make sure to stop and disable the Network Time Synchronization service.
+
+  Enter following command::
+
+    sudo systemctl disable --now systemd-timesyncd.service
 
 * Enable and start the juputer service after first boot. The service will start automatically after subsequent reboots/restarts.
 
-  Enter following command ::
+  Enter following command::
 
-        sudo systemctl enable --now jupyter-setup.service
+    sudo systemctl enable --now jupyter-setup
+
+.. note:: This service might take about 90 seconds to start. Jupyter service requires the network to be online, hence the service can take up to 2-3 minutes to start on subsequent restarts as well.
 
 * Check status of the service::
 
-        sudo systemctl status jupyter-setup.service
+    systemctl status jupyter-setup
 
-* Status of server will be displayed::
+* Output for the status of service::
 
-    plnx-vssr-trd:~$ jupyter-setup.service - jupyter setup scripts
-        Main PID: 712(start-jupyter.s)
-        Tasks:2 (limit: 9216)
-        Memory: 104.M
-        CGroup: /system.slice/jupyter-setup.service
-                -712 /bin/bash //sbin/start-jupyter.sh
-                -718 python3 /usr/nin/jupyter-lab --no-browser --allow-root --ip=192.168.0.10
+    plnx-vck190-prod:~$ systemctl status jupyter-setup
+    * jupyter-setup.service - jupyter setup scripts
+         Loaded: loaded (/lib/systemd/system/jupyter-setup.service; enabled; vendor preset: disabled)
+         Active: active (running) since Tue 2038-01-19 05:02:52 UTC; 29s ago
+       Main PID: 882 (start-jupyter.s)
+          Tasks: 2 (limit: 9216)
+         Memory: 103.3M
+         CGroup: /system.slice/jupyter-setup.service
+                 |-882 /bin/bash /sbin/start-jupyter.sh
+                 `-888 python3 /usr/bin/jupyter-lab --no-browser --allow-root --ip=192.168.0.10
 
     [I 2022-03-24 21:31:59.626 LabApp] JupyterLab extension loaded from /usr/lib/python3.8/site-packages/jupyterlab
     [I 2038-02-17 10:13:21.879 LabApp] JupyterLab application directory is /usr/share/jupyter/lab
@@ -217,6 +229,9 @@ Follow these steps to connect to the jupyter-server using Chrome browser on the 
     [I 2038-02-17 10:13:21.897 ServerApp]  or http://127.0.0.1:8888/lab
     [I 2038-02-17 10:13:21.897 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip
     confirmation)
+
+Connect to the JupyterLab Server
+--------------------------------
 
 Follow these steps to connect to the jupyter-server using Chrome browser on the
 laptop.
@@ -243,7 +258,7 @@ laptop.
 
 * To look up the jupyter server IP address on the target, run::
 
-    jupyter lab list
+    sudo jupyter lab list
 
 
 Run the TRD Notebook
