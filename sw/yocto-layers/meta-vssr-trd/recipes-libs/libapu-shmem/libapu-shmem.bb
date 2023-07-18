@@ -36,5 +36,5 @@ do_install() {
     install -m 0644 ${S}/*.h ${D}${includedir}/apu-shmem/
 }
 
-FILES_${PN} = "${libdir}/*.so.* ${includedir}/*"
-FILES_${PN}-dev = "${libdir}/*.so"
+FILES:${PN} = "${libdir}/*.so.* ${includedir}/*"
+FILES:${PN}-dev = "${libdir}/*.so"
