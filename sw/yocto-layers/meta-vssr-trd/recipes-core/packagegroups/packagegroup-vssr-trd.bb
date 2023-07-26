@@ -1,5 +1,7 @@
 DESCRIPTION = "Versal SubSystem Restart TRD related Packages"
 
+
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
 inherit packagegroup
 
 RDEPENDS:${PN} = "  \
@@ -7,7 +9,7 @@ RDEPENDS:${PN} = "  \
 	python3 \
 	python3-dev \
 	packagegroup-python3-jupyter \
-	python3-jupyterlab_widgets \
+	python3-jupyterlab-widgets \
 	python3-ipywidgets \
 	python3-markdown \
 	python3-pybind11 \

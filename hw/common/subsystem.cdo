@@ -1,7 +1,7 @@
 #*****************************************************************************
 #
 # Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
-# Copyright (C) 2022 Advanced Micro Devices, Inc. All rights reserved.
+# Copyright (C) 2022 - 2023 Advanced Micro Devices, Inc. All rights reserved.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@
 version 2.0
 # Not writing protection due to spec flag: enable_protection=false
 #
-marker 0x64 "Subsystem"
+marker 0x64 "SUBSYSTEM_DEFINITION"
 # 
 #  -- Add All Subsystems --
 #     add subsystem apu id 3
@@ -379,6 +379,6 @@ pm_add_requirement 0x1c000004 0x18250001 0x46 0x0 0x1 0x4E20
 #Second Argument = error action; POR=0x1; SRST=0x2; ERR_OUT=0x4;
 em_set_action 0x28110000 0x1 0x2
 #  -- End Subsystem rpu_ls Requirements --
-marker 0x65 "Subsystem"
+marker 0x65 "SUBSYSTEM_DEFINITION"
 # 
 # IPI is not enabled due to the isolation spec flag write_ipi=false

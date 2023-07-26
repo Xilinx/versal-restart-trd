@@ -21,6 +21,6 @@ do_install:append() {
 	install -m 0644 ${WORKDIR}/overrides-vssr.json ${D}${datadir}/jupyter/lab/settings/overrides.json
 }
 
-FILES_${PN}:append += " \
+FILES:${PN}:append = " \
 	${datadir}/jupyter/lab/settings \
 	"
