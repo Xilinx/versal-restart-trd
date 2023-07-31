@@ -1,0 +1,983 @@
+﻿
+
+
+<!DOCTYPE HTML>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<link rel="stylesheet" href="https://static.cloud.coveo.com/searchui/v2.4382/css/CoveoFullSearch.css"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description"/>
+		<meta name="keywords"/>
+		<meta property="og:title" content=""/>
+		<meta property="og:description"/>
+		<!-- favicon -->
+		<link rel="icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+		<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="../_static/favicon.ico"/>
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" type="text/css"/>
+
+	<!-- OneTrust Cookies Consent Notice start for xilinx.github.io -->
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" type="text/javascript" charset="UTF-8" data-domain-script="37701bd4-e5c0-4ee3-9329-e7475d0b13a7" ></script>
+<script type="text/javascript">
+function OptanonWrapper() { }
+</script>
+<!-- OneTrust Cookies Consent Notice end for xilinx.github.io -->
+		<!-- Google Tag Manager -->
+	<script type="text/plain" class="optanon-category-C0002">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-5RHQV7');</script>
+	<!-- End Google Tag Manager -->
+	
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5RHQV7" height="0" width="0" style="display:none;visibility:hidden" class="optanon-category-C0002"></iframe></noscript>
+        <!-- End Google Tag Manager -->	
+
+  
+  
+  
+  
+
+  
+      <script type="text/javascript" src="../_static/js/jquery.min.js"></script>
+	  <script type="text/javascript" src="../_static/js/gtm.js"></script>
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+    <script type="text/javascript" src="../_static/js/d3dd8c60ed.js"></script>
+    <script type="text/javascript" src="../_static/js/common-ui-all.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../_static/js/CoveoJsSearch.Lazy.min.js"></script>
+    <script type="text/javascript" src="../_static/js/linkid.js"></script>
+    <script type="text/javascript" src="../_static/js/Searchbox.min.js"></script>
+    <script type="text/javascript" src="../_static/js/header-footer.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/common-ui-all.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/header-footer.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pro.min.css" media="all" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Build the Vivado Design" href="build-hw.html" />
+    <link rel="prev" title="2. Introduction" href="intro.html" /> 
+	</head>
+	<body>
+		<div class="xilinx-bs3"/>
+		<div class="root responsivegrid">
+			<div class="aem-Grid aem-Grid--16 aem-Grid--default--16 aem-Grid--large--16 aem-Grid--xlarge--16 aem-Grid--xxlarge--16 aem-Grid--xxxlarge--16 ">
+ <div class="xilinxExperienceFragments experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+<div class="aem-Grid aem-Grid--16 aem-Grid--default--16 ">
+    
+    <div class="header parbase aem-GridColumn aem-GridColumn--default--12"><noindex>
+	<header data-component="header" class="site-header">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid main-nav">
+				<div class="row">
+					<div class="navbar-column col-xs-4 col-sm-5">
+						<ul class="nav navbar-nav hidden-xs">
+							<li>
+									<button onclick="window.location.href=&#39;https://www.xilinx.com/applications.html&#39;;">Solutions</button>
+								</li>
+							<li>
+									<button onclick="window.location.href=&#39;https://www.xilinx.com/products/silicon-devices.html&#39;;">Products</button>
+								</li>
+							<li>
+									<button onclick="window.location.href=&#39;https://www.xilinx.com/about/company-overview.html&#39;;">Company</button>
+								</li>
+							</ul>
+							
+						<ul class="nav navbar-nav hidden-sm hidden-md hidden-lg">
+							<li>
+									<button data-target="#header-container-0" data-function="toggle">Solutions</button>
+								</li>
+							<li>
+									<button data-target="#header-container-1" data-function="toggle">Products</button>
+								</li>
+							<li>
+									<button data-target="#header-container-2" data-function="toggle">Company</button>
+								</li>
+							</ul>
+							
+						<div id="header-container-0" class="menu-container">
+								<div class="navbar-nav-container">
+									<ul class="nav navbar-nav">
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/applications.html&#39;;">Solutions</button>
+												</li>
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/products/silicon-devices.html&#39;;">Products</button>
+												</li>
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/about/company-overview.html&#39;;">Company</button>
+												</li>
+										</ul>
+									<button data-function="close-menu">
+										<span class="fal fa-times" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+							<div id="header-container-1" class="menu-container">
+								<div class="navbar-nav-container">
+									<ul class="nav navbar-nav">
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/applications.html&#39;;">Solutions</button>
+												</li>
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/products/silicon-devices.html&#39;;">Products</button>
+												</li>
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/about/company-overview.html&#39;;">Company</button>
+												</li>
+										</ul>
+									<button data-function="close-menu">
+										<span class="fal fa-times" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+							<div id="header-container-2" class="menu-container">
+								<div class="navbar-nav-container">
+									<ul class="nav navbar-nav">
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/applications.html&#39;;">Solutions</button>
+												</li>
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/products/silicon-devices.html&#39;;">Products</button>
+												</li>
+										<li>
+												<button onclick="window.location.href=&#39;https://www.xilinx.com/about/company-overview.html&#39;;">Company</button>
+												</li>
+										</ul>
+									<button data-function="close-menu">
+										<span class="fal fa-times" aria-hidden="true"></span>
+									</button>
+								</div>
+							</div>
+							</div>
+					<div class="logo-column col-xs-4 col-sm-2">
+						<div class="logo">
+							<a target="_blank" href="https://www.xilinx.com/">
+								<img src="https://github.com/Xilinx/Image-Collateral/blob/main/xilinx-header-logo.svg?raw=true" title="Xilinx Inc"/>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			</nav></header></noindex></div>
+		
+	
+</div>
+
+    
+</div>
+</div>
+
+<div class="calloutBanner parbase aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--16"><div class="callout-banner">
+    Xilinx is now a part of <a target="_blank" href="https://www.amd.com/en/corporate/xilinx-acquisition">AMD</a> |  <a target="_blank" href="https://www.amd.com/en/corporate/privacy">Learn More</a>
+</div>
+</div>
+				<div class="parsys aem-GridColumn--xxxlarge--none aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+						<div class="container-fluid">
+							<div class="row">
+							<div class="col-xs-12">
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Versal Restart TRD
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2023.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+      
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+            
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="revision.html">1. Revision History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">2. Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Run Images on Target</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">3.1. Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sd-card-creation">3.2. SD Card Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#board-setup">3.3. Board Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-boot-configurations">3.4. First Boot configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initial-boot">3.4.1. Initial Boot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-configurations">3.4.2. Initial Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-the-jupyterlab-server">3.5. Connect to the JupyterLab Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-trd-notebook">3.6. Run the TRD Notebook</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-the-notebook">3.6.1. Start the Notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-notebook">3.6.2. Using the Notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#control-selections">3.6.3. Control Selections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#terminal-based-testing">3.7. Terminal based Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">3.8. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build-hw.html">4. Build the Vivado Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build-sw.html">5. Build Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">6. Appendix</a></li>
+</ul>
+
+            
+			
+			<p class="caption"><span class="caption-text">This Page</span></p>
+				<ul class="current">
+				  <li class="toctree-l1"><a href="../_sources/pages/run.rst.txt"
+						rel="nofollow">Show Source</a></li>
+				</ul>
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Versal Restart TRD</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Run Images on Target</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/pages/run.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="run-images-on-target">
+<span id="run"></span><h1><span class="section-number">3. </span>Run Images on Target<a class="headerlink" href="#run-images-on-target" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<span id="id1"></span><h2><span class="section-number">3.1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>SD card image.</p>
+<ul>
+<li><p>Download <a class="reference external" href="https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.2/README.md#prebuilt-images">Prebuilt Images</a> and use the prebuilt petalinux-sdimage.wic.xz</p></li>
+<li><p>Alternatively build the petalinux-sdimage.wic.xz from the build tutorial.</p></li>
+</ul>
+</li>
+<li><p>Image flashing tool, for example:</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 23%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>OS</p></th>
+<th class="head"><p>Program</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Windows</p></td>
+<td rowspan="2"><p>Balena Etcher</p></td>
+<td rowspan="2"><p><a class="reference external" href="https://www.balena.io/etcher/">https://www.balena.io/etcher/</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Terminal emulator, for example:</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 23%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>OS</p></th>
+<th class="head"><p>Program</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Windows</p></td>
+<td><p>teraterm</p></td>
+<td><p><a class="reference external" href="https://osdn.net/projects/ttssh2">https://osdn.net/projects/ttssh2</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux</p></td>
+<td><p>picocom</p></td>
+<td><p><a class="reference external" href="https://github.com/npat-efault/picocom/releases">https://github.com/npat-efault/picocom/releases</a></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Chrome or Firebox browser:</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 23%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>OS</p></th>
+<th class="head"><p>Program</p></th>
+<th class="head"><p>Link</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Windows / Linux</p></td>
+<td><p>Chrome</p></td>
+<td><p><a class="reference external" href="https://www.google.com/chrome/">https://www.google.com/chrome/</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Windows / Linux</p></td>
+<td><p>Firefox</p></td>
+<td><p><a class="reference external" href="https://www.mozilla.org">https://www.mozilla.org</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sd-card-creation">
+<h2><span class="section-number">3.2. </span>SD Card Creation<a class="headerlink" href="#sd-card-creation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Plug uSD card (minimum 8 GB of size) in the host machine.</p></li>
+<li><p>Flash petalinux-sdimage.wic.xz (locally built or downloaded prebuilt) in to the uSD card.</p>
+<ul>
+<li><p>Install and launch Balena Etcher (or any image writing tool) and follow the wizard.</p>
+<ul>
+<li><p>Browse and select the petalinux-sdimage.wic.xz image as file to be flashed.
+(Balena Etcher will uncompress the .xz file automatically. Uncompress manually, if other tool is used)</p></li>
+<li><p>Select target as uSD card</p></li>
+<li><p>Click flash to write the image.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/flasher.png"><img alt="flasher" src="../_images/flasher.png" style="width: 50%;" /></a>
+</div>
+</div>
+<div class="section" id="board-setup">
+<h2><span class="section-number">3.3. </span>Board Setup<a class="headerlink" href="#board-setup" title="Permalink to this headline">¶</a></h2>
+<p>The following figure shows how to set up the VCK190 or VMK180 evaluation boards.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/vck190-setup-no-router.jpg"><img alt="VCK190 Board Setup" src="../_images/vck190-setup-no-router.jpg" style="width: 50%;" /></a>
+</div>
+<p><strong>Board jumper and switch settings</strong></p>
+<p>This is a onetime setup and the board should have been delivered to you with
+this default settings, but it is good to double check for the first time when
+you get the board.</p>
+<ul class="simple">
+<li><p>Make sure you remove J326 (7-8) jumper.</p></li>
+<li><p>Setup SYSCTRL Boot mode switch SW11 to (ON,OFF,OFF,OFF) from switch bits
+1 to 4 as shown in the above picture.</p></li>
+<li><p>The Evaluation kit comes with an image pre-installed on the System Controller micro SD card. If for some reason the System Controller uSD card is corrupted or damaged, you can create new by flashing the prebuilt <a class="reference external" href="https://www.xilinx.com/member/forms/download/xef.html?filename=intermediate_petalinux-sdimage.zip">System Controller SD Image</a>.</p></li>
+<li><p>Setup Versal Boot Mode switch SW1 to (ON,OFF,OFF,OFF) from switch bits 1 to 4
+as shown in the above picture.</p></li>
+</ul>
+<p><strong>Serial console settings</strong></p>
+<p>The Evaluation Boards come with a USB-C connector for JTAG+UART, and when connected three UART
+ports should be visible in Device Manager.  They will not be identified by name,
+but they will correspond to the following:</p>
+<ul class="simple">
+<li><p>Versal UART0</p></li>
+<li><p>Versal UART1</p></li>
+<li><p>System Controller UART</p></li>
+</ul>
+<p>Connect a USB-C cable to the USB-UART connector. Since the COM ports are not identified
+by name, open three terminal emulators, and choose one COM port for each one using
+the following settings:</p>
+<ul class="simple">
+<li><p>Baud Rate: 115200</p></li>
+<li><p>Data: 8 bit</p></li>
+<li><p>Parity: None</p></li>
+<li><p>Stop: 1 bit</p></li>
+<li><p>Flow Control: None</p></li>
+</ul>
+<p>UART0 will be used for PLM, U-boot, and Linux on APU. UART1 will be used for RPU prints.
+System Controller UART will not be used, and can be closed once its terminal has been
+identified.</p>
+<p><strong>Ethernet IP settings</strong></p>
+<p>The JupyterLab Server IP address is fixed (static) at <code class="docutils literal notranslate"><span class="pre">192.168.0.10</span></code>.</p>
+<p>In order for this server to be seen by another computer, such as a laptop, the computer
+needs to be on the same subnet.</p>
+<p>On Linux, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ifconfig</span>
+</pre></div>
+</div>
+<p>Note the Ethernet adapter name given, then type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ifconfig</span> <span class="o">&lt;</span><span class="n">adapter</span><span class="o">&gt;</span> <span class="mf">192.168.0</span><span class="o">.</span><span class="n">xxx</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">.xxx</span></code> can be anything other than <code class="docutils literal notranslate"><span class="pre">.10</span></code> which would conflict with the JupyterLab server.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/ifconfig_linux.png"><img alt="ifconfig_linux" src="../_images/ifconfig_linux.png" style="width: 50%;" /></a>
+</div>
+<p>On Windows, set the IP address from Control Panel as shown below.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/set_ip_windows.png"><img alt="set_ip_windows" src="../_images/set_ip_windows.png" style="width: 50%;" /></a>
+</div>
+</div>
+<div class="section" id="first-boot-configurations">
+<h2><span class="section-number">3.4. </span>First Boot configurations<a class="headerlink" href="#first-boot-configurations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="initial-boot">
+<h3><span class="section-number">3.4.1. </span>Initial Boot<a class="headerlink" href="#initial-boot" title="Permalink to this headline">¶</a></h3>
+<p>Follow these steps to boot the board into Linux.</p>
+<ul class="simple">
+<li><p>Ensure all steps under the section ‘Board jumper and switch settings’ are
+verified.</p></li>
+<li><p>Insert the prepared micro SD card into the Versal SD card slot (refer to
+<a class="reference internal" href="#board-setup">Board Setup</a>)</p></li>
+<li><p>Make physical connections to ethernet, UART, and power as shown
+in the image.</p></li>
+<li><p>Have the UART0 &amp; UART1 terminal emulator connected.</p></li>
+<li><p>Turn ON power switch SW13.</p></li>
+<li><p>On Versal UART0 terminal, Versal device boot messages should appear starting with the message
+“Xilinx Versal Platform Loader and Manager”</p></li>
+<li><p>Wait for about 60 seconds for boot to complete and login prompt to appear.</p></li>
+<li><p>Enter <strong>petalinux</strong> as <code class="docutils literal notranslate"><span class="pre">login</span></code> and set a password of your choice on first boot.</p></li>
+<li><p>Use these credentials for subsequent boots and to gain sudo privileges.</p></li>
+</ul>
+</div>
+<div class="section" id="initial-configurations">
+<h3><span class="section-number">3.4.2. </span>Initial Configurations<a class="headerlink" href="#initial-configurations" title="Permalink to this headline">¶</a></h3>
+<p>Following one time configurations are required to setup envirnoment to run the trd tests.</p>
+<ul>
+<li><p>In case of static IP address configuration (which is default prebuilt images &amp; build scripts), make sure to stop and disable the Network Time Synchronization service.</p>
+<p>Enter following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">disable</span> <span class="o">--</span><span class="n">now</span> <span class="n">systemd</span><span class="o">-</span><span class="n">timesyncd</span><span class="o">.</span><span class="n">service</span>
+</pre></div>
+</div>
+</li>
+<li><p>Enable and start the juputer service after first boot. The service will start automatically after subsequent reboots/restarts.</p>
+<p>Enter following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">enable</span> <span class="o">--</span><span class="n">now</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">setup</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This service might take about 90 seconds to start. Jupyter service requires the network to be online, hence the service can take up to 2-3 minutes to start on subsequent restarts as well.</p>
+</div>
+<ul>
+<li><p>Check status of the service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">systemctl</span> <span class="n">status</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">setup</span>
+</pre></div>
+</div>
+</li>
+<li><p>Output for the status of service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>plnx-vck190-prod:~$ systemctl status jupyter-setup
+* jupyter-setup.service - jupyter setup scripts
+     Loaded: loaded (/lib/systemd/system/jupyter-setup.service; enabled; vendor preset: disabled)
+     Active: active (running) since Tue 2038-01-19 05:02:52 UTC; 29s ago
+   Main PID: 882 (start-jupyter.s)
+      Tasks: 2 (limit: 9216)
+     Memory: 103.3M
+     CGroup: /system.slice/jupyter-setup.service
+             |-882 /bin/bash /sbin/start-jupyter.sh
+             `-888 python3 /usr/bin/jupyter-lab --no-browser --allow-root --ip=192.168.0.10
+
+[I 2022-03-24 21:31:59.626 LabApp] JupyterLab extension loaded from /usr/lib/python3.8/site-packages/jupyterlab
+[I 2038-02-17 10:13:21.879 LabApp] JupyterLab application directory is /usr/share/jupyter/lab
+[I 2038-02-17 10:13:21.896 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2038-02-17 10:13:21.896 ServerApp] Serving notebooks from local directory: /usr/share/notebooks/vssr-trd
+[I 2038-02-17 10:13:21.897 ServerApp] Jupyter Server 1.13.5 is running at:
+[I 2038-02-17 10:13:21.897 ServerApp] http://192.168.0.10:8888/lab
+[I 2038-02-17 10:13:21.897 ServerApp]  or http://127.0.0.1:8888/lab
+[I 2038-02-17 10:13:21.897 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip
+confirmation)
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="connect-to-the-jupyterlab-server">
+<h2><span class="section-number">3.5. </span>Connect to the JupyterLab Server<a class="headerlink" href="#connect-to-the-jupyterlab-server" title="Permalink to this headline">¶</a></h2>
+<p>Follow these steps to connect to the jupyter-server using Chrome browser on the
+laptop.</p>
+<p><strong>Note:</strong> This demo is tested with Chrome browser, but Firefox should work as well.</p>
+<ul>
+<li><p>Type the IP address of the Jupyter server in the browser address bar of the laptop:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.0.10</span><span class="p">:</span><span class="mi">8888</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/password.png"><img alt="Jupyter Login" src="../_images/password.png" style="width: 50%;" /></a>
+</div>
+</li>
+<li><p>Enter the password <code class="docutils literal notranslate"><span class="pre">vssr-trd</span></code></p></li>
+<li><p>Click <em>Log in</em> button</p>
+<p><strong>Note:</strong> To stop and restart the Jupyter server, use the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">setup</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">setup</span><span class="o">.</span><span class="n">service</span>
+</pre></div>
+</div>
+</li>
+<li><p>To look up the jupyter server IP address on the target, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">jupyter</span> <span class="n">lab</span> <span class="nb">list</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="run-the-trd-notebook">
+<h2><span class="section-number">3.6. </span>Run the TRD Notebook<a class="headerlink" href="#run-the-trd-notebook" title="Permalink to this headline">¶</a></h2>
+<p>This TRD includes a Jupyter notebook to demonstrate various restart options.</p>
+<div class="section" id="start-the-notebook">
+<h3><span class="section-number">3.6.1. </span>Start the Notebook<a class="headerlink" href="#start-the-notebook" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>On the left pane (File browser pane)  of the browser, double-click vssr-trd-widgets.ipynb to open the notebook.</p></li>
+<li><p>Select menu <strong>Run &gt; Run All Cells</strong>. This will start the TRD dashboard.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/jupyter-open.png"><img alt="jupyter-open" src="../_images/jupyter-open.png" style="width: 50%;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/jupyter-runall.png"><img alt="jupyter-runall" src="../_images/jupyter-runall.png" style="width: 50%;" /></a>
+</div>
+</li>
+</ol>
+<p>This will start the TRD dashboard in the notebook.</p>
+</div>
+<div class="section" id="using-the-notebook">
+<h3><span class="section-number">3.6.2. </span>Using the Notebook<a class="headerlink" href="#using-the-notebook" title="Permalink to this headline">¶</a></h3>
+<p>The notebook is laid out in a dashboard which allows to choose various TRD operations.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dashboard.png"><img alt="dashboard" src="../_images/dashboard.png" style="width: 100%;" /></a>
+</div>
+<ul>
+<li><p>The top half of the notebook presents the general information about the notebook with
+links to documentation and sources.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/dashboard-top.png"><img alt="dashboard-top" src="../_images/dashboard-top.png" style="width: 75%;" /></a>
+</div>
+</li>
+<li><p>The bottom half of the notebook has 2 panes</p>
+<ul class="simple">
+<li><p><strong>Control &amp; Status pane on the right</strong>: Which allows to perform various TRD actions and
+shows the live status of subsystem.</p></li>
+<li><p><strong>Description pane on the left</strong>: Shows detailed description of current selection in the control pane.
+This is updated dynamically when the selection in Control pane changes. The following information is displayed:</p>
+<ul>
+<li><p>Introduction and how the agent will normally perform this operation.</p></li>
+<li><p>Behind the scene operation done by PLM and other intermediate layers.</p></li>
+<li><p>How this operation can be triggered using the python module</p></li>
+<li><p>Observation and what to expect.</p></li>
+</ul>
+</li>
+</ul>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/rpu-ss.png"><img alt="rpu-ss" src="../_images/rpu-ss.png" style="width: 75%;" /></a>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="control-selections">
+<h3><span class="section-number">3.6.3. </span>Control Selections<a class="headerlink" href="#control-selections" title="Permalink to this headline">¶</a></h3>
+<p>Following TRD operations can be selected using the control pane.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 25%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Target</p></th>
+<th class="head"><p>Action</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="4"><p>APU</p></td>
+<td><p>Subsystem Restart</p></td>
+<td><p>APU performs self (subsystem only) restart</p></td>
+</tr>
+<tr class="row-odd"><td><p>Watchdog Recovery</p></td>
+<td><p>APU kills FPD watchdog to demonstrate recovery</p></td>
+</tr>
+<tr class="row-even"><td><p>System Restart</p></td>
+<td><p>APU performs full system restart</p></td>
+</tr>
+<tr class="row-odd"><td><p>Healthy Boot Test</p></td>
+<td><p>APU demonstrate healthy boot based recovery</p></td>
+</tr>
+<tr class="row-even"><td rowspan="4"><p>RPU</p></td>
+<td><p>Subsystem Restart</p></td>
+<td><p>RPU performs self (subsystem only) restart</p></td>
+</tr>
+<tr class="row-odd"><td><p>Watchdog Recovery</p></td>
+<td><p>RPU kills LPD watchdog to demonstrate recovery</p></td>
+</tr>
+<tr class="row-even"><td><p>System Restart</p></td>
+<td><p>RPU performs full system restart</p></td>
+</tr>
+<tr class="row-odd"><td><p>Healthy Boot Test</p></td>
+<td><p>RPU demonstrate healthy boot based recovery</p></td>
+</tr>
+</tbody>
+</table>
+<p>After the selection <strong>Perform Action</strong> button triggers the selected action.</p>
+<p>Refer to <strong>Restart Use Cases</strong> section in the <a class="reference internal" href="appendix.html#appendix"><span class="std std-ref">Appendix</span></a> for more details on each of the use cases.</p>
+</div>
+</div>
+<div class="section" id="terminal-based-testing">
+<h2><span class="section-number">3.7. </span>Terminal based Testing<a class="headerlink" href="#terminal-based-testing" title="Permalink to this headline">¶</a></h2>
+<p>All the use cases can be tested even without Jupyter Notebook, through the terminal.
+A python script <cite>vssr-test</cite> provides menu based selection for variou use cases.</p>
+<p>From the Uart0 terminal just type <cite>sudo vssr-test</cite> to execute this python script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>plnx-vssr-trd:~$ sudo vssr-test
+Password:
+
+Versal Restart TRD Testing. Choose the Test:
+
+1. APU: Subsystem Restart
+2. APU: System Restart
+3. APU: Healthy Boot Test
+4. APU: WDT Recovery
+5. RPU: Subsystem Restart
+6. RPU: System Restart
+7. RPU: Healthy Boot Test
+8. RPU: WDT Recovery
+0. Exit
+
+Enter your choice:
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2><span class="section-number">3.8. </span>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>If after restarting the APU subsystem, the Jupyter notebook does not reconnect,wait for around 120-150 seconds
+and try hitting refresh (Normally <cite>F5 key</cite>).</p></li>
+<li><p>If the petalinux image is configured to have dynamic (static in tutorial), then enter the new
+ip address (if the board ip is reassigned) after each reboot in the browser.</p></li>
+<li><p>If after restarting the APU subsystem, you are prompted for the key again, make sure that
+cookies are enabled in your browser.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+<!-- Atalwar: Moved the footer code to layout.html to resolve conflict with the Xilinx template -->
+</footer>
+
+        </div>
+      </div>
+
+
+	  <!-- Sphinx Page Footer block -->
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build-hw.html" class="btn btn-neutral float-right" title="4. Build the Vivado Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral float-left" title="2. Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo" class="copyright">
+    <p class="footerinfo">
+      <span class="lastupdated">
+        Last updated on July 26, 2023.
+      </span>
+
+    </p>
+	<br>
+  </div>
+      </div>
+    </section>
+
+
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+   <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("searchindex.js"); });
+  </script>
+
+  <script type="text/javascript" id="searchindexloader"></script>
+
+
+  
+  
+    
+  
+
+
+
+  <!--  Xilinx template footer block -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="xilinxExperienceFragments experiencefragment aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--16">
+					<div class="xf-content-height">
+						<div class="aem-Grid aem-Grid--16 aem-Grid--default--16 ">
+							<div class="footer parbase aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--16">
+								<noindex>
+                  <!-- make footer fixed - NileshP -->
+                  <style>
+                        .footer {
+                        position: fixed;
+                        left: 0;
+                        bottom: 0;
+                        width: 100%;
+                        }
+                  </style>
+                  <!-- make footer fixed NileshP-->
+									<footer>
+										<div class="aem-Grid aem-Grid--16">
+											<div class="aem-GridColumn aem-GridColumn--xxxlarge--none aem-GridColumn--xsmall--16 aem-GridColumn--offset--xsmall--0 aem-GridColumn--xlarge--none aem-GridColumn--xxlarge--none aem-GridColumn--default--none aem-GridColumn--offset--large--1 aem-GridColumn--xlarge--12 aem-GridColumn--offset--default--0 aem-GridColumn--xxlarge--10 aem-GridColumn--offset--xlarge--2 aem-GridColumn--offset--xxlarge--3 aem-GridColumn--offset--xxxlarge--4 aem-GridColumn--xsmall--none aem-GridColumn--large--none aem-GridColumn aem-GridColumn--large--14 aem-GridColumn--xxxlarge--8 aem-GridColumn--default--16">
+												<div class="container-fluid sub-footer">
+													<div class="row">
+														<div class="footerSocial parbase">
+														
+															<div class="col-md-push-6 col-lg-push-6 col-md-6 col-lg-6">
+																<div class="lang-select dropup hidden-md hidden-lg">
+		<button data-toggle="dropdown">
+			<span class="fas fa-globe" aria-hidden="true"></span>
+			<span>
+				
+					English
+				</span>
+		<span class="far fa-angle-down" aria-hidden="true"></span>
+	</button>
+	<ul class="dropdown-menu">
+		<li>
+				<a target="_blank" href="https://japan.xilinx.com/" target="_self">
+					日本語
+				</a>
+			</li>
+		<li>
+				<a target="_blank" href="https://china.xilinx.com/" target="_self">
+					简体中文
+				</a>
+			</li>
+		</ul>
+	</div>
+																<ul class="list-inline pull-right social-menu">
+																	<li>
+																		<a target="_blank" href="https://www.linkedin.com/company/xilinx">
+																		<span class="linkedin icon"></span>
+																		<span class="sr-only">Connect on LinkedIn</span>
+																		</a>
+																	</li>
+																	<li>
+																		<a target="_blank" href="https://www.twitter.com/XilinxInc">
+																		<span class="twitter icon"></span>
+																		<span class="sr-only">Follow us on Twitter</span>
+																		</a>
+																	</li>
+																	<li>
+																		<a target="_blank" href="https://www.facebook.com/XilinxInc">
+																		<span class="facebook icon"></span>
+																		<span class="sr-only">Connect on Facebook</span>
+																		</a>
+																	</li>
+																	<li>
+																		<a target="_blank" href="https://www.youtube.com/XilinxInc">
+																		<span class="youtube icon"></span>
+																		<span class="sr-only">Watch us on YouTube</span>
+																		</a>
+																	</li>
+																	<li>
+																		<a target="_blank" href="https://www.xilinx.com/registration/subscriber-signup.html">
+																		<span class="newsletter icon"></span>
+																		<span class="sr-only">Subscribe to Newsletter</span>
+																		</a>
+																	</li>
+																</ul>
+																	<div class="lang-select dropup hidden-xs hidden-sm">
+	<button data-toggle="dropdown">
+		<span class="fas fa-globe" aria-hidden="true"></span>
+		<span>
+			
+				English
+			</span>
+		<span class="far fa-angle-down" aria-hidden="true"></span>
+	</button>
+	<ul class="dropdown-menu">
+		<li>
+				<a target="_blank" href="https://japan.xilinx.com/" target="_self">
+					日本語
+				</a>
+			</li>
+		<li>
+				<a target="_blank" href="https://china.xilinx.com/" target="_self">
+					简体中文
+				</a>
+			</li>
+		</ul>
+	</div>
+															</div>
+														</div>
+														<div class="col-md-pull-5 col-lg-pull-5 col-md-5 col-lg-5">
+															<span class="copyright">©2022 - 2023 Advanced Micro Devices, Inc</span>
+														</div>
+
+													</div>
+													                    <div class="movethisrowtoleft row">
+                        <div class="col-xs-24">
+                            <ul class="sub-menu">
+                                <li><a target="_blank" href="https://www.amd.com/en/corporate/copyright">Terms and Conditions</a></li>
+                                <li><a target="_blank" href="https://www.amd.com/en/corporate/privacy">Privacy</a></li>
+                                <li><a target="_blank" href="https://www.amd.com/en/corporate/cookies">Cookie Policy</a></li>
+                                <li><a target="_blank" href="https://www.amd.com/en/corporate/trademarks">Trademarks</a></li>
+                                <li><a target="_blank" href="https://www.amd.com/system/files/documents/statement-human-trafficking-forced-labor.pdf">Statement on Forced Labor</a></li>
+                                <li><a target="_blank" href="https://www.amd.com/en/corporate/competition">Fair and Open Competition</a></li>
+                                <li><a target="_blank" href="https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf">UK Tax Strategy</a></li>
+								<li><a target="_blank" href="https://docs.xilinx.com/v/u/9x6YvZKuWyhJId7y7RQQKA">Inclusive Terminology</a></li>
+                                <li><a href="#cookiessettings" class="ot-sdk-show-settings">Cookies Settings</a></li>
+                            </ul>
+                        </div>
+                    </div>
+												</div>
+											</div>
+										</div>
+									</footer>
+								</noindex>
+							</div>
+						</div>
+					</div>
+				</div>
+<div class="backToTop parbase aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--16"><noindex>
+    <span data-component="backToTopButton" class="backToTopButton loaded">
+        <ul>
+            <li>
+                <a href="https://www.author.xilinx.com/xx/rebrand/amd/en-amd-xilinx-header-footer.html#top" class="btn top">
+                    <span class="fas fa-angle-up" aria-hidden="true"></span>
+                </a>
+            </li>
+        </ul>
+    </span>
+</noindex></div>
+			</div>
+		</div>
+
+
+		<script>window.CQ = window.CQ || {}</script>
+		<script src="https://static.cloud.coveo.com/searchui/v2.4382/js/CoveoJsSearch.Lazy.min.js"></script>
+		<script>
+			var underscoreSetup = function () {
+			  _.templateSettings.interpolate = /\{\{=([^-][\S\s]+?)\}\}/g;
+			  _.templateSettings.evaluate = /\{\{([^-=][\S\s]+?)\}\}/g;
+			  _.templateSettings.escape = /\{\{-([^=][\S\s]+?)\}\}/g;
+			}
+
+			underscoreSetup();
+		</script>
+	</body>
+</html>
