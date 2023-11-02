@@ -23,13 +23,13 @@ This repository provides all the sources of TRD and their build infrastructure.
 ##### TODO: Need to update prebuilt images and their licenses for 2023.1
 Board   | Silicon        | Download Link
 --------|----------------|--------------
-VCK190  | Production     | To be uploaded
-VMK180  | Production     | To be uploaded
+VCK190  | Production     | [vssr-trd-pb-vck190-prod-2023.1.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vck190-prod-2023.1.zip)
+VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2023.1.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vmk180-prod-2023.1.zip)
 
 #### Prebuilt Images for ES Silicon
 > Engineering Samples or ES (including es1) design support is dropped in release 2022.1. Use [previous release 2021.2](https://github.com/Xilinx/versal-restart-trd/tree/xilinx-v2021.2) for ES1 silicon.
 
-#### Licenses for Prebuilt Images : [vssr-trd-pb-licenses-2022.2.tar.gz](https://www.xilinx.com/member/forms/download/xef.html?filename=licenses.zip)
+#### Licenses for Prebuilt Images : [vssr-trd-pb-licenses-2023.1.tar.gz](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-licenses-2023.1.tar.gz)
 
 ### Xilinx Tools
 Tools       | Download Link
