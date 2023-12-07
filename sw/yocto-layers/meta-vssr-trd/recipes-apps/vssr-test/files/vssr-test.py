@@ -3,6 +3,7 @@
 #*****************************************************************************
 #
 # Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+# Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc.  All rights reserved.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +32,7 @@ import time
 import vssr_trd as trd
 
 d_target = {0: 'APU', 1: 'RPU'}
-d_action = {0: 'Subsystem Restart', 1: 'System Restart', 2: 'Healthy Boot Test', 4: 'WDT Recovery Test'}
+d_action = {0: 'Subsystem Restart', 1: 'System Restart', 2: 'Healthy Boot Test', 4: 'WDT Recovery Test', 5:'Image Store'}
 d_operation = {'1':[0,0],
                '2':[0,1],
                '3':[0,2],
@@ -39,7 +40,8 @@ d_operation = {'1':[0,0],
                '5':[1,0],
                '6':[1,1],
                '7':[1,2],
-               '8':[1,4] }
+               '8':[1,4],
+               '9':[1,5] }
 
 def getAction():
     print("\nVersal Restart TRD Testing. Choose the Test:\n")
@@ -51,6 +53,7 @@ def getAction():
     print("6. RPU: System Restart")
     print("7. RPU: Healthy Boot Test")
     print("8. RPU: WDT Recovery")
+    print("9. APU: Image Store")
     print("0. Exit\n\n")
     choice = input("Enter your choice: ")
 

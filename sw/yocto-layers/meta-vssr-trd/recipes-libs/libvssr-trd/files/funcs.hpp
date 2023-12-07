@@ -1,6 +1,7 @@
 /******************************************************************************
 *
 * Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc.  All rights reserved.
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +32,7 @@ enum Action {
 	E_ActionTestHealthyBoot,
 	E_ActionStartWatchdog,
 	E_ActionKillWatchdog,
+	E_ActionTestImageStore,
 	E_ActionMax
 };
 

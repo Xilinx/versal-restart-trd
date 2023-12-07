@@ -1,6 +1,7 @@
 /******************************************************************************
 *
 * Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc.  All rights reserved.
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +49,7 @@
 #define RPU_CMD_SYS_RESTART		"System Restart"
 #define RPU_CMD_WDT_KILL		"Kill Watchdog"
 #define RPU_CMD_TEST_HB			"Do Healthy Boot Test"
+#define RPU_CMD_TEST_IMG		"Image Store Test"
 
 int init(){
 	return apu_setup();
@@ -123,6 +125,10 @@ char const* SetControl(int a_agent, int a_a)
 	}
 	if (agent == E_AgentRPU0 && a == E_ActionTestHealthyBoot){
 		request_rpu_command(RPU_CMD_TEST_HB);
+		return "Starting RPU Healthy Boot Test";
+	}
+	if (agent == E_AgentRPU0 && a == E_ActionTestImageStore){
+		request_rpu_command(RPU_CMD_TEST_IMG);
 		return "Starting RPU Healthy Boot Test";
 	}
 	return "This action is not yet supported";
