@@ -382,3 +382,18 @@ em_set_action 0x28110000 0x1 0x2
 marker 0x65 "SUBSYSTEM_DEFINITION"
 # 
 # IPI is not enabled due to the isolation spec flag write_ipi=false
+
+marker 0x64 "PMC_FW_CONFIG"
+marker 0x64 "SSIT_TEMP"
+# Enable SSIT temperature propagation
+# Set task period to 100ms
+write 0xf2014298 0x6401
+marker 0x65 "SSIT_TEMP"
+# Image Store Location: 64-bit address
+# Higher 32-bit Address
+write 0xF2014288 0x0
+# Lower 32-bit Address
+write 0xf201428C 0x3e000000
+# Size
+write 0xf2014290 0x00400000
+marker 0x65 "PMC_FW_CONFIG"
