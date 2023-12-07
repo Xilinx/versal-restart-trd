@@ -1,6 +1,7 @@
 /******************************************************************************
 *
 * Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc.  All rights reserved.
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +22,20 @@
 * THE SOFTWARE.
 *
 ******************************************************************************/
+
+/* Subsystem definitions */
+#define PM_SUBSYS_APU                           (0x1c000003U)
+
+/* Select TTC for timer based on xparameters.h */
+#if (SLEEP_TIMER_BASEADDR == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_0_BASEADDR)
+        #define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_0
+#elif (SLEEP_TIMER_BASEADDR  == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_3_BASEADDR)
+        #define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_1
+#elif (SLEEP_TIMER_BASEADDR  == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_6_BASEADDR)
+        #define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_2
+#elif (SLEEP_TIMER_BASEADDR  == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_9_BASEADDR)
+        #define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_3
+#endif
 
 #ifndef _PM_INIT_H_
 #define _PM_INIT_H_
