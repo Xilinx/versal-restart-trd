@@ -7,6 +7,10 @@ The APU subsystem in this design includes the PS peripherals needed to run Linux
 This will perform APU subsystem restart from RPU subsystem by following below steps:
 	- RPU application triggers apu power down by calling XilPm client API `XPm_ForcePowerDown`, with APU subsystem id as arugment.
 	- After that we try to wakeup APU subsystem by loading partial PDI through an IPI command from Image store
+
+#### Limitation
+To run this test case again, please restart the RPU subsystem.
+
 #### Behind the scene
 While generating the pdi we need to give range and size of the Image store using cdo commands.
 
