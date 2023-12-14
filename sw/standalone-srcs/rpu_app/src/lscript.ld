@@ -4,9 +4,9 @@
 /*                                                                 */
 /* Version: 2020.1.0                                               */
 /*                                                                 */
-/* Copyright (c) 2010-2019 Xilinx, Inc.  All rights reserved.      */
-/* Copyright (c) 2022 Advanced Micro Devices, Inc.  ALL rights     */
-/* reserved.                                                       */
+/* Copyright (c) 2010-2012 Xilinx, Inc.  All rights reserved.      */
+/* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc. All      */
+/* rights reserved.                                                */
 /*                                                                 */
 /* Description : Cortex-R5 Linker Script                           */
 /*                                                                 */
@@ -121,7 +121,7 @@ SECTIONS
    *(.got)
    *(.got.plt)
    __data_end = .;
-} > psv_r5_tcm_ram_0_NOC_0
+} > NOC_0__DDR_LOW0
 
 .data1 : {
    __data1_start = .;

@@ -45,7 +45,7 @@ PLNX_PROJECT := $(BUILD_DIR)/plnx-$(BOARD)-$(SIL)
 PLNX_PROJECT_SPEC := $(PLNX_PROJECT)/project-spec
 PLNX_IMG_DIR := $(PLNX_PROJECT)/images/linux
 
-BIF_FILE = $(PLNX_PROJECT_SPEC)/meta-vssr-trd/scripts/bif_files/boot.bif
+BIF_FILE = $(PLNX_PROJECT_SPEC)/meta-vssr-trd/scripts/bif_files/$(BOARD)/boot.bif
 
 YOCTO_LAYER_base := meta-vssr-trd
 

@@ -27,20 +27,6 @@
 #include "gic_setup.h"
 #include "pm_init.h"
 
-
-/* Select TTC for timer based on xparameters.h */
-#if (SLEEP_TIMER_BASEADDR == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_0_BASEADDR)
-	#define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_0
-#elif (SLEEP_TIMER_BASEADDR  == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_3_BASEADDR)
-	#define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_1
-#elif (SLEEP_TIMER_BASEADDR  == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_6_BASEADDR)
-	#define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_2
-#elif (SLEEP_TIMER_BASEADDR  == XPAR_VERSAL_CIPS_0_PSPMC_0_PSV_TTC_9_BASEADDR)
-	#define PM_DEV_TTC_FOR_TIMER PM_DEV_TTC_3
-#endif
-
-
-
 XStatus PmInit(XScuGic *const GicInst, XIpiPsu *const IpiInst, u32 FullBoot)
 {
 	XPm_Dbg("%s Started", __func__);
