@@ -267,10 +267,9 @@ function OptanonWrapper() { }
 <li class="toctree-l3"><a class="reference internal" href="rpu_wdt.html">6.1.7. RPU - WDT Recovery</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rpu_hb_test.html">6.1.8. RPU - Healthy Boot Test</a></li>
 <li class="toctree-l3"><a class="reference internal" href="apu_img.html">6.1.9. APU - Image store</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Limitation">6.1.9.1. Limitation</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#behind-the-scene">6.1.9.2. Behind the scene</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#python-module-jupyter-wrapper">6.1.9.3. Python Module &amp; Jupyter wrapper.</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#observation">6.1.9.4. Observation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#behind-the-scene">6.1.9.1. Behind the scene</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-module-jupyter-wrapper">6.1.9.2. Python Module &amp; Jupyter wrapper.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#observation">6.1.9.3. Observation</a></li>
 </ul>
 </li>
 </ul>
@@ -357,13 +356,8 @@ function OptanonWrapper() { }
 <p>This will perform APU subsystem restart from RPU subsystem by following below steps:</p>
 <p>1) RPU application triggers apu power down by calling XilPm client API <code class="docutils literal notranslate"><span class="pre">XPm_ForcePowerDown</span></code>, with APU subsystem id as arugment.</p>
 <p>2) After that we try to wakeup APU subsystem by loading partial PDI through an IPI command from Image store.</p>
-
-<div class="section" id="Limitation">
-<h2><span class="section-number">6.1.9.1. </span>Limitation<a class="headerlink" href="#Limitation" title="Permalink to this headline">¶</a></h2>
-<p>To run this test case again, please restart the RPU subsystem.</p>
-
 <div class="section" id="behind-the-scene">
-<h2><span class="section-number">6.1.9.2. </span>Behind the scene<a class="headerlink" href="#behind-the-scene" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1.9.1. </span>Behind the scene<a class="headerlink" href="#behind-the-scene" title="Permalink to this headline">¶</a></h2>
 <p>While generating the pdi we need to give range and size of the Image store using cdo commands.</p>
 
 <p>Image store CDO :</p>
@@ -389,7 +383,7 @@ function OptanonWrapper() { }
 <p>After that the API  <code class="docutils literal notranslate"><span class="pre">XIpiPsu_TriggerIpi</span></code> triggers subsystems loading from the DDR address. PLM recives ipi call, reloads the subsystem from the DDR address and the subsystem requests necessary nodes.</p>
 </div>
 <div class="section" id="python-module-jupyter-wrapper">
-<h2><span class="section-number">6.1.9.3. </span>Python Module &amp; Jupyter wrapper.<a class="headerlink" href="#python-module-jupyter-wrapper" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1.9.2. </span>Python Module &amp; Jupyter wrapper.<a class="headerlink" href="#python-module-jupyter-wrapper" title="Permalink to this headline">¶</a></h2>
 <p>This operation can be performed from the python module vssr_trd, which is used by this notebook.</p>
 <p>Click <strong>Perform Action</strong> to execute python call sequence similar to:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vssr_trd</span> <span class="k">as</span> <span class="nn">trd</span>
@@ -399,7 +393,7 @@ function OptanonWrapper() { }
 </div>
 </div>
 <div class="section" id="observation">
-<h2><span class="section-number">6.1.9.4. </span>Observation<a class="headerlink" href="#observation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">6.1.9.3. </span>Observation<a class="headerlink" href="#observation" title="Permalink to this headline">¶</a></h2>
 <p>Observe RPU application still running normally in terminal during this restart and See APU subsystem restart from DDR memory addresses using kernel log.</p>
 <blockquote>
 <div><p>Note: As APU is hosting this notebook, the notebook becomes inactive and disconnects during the reboot. After reboot one must reconnect the notebook in the browser. In most cases, after waiting for about 120-150 seconds, just a browser refresh is enough to reconnect the notebook after reboot.</p>
