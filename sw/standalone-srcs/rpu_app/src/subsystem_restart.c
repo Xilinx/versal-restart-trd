@@ -240,16 +240,8 @@ static u32 DoImageStoreTest(void)
 {
 	u32 Status = XST_SUCCESS;
 
-	/* Making sure this functionality calls only 1 time.
-	   After fixing this issue, remove the below block.*/
-
-	static u32 x = 0;
-	if (x != 0) {
-		goto done;
-	}
-	x++;
-	xil_printf("Note: Image Store feature test case can be executed only once\r\n");
-	xil_printf("To run this test case again, please restart the RPU subsystem\r\n");
+	/* Allow memory to clean before Force Powerdown */
+	sleep(1);
 
 	Status = XPm_ForcePowerDown(TARGET_SUBSYSTEM, 1);
 	if (XST_SUCCESS != Status) {
@@ -257,13 +249,11 @@ static u32 DoImageStoreTest(void)
 		goto done;
 	}
 
-	xil_printf("Loading APU subsystem from Image store...\n");
 	Status = ImageStoreTest(&IpiInst);
 	if (XST_SUCCESS != Status) {
 		xil_printf("API=ImageStoreTest  ERROR=%d\r\n", Status);
 		goto done;
 	}
-	xil_printf("ImageStoreTest: End\r\n");
 
 done:
 	return Status;
