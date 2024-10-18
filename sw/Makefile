@@ -62,7 +62,7 @@ PLNX_WIC_OBJS += $(PLNX_IMG_DIR)/boot.scr
 PLNX_WIC_OBJS += $(PLNX_IMG_DIR)/Image
 PLNX_WIC_OBJS += $(PLNX_IMG_DIR)/rootfs.tar.gz
 PLNX_WIC_OBJS += $(PLNX_IMG_DIR)/ramdisk.cpio.gz.u-boot
-PLNX_WIC_ARGS = --wic-extra-args "-c xz"
+PLNX_WIC_ARGS = --wic-extra-args="-c xz"
 
 PLNX_CONFIG := $(PLNX_PROJECT_SPEC)/hw-description/system.xsa
 
