@@ -27,6 +27,7 @@
 
 XStatus WatchdogInit(const u32 DeviceId, const u32 TimeOut);
 XStatus WatchdogKeepAlive(void);
+XStatus WatchdogEmConfig(XIpiPsu *IpiInst);
 
 #endif
 

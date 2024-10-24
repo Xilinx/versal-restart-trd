@@ -243,7 +243,7 @@ static u32 DoImageStoreTest(void)
 	/* Allow memory to clean before Force Powerdown */
 	sleep(1);
 
-	Status = XPm_ForcePowerDown(TARGET_SUBSYSTEM, 1);
+	Status = XPm_ForcePowerDown(TARGET_SUBSYSTEM, REQUEST_ACK_BLOCKING);
 	if (XST_SUCCESS != Status) {
 		xil_printf("API=XPm_ForcePowerDown  ERROR=%d\r\n", Status);
 		goto done;
@@ -279,7 +279,7 @@ static u32 DoCmdAction()
 	u32 i=0;
 	for(i = 0; i < ARRAY_SIZE(CmdList); i++) {
 		rpu_load_message(strlen(CmdList[i].cmd));
-		if (strcmp(rpu_read_message(),CmdList[i].cmd) == 0) {
+		if (strcmp(rpu_read_message(), CmdList[i].cmd) == 0) {
 			rpu_clear_message();
 			Status = CmdList[i].action();
 			break;
@@ -309,8 +309,8 @@ int main()
 {
 	int Status;
 	int i;
-	u32 AliveCount= 0;
-	int infinite_loop =1;
+	u32 AliveCount = 0;
+	int infinite_loop = 1;
 
 	char prog_bar[PROGRESS_BAR_MAX];
 	int prog_bar_len = PROGRESS_BAR_MAX - 1;
@@ -327,7 +327,7 @@ int main()
 
 	sleep(3);
 
-	for(i=0; i< prog_bar_len; i++)
+	for(i = 0; i< prog_bar_len; i++)
 	{
 		prog_bar[i] = ' ';
 	}
@@ -335,12 +335,18 @@ int main()
 
 	rpu_shmem_setup();
 
+	Status = WatchdogEmConfig(&IpiInst);
+	if (XST_SUCCESS != Status) {
+		xil_printf("\tAPI=EmSetAction  ERROR=%d\r\n", Status);
+		goto done;
+	}
+
 	while (infinite_loop)
 	{
 		/* Heartbeats */
 		alive[5] += 1;
 		if (!alive[5]){
-			alive[5]+=1;
+			alive[5] += 1;
 		}
 		rpu_send_message(alive);
 
