@@ -2,9 +2,9 @@
 
 This function demonstrates the system recovery through LPD Watchdog.
 
-The RPU application configures and start the LPD watchdog during the init sequence.
+The RPU application configures and starts the LPD watchdog during the init sequence.
 
-The watchdog is configured with the timeout value of __10 seconds__ and is kicked approximately every __500 miliseconds__.
+The watchdog is configured with the timeout value of __10 seconds__ and is kicked approximately every __50 miliseconds__.
 
 To test the recovery, when the rpu application receives the request, it stops kicking the watchdog, and allow it to expire after 10 seconds.
 

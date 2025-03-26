@@ -6,7 +6,7 @@ Build the Vivado Design
 Prerequisites
 -------------
 
-* Vivado Design Suite 2022.1
+* Vivado Design Suite 2024.1
 
 * Linux host machine (only Linux supported)
 
@@ -27,10 +27,10 @@ Clone the Git Repository for the current release tag.
 	mkdir -p </path/to/source/repo>
 	cd </path/to/source/repo>
 
-	# clone git repo and switch to the current release tag
+	# clone git repo and switch to the current release tag (amd/xilinx-v2024.1)
 	git clone https://github.com/Xilinx/versal-restart-trd.git
 	cd versal-restart-trd
-	git checkout -b xilinx-v2022.1 xilinx-v2022.1
+	git checkout amd/xilinx-v2024.1
 	export REPO_SRC = </path/to/source/repo>/veral-restart-trd
 
 .. note:: refer REPO_SRC = </path/to/source/repo>/veral-restart-trd for rest of the documentation

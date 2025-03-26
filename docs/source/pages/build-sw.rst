@@ -6,9 +6,9 @@ Build Software
 Prerequisites
 -------------
 
-* Vitis Unified Software Platform 2022.1
+* Vitis Unified Software Platform 2024.1
 
-* PetaLinux Tools 2022.1
+* PetaLinux Tools 2024.1
 
 * Linux host machine (All instructions are with Linux host machine)
 
@@ -28,10 +28,10 @@ Clone the git repository for the current release tag.
   mkdir -p </path/to/source/repo>
   cd </path/to/source/repo>
 
-  # clone and switch to current release tag (xilinx-v2022.1)
+  # clone and switch to current release tag (amd/xilinx-v2024.1)
   git clone https://github.com/Xilinx/versal-restart-trd.git
   cd versal-restart-trd
-  git checkout -b xilinx-v2022.1 xilinx-v2022.1
+  git checkout amd/xilinx-v2024.1
 
   export REPO_SRC = </path/to/source/repo>/versal-restart-trd
 
@@ -107,12 +107,12 @@ This produces
 
 Run :code:`make help` in *$REPO_SRC* directory to see various build options.
 
-For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2022.1/README.md#makefiles>`_ file in the repository.
+For more details on usage of Makefile refer the `README.md <https://github.com/Xilinx/versal-restart-trd/blob/amd/xilinx-v2024.1/README.md#makefiles>`_ file in the repository.
 
 Build without Makefile
 ----------------------
 
-This section provides instruction to build individual software components through Vitis and Petalinux flow without automated Makefile.
+This section provides instructions to build individual software components through Vitis and Petalinux flow without automated Makefile.
 
 Following components will be built:
 
@@ -389,7 +389,7 @@ Following step create a SD card wic image which can be flashed on the uSD card f
 
 #. Create wic image::
 
-        petalinux-package --wic --wic-extra-args "-c xz"
+        petalinux-package --wic --wic-extra-args="-c xz"
 
 #. This will create the compressed wic image at following location::
 

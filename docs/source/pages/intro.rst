@@ -18,7 +18,7 @@ Features:
 
   * APU subsystem running Linux
 
-  * RPU Lockstep running a PM-aware standalone application.
+  * RPU Lockstep running a PM-aware standalone application
 
 * Jupyter lab based user interface, with dashboard layout
 
@@ -26,7 +26,7 @@ Features:
 
 * Healthy boot monitoring for the subsystems
 
-* Watchdog monitoring for the subsystems after boot.
+* Watchdog monitoring for the subsystems after boot
 
 * Demonstration of following restart scenarios:
 
@@ -38,13 +38,15 @@ Features:
 
   * System Restart by RPU
 
-  * System recovery due to boot hang during Linux boot.
+  * System recovery due to boot hang during Linux boot
 
-  * System recovery due to bad boot during Standalone RPU boot.
+  * System recovery due to bad boot during Standalone RPU boot
 
   * Subsystem recovery due to Linux hang (by forcing FPD watchdog expiry)
 
   * Subsystem recovery due to RPU hang (by forcing LPD watchdog expiry)
+
+  * APU Subsystem Restart from RPU application using image store feature
 
 * Supports multiple platforms:
 
@@ -90,33 +92,94 @@ The subsystem definition is important for the PLM to:
 The TRD defines two subsystems, **APU Subsystem** running Linux on SMP Cortex A72 cores and **RPU Subsystem**
 running standalone application on Lock-Step Cortex R5 cores.
 
-Following table describes example of some peripheral permission for subsystems in the TRD:
+Following tables describe examples of some peripheral/device permission for APU and RPU subsystems, respectively, in this TRD:
 
-+-----------------+---------------+-------------+-------------------+
-| Peripheral      | Subsystem     | Pre-alloced | Access Permission |
-+=================+===============+=============+===================+
-| Uart_0          | APU           | Yes         | Shared            |
-+-----------------+---------------+-------------+-------------------+
-| Uart_1          | RPU           | Yes         | Exclusive         |
-+-----------------+---------------+-------------+-------------------+
-| Sdio_1          | APU           | Yes         | No Restriction    |
-+-----------------+---------------+-------------+-------------------+
-| Swdt_fpd        | APU           | No          | Time-shared       |
-+-----------------+---------------+-------------+-------------------+
-| Swdt_lpd        | RPU           | No          | Time-shared       |
-+-----------------+---------------+-------------+-------------------+
-| Gem_0           | APU           | Yes         | Exclusive         |
-+-----------------+---------------+-------------+-------------------+
-| HB_MON_0        | APU           | Yes         | Exclusive         |
-+-----------------+---------------+-------------+-------------------+
-| HB_MON_1        | RPU           | Yes         | Exclusive         |
-+-----------------+---------------+-------------+-------------------+
+
++----------------------------------------------------------------------+
+| APU Subsystem Management                                             |
++-----------------+-------------------------+--------------------------+
+| Device          | Requested (Pre-alloced) | Access Permission Flags  |
++=================+=========================+==========================+
+| Swdt_fpd        | No                      | Time-shared              |
++-----------------+-------------------------+--------------------------+
+| DDR_0           | No                      | Time-shared              |
++-----------------+-------------------------+--------------------------+
+| HB_MON_0        | Yes                     | Non-shared               |
++-----------------+-------------------------+--------------------------+
+
+
++----------------------------------------------------------------------+
+| APU Subsystem Peripheral                                             |
++-----------------+-------------------------+--------------------------+
+| Device          | Requested (Pre-alloced) | Access Permission Flags  |
++=================+=========================+==========================+
+| Uart_0          | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| Uart_1          | No                      | Time-shared              |
++-----------------+-------------------------+--------------------------+
+| I2C0            | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| I2C1            | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| SPI0            | No                      | Non-shared               |
++-----------------+-------------------------+--------------------------+
+| SPI1            | No                      | Non-shared               |
++-----------------+-------------------------+--------------------------+
+| OSPI            | No                      | Non-shared               |
++-----------------+-------------------------+--------------------------+
+| QSPI            | Yes                     | None                     |
++-----------------+-------------------------+--------------------------+
+| SD_eMMC0        | Yes                     | None                     |
++-----------------+-------------------------+--------------------------+
+| SD_eMMC1        | Yes                     | None                     |
++-----------------+-------------------------+--------------------------+
+| Gem_0           | Yes                     | Non-shared               |
++-----------------+-------------------------+--------------------------+
+| Gem_1           | Yes                     | Non-shared               |
++-----------------+-------------------------+--------------------------+
+
+
++----------------------------------------------------------------------+
+| RPU Subsystem Management                                             |
++-----------------+-------------------------+--------------------------+
+| Device          | Requested (Pre-alloced) | Access Permission Flags  |
++=================+=========================+==========================+
+| Swdt_lpd        | No                      | Time-shared              |
++-----------------+-------------------------+--------------------------+
+| PMC_RTC         | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| HB_MON_1        | Yes                     | Non-shared               |
++-----------------+-------------------------+--------------------------+
+
+
++----------------------------------------------------------------------+
+| RPU Subsystem Peripheral                                             |
++-----------------+-------------------------+--------------------------+
+| Device          | Requested (Pre-alloced) | Access Permission Flags  |
++=================+=========================+==========================+
+| Uart_0          | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| Uart_1          | Yes                     | Time-shared              |
++-----------------+-------------------------+--------------------------+
+| I2C0            | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| I2C1            | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| QSPI            | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| SD_eMMC0        | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+| SD_eMMC1        | No                      | None                     |
++-----------------+-------------------------+--------------------------+
+
 
 Detail subsystem definition is available in the sources under *hw/common/subsystem.cdo* file.
 
-.. note:: Uart_0 is set to have *Shared* access permission as it is being shared with plm for initial boot messages.
+.. note:: Uart_0 is set to have *None* access permission as it is being shared with plm for initial boot messages.
 
 .. note:: Access permissions will be enforced both by hardware (using protection units) and software (using plm and pm permissions).
+
+.. note:: The location and size of image store is also included.
 
 
 Software Stack
@@ -197,7 +260,7 @@ It has the following contents:
 
 The zip contents for **vck190-prod** are as follow ::
 
- vssr-trd-pb-vck190-prod-2022.1.zip
+ vssr-trd-pb-vck190-prod-2024.1.zip
  │
  vssr-trd-vck190-prod
  ├── LICENSE
@@ -245,10 +308,10 @@ Clone the git repository for the current release tag.
   mkdir -p </path/to/source/repo>
   cd </path/to/source/repo>
 
-  # clone and switch to current release tag (xilinx-v2022.1)
+  # clone and switch to current release tag (amd/xilinx-v2024.1)
   git clone https://github.com/Xilinx/versal-restart-trd.git
   cd versal-restart-trd
-  git checkout -b xilinx-v2022.1 xilinx-v2022.1
+  git checkout amd/xilinx-v2024.1
 
 From the cloned area, run :code:`make help` to see various build options.
 
@@ -292,5 +355,5 @@ You are solely responsible for checking any files you
 use for notices and licenses and for complying with any terms applicable to your
 use of the design sl-restart-trdss any third party files supplied with the design.
 
-.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2022.1/README.md#prebuilt-images
+.. _`zip file`: https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2024.1/README.md#prebuilt-images
 
