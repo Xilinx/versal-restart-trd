@@ -10,7 +10,7 @@ Prerequisites
 
 * SD card image.
 
-  * Download `Prebuilt Images <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2021.2/README.md#prebuilt-images>`_ and use the prebuilt petalinux-sdimage.wic.xz
+  * Download `Prebuilt Images <https://github.com/Xilinx/versal-restart-trd/blob/xilinx-v2024.1/README.md#prebuilt-images>`_ and use the prebuilt petalinux-sdimage.wic.xz
 
   * Alternatively build the petalinux-sdimage.wic.xz from the build tutorial.
 
@@ -329,25 +329,27 @@ Control Selections
 
 Following TRD operations can be selected using the control pane.
 
-+-----------+--------------------+-------------------------------------------------+
-|  Target   |     Action         |    Description                                  |
-+===========+====================+=================================================+
-| APU       |  Subsystem Restart | APU performs self (subsystem only) restart      |
-|           +--------------------+-------------------------------------------------+
-|           |  Watchdog Recovery | APU kills FPD watchdog to demonstrate recovery  |
-|           +--------------------+-------------------------------------------------+
-|           |  System Restart    | APU performs full system restart                |
-|           +--------------------+-------------------------------------------------+
-|           |  Healthy Boot Test | APU demonstrate healthy boot based recovery     |
-+-----------+--------------------+-------------------------------------------------+
-| RPU       |  Subsystem Restart | RPU performs self (subsystem only) restart      |
-|           +--------------------+-------------------------------------------------+
-|           |  Watchdog Recovery | RPU kills LPD watchdog to demonstrate recovery  |
-|           +--------------------+-------------------------------------------------+
-|           |  System Restart    | RPU performs full system restart                |
-|           +--------------------+-------------------------------------------------+
-|           |  Healthy Boot Test | RPU demonstrate healthy boot based recovery     |
-+-----------+--------------------+-------------------------------------------------+
++-----------+--------------------+-------------------------------------------------------+
+|  Target   |     Action         |    Description                                        |
++===========+====================+=======================================================+
+| APU       |  Subsystem Restart | APU performs self (subsystem only) restart            |
+|           +--------------------+-------------------------------------------------------+
+|           |  Watchdog Recovery | APU kills FPD watchdog to demonstrate recovery        |
+|           +--------------------+-------------------------------------------------------+
+|           |  System Restart    | APU performs full system restart                      |
+|           +--------------------+-------------------------------------------------------+
+|           |  Healthy Boot Test | APU demonstrate healthy boot based recovery           |
+|           +--------------------+-------------------------------------------------------+
+|           |  Image Store       | APU performs subsystem restart through PRU application|
++-----------+--------------------+-------------------------------------------------------+
+| RPU       |  Subsystem Restart | RPU performs self (subsystem only) restart            |
+|           +--------------------+-------------------------------------------------------+
+|           |  Watchdog Recovery | RPU kills LPD watchdog to demonstrate recovery        |
+|           +--------------------+-------------------------------------------------------+
+|           |  System Restart    | RPU performs full system restart                      |
+|           +--------------------+-------------------------------------------------------+
+|           |  Healthy Boot Test | RPU demonstrate healthy boot based recovery           |
++-----------+--------------------+-------------------------------------------------------+
 
 After the selection **Perform Action** button triggers the selected action.
 
@@ -374,6 +376,7 @@ From the Uart0 terminal just type `sudo vssr-test` to execute this python script
         6. RPU: System Restart
         7. RPU: Healthy Boot Test
         8. RPU: WDT Recovery
+        9. APU: Image Store
         0. Exit
 
         Enter your choice:
@@ -382,7 +385,7 @@ From the Uart0 terminal just type `sudo vssr-test` to execute this python script
 Troubleshooting
 ---------------
 
-#. If after restarting the APU subsystem, the Jupyter notebook does not reconnect,wait for around 120-150 seconds
+#. If after restarting the APU subsystem, the Jupyter notebook does not reconnect, wait for around 120-150 seconds
    and try hitting refresh (Normally `F5 key`).
 
 #. If the petalinux image is configured to have dynamic (static in tutorial), then enter the new

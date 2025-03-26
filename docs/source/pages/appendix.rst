@@ -17,4 +17,4 @@ Restart Use Cases
    usecases/rpu_sys.md
    usecases/rpu_wdt.md
    usecases/rpu_hb_test.md
-
+   usecases/apu_img.md

@@ -1,5 +1,43 @@
 Revision History
 ================
+**2024.1**
+
+* Updates in sw component
+
+  * Fix an image store issue and a watchdog issue both in rpu_app
+
+  * Update makefile compatible with 2024.1 release
+
+**2023.2**
+
+* Updates in hw component
+
+  * Upadtes subsystem cdo as per image store feature
+
+* Updates in sw component
+
+  * Add Image store feature test case
+
+**2023.1**
+
+* Updates in hw components
+
+  * Change subsystem marker as per Vivado 2023.1 design
+
+* Updates in sw components
+
+  * Change recipes as per updated packages in 2023.1 release
+
+**2022.2**
+
+* Updates in sw components
+
+  * Update linker script due to memory overflow issue in rpu_app
+
+* Updates in hw components
+
+  * Update subsystem CDO to make the TRD compatible with 2022.2 release
+
 **2022.1**
 
 * Updated for 2022.1 toolchain
@@ -24,15 +62,15 @@ Revision History
 
 * Updated for 2021.1
 
-  * Changed Release format: Source on Github and Binaries on Xilinx.com through zip file.
+  * Changed Release format: Source on Github and Binaries on Xilinx.com through zip file
 
   * New features: Healthy Boot, Recovery with WDT, CDO Overlay
 
-  * Improved Jupyter dashboard layout.
+  * Improved Jupyter dashboard layout
 
-  * RPU now demonstrate all the features like APU.
+  * RPU now demonstrate all the features like APU
 
-  * Removed unsupported BZip2 design.
+  * Removed unsupported BZip2 design
 
 **2020.2 v1.2.0**
 
