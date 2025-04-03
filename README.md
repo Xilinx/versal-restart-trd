@@ -2,7 +2,7 @@
 [![Docs](https://img.shields.io/badge/-Documention-blue)](https://xilinx.github.io/versal-restart-trd/)
 [![prebuilt](https://img.shields.io/badge/-Prebuilt_Images-blueviolet)](#prebuilt-images)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2023.2-orange)](https://www.xilinx.com/)
+[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2024.1-orange)](https://www.xilinx.com/)
 
 The Versal System and Subsystem Restart TRD (**VSSR TRD**), also referred to as
 **Versal Restart TRD**, demonstrates how to restart various components of a system.
@@ -20,23 +20,23 @@ This repository provides all the sources of TRD and their build infrastructure.
 
 ### Prebuilt Images
 #### Prebuilt Images for Production Silicon
-##### TODO: Need to update prebuilt images and their licenses for 2023.2
+##### TODO: Need to update prebuilt images and their licenses for 2024.1
 Board   | Silicon        | Download Link
 --------|----------------|--------------
-VCK190  | Production     | [vssr-trd-pb-vck190-prod-2023.2.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vck190-prod-2023.2.zip)
-VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2023.2.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vmk180-prod-2023.2.zip)
+VCK190  | Production     | [vssr-trd-pb-vck190-prod-2024.1.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vck190-prod-2024.1.zip)
+VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2024.1.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vmk180-prod-2024.1.zip)
 
 #### Prebuilt Images for ES Silicon
 > Engineering Samples or ES (including es1) design support is dropped in release 2022.1. Use [previous release 2021.2](https://github.com/Xilinx/versal-restart-trd/tree/xilinx-v2021.2) for ES1 silicon.
 
-#### Licenses for Prebuilt Images : [vssr-trd-pb-licenses-2023.2.tar.gz](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-licenses-2023.2.tar.gz)
+#### Licenses for Prebuilt Images : [vssr-trd-pb-licenses-2024.1.tar.gz](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-licenses-2024.1.tar.gz)
 
 ### Xilinx Tools
 Tools       | Download Link
 ------------|--------------
-Vivado      | [2023.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2023.2.html)
-Vitis       | [2023.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2023.2.html)
-Petalinux   | [2023.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2023.2.html)
+Vivado      | [2024.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2024.1.html)
+Vitis       | [2024.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2024.1.html)
+Petalinux   | [2024.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024.1.html)
 
 ## Directory Structure
 
@@ -206,7 +206,7 @@ Refer **Run Images on Target** section in the [documentation](#links).
 
 ```
 Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
-Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc.  ALL rights reserved.
+Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc.  ALL rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
