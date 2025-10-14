@@ -98,11 +98,9 @@ Following tables describe examples of some peripheral/device permission for APU 
 +----------------------------------------------------------------------+
 | APU Subsystem Management                                             |
 +-----------------+-------------------------+--------------------------+
-| Device          | Requested (Pre-alloced) | Access Permission Flags  |
+| Device          | Requested (Pre-alloced) | Subsystem Flags          |
 +=================+=========================+==========================+
-| Swdt_fpd        | No                      | Time-shared              |
-+-----------------+-------------------------+--------------------------+
-| DDR_0           | No                      | Time-shared              |
+| Swdt_fpd        | No*                     | Time-shared              |
 +-----------------+-------------------------+--------------------------+
 | HB_MON_0        | Yes                     | Non-shared               |
 +-----------------+-------------------------+--------------------------+
@@ -111,8 +109,10 @@ Following tables describe examples of some peripheral/device permission for APU 
 +----------------------------------------------------------------------+
 | APU Subsystem Peripheral                                             |
 +-----------------+-------------------------+--------------------------+
-| Device          | Requested (Pre-alloced) | Access Permission Flags  |
+| Device          | Requested (Pre-alloced) | Subsystem Flags          |
 +=================+=========================+==========================+
+| DDR_0           | No                      | Time-shared              |
++-----------------+-------------------------+--------------------------+
 | Uart_0          | No                      | None                     |
 +-----------------+-------------------------+--------------------------+
 | Uart_1          | No                      | Time-shared              |
@@ -142,7 +142,7 @@ Following tables describe examples of some peripheral/device permission for APU 
 +----------------------------------------------------------------------+
 | RPU Subsystem Management                                             |
 +-----------------+-------------------------+--------------------------+
-| Device          | Requested (Pre-alloced) | Access Permission Flags  |
+| Device          | Requested (Pre-alloced) | Subsystem Flags          |
 +=================+=========================+==========================+
 | Swdt_lpd        | No                      | Time-shared              |
 +-----------------+-------------------------+--------------------------+
@@ -155,7 +155,7 @@ Following tables describe examples of some peripheral/device permission for APU 
 +----------------------------------------------------------------------+
 | RPU Subsystem Peripheral                                             |
 +-----------------+-------------------------+--------------------------+
-| Device          | Requested (Pre-alloced) | Access Permission Flags  |
+| Device          | Requested (Pre-alloced) | Subsystem Flags          |
 +=================+=========================+==========================+
 | Uart_0          | No                      | None                     |
 +-----------------+-------------------------+--------------------------+
@@ -175,12 +175,18 @@ Following tables describe examples of some peripheral/device permission for APU 
 
 Detail subsystem definition is available in the sources under *hw/common/subsystem.cdo* file.
 
-.. note:: Uart_0 is set to have *None* access permission as it is being shared with plm for initial boot messages.
+.. note:: * *No* in Requested (Pre-alloced) column means the devices do not require to be pre-allocated. They can still be requested/accessed after booting.
 
-.. note:: Access permissions will be enforced both by hardware (using protection units) and software (using plm and pm permissions).
+          * Uart_0 is set to have *None* flag as it is being shared with plm for initial boot messages.
 
-.. note:: The location and size of image store is also included.
+          * Access permission of Subsysten flags would be enforced both by hardware (using protection units) and software (using plm and pm permissions).
 
+          * The location and size of image store is also included.
+
+
+The detailed setting of each subsystem can be configured through isoutil, whose GUI inteface is as follows. For VCK190 and VMK180 platforms, the top flag settings (debugger_access, enable_protection, and write_subsystems) are all enabled as default.
+
+.. figure:: images/intro/setting_and_messages.png
 
 Software Stack
 **************
