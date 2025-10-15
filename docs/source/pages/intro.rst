@@ -184,7 +184,7 @@ Detail subsystem definition is available in the sources under *hw/common/subsyst
           * The location and size of image store is also included.
 
 
-The detailed setting of each subsystem can be configured through isoutil, whose GUI inteface is as follows. For VCK190 and VMK180 platforms, the top flag settings (debugger_access, enable_protection, and write_subsystems) are all enabled as default.
+The detailed setting of each subsystem can be configured through ACE (Advanced Configuration Editor) tool, whose GUI inteface is as follows. For VCK190 and VMK180 platforms, the top settings (debugger_access, enable_protection, and write_subsystems) are all enabled as default. However, at this TRD, we uncheck the enable_protection flag for *hw/common/subsystem.cdo* file.
 
 .. figure:: images/intro/setting_and_messages.png
 
