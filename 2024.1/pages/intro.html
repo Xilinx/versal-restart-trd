@@ -421,19 +421,15 @@ running standalone application on Lock-Step Cortex R5 cores.</p>
 </tr>
 <tr class="row-even"><th class="head">Device</th>
 <th class="head">Requested (Pre-alloced)</th>
-<th class="head">Access Permission Flags</th>
+<th class="head">Subsystem Flags</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-odd"><td>Swdt_fpd</td>
-<td>No</td>
+<td>No*</td>
 <td>Time-shared</td>
 </tr>
-<tr class="row-even"><td>DDR_0</td>
-<td>No</td>
-<td>Time-shared</td>
-</tr>
-<tr class="row-odd"><td>HB_MON_0</td>
+<tr class="row-even"><td>HB_MON_0</td>
 <td>Yes</td>
 <td>Non-shared</td>
 </tr>
@@ -450,55 +446,59 @@ running standalone application on Lock-Step Cortex R5 cores.</p>
 </tr>
 <tr class="row-even"><th class="head">Device</th>
 <th class="head">Requested (Pre-alloced)</th>
-<th class="head">Access Permission Flags</th>
+<th class="head">Subsystem Flags</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-odd"><td>Uart_0</td>
-<td>No</td>
-<td>None</td>
-</tr>
-<tr class="row-even"><td>Uart_1</td>
+<tr class="row-odd"><td>DDR_0</td>
 <td>No</td>
 <td>Time-shared</td>
 </tr>
-<tr class="row-odd"><td>I2C0</td>
+<tr class="row-even"><td>Uart_0</td>
 <td>No</td>
 <td>None</td>
 </tr>
-<tr class="row-even"><td>I2C1</td>
+<tr class="row-odd"><td>Uart_1</td>
+<td>No</td>
+<td>Time-shared</td>
+</tr>
+<tr class="row-even"><td>I2C0</td>
 <td>No</td>
 <td>None</td>
 </tr>
-<tr class="row-odd"><td>SPI0</td>
+<tr class="row-odd"><td>I2C1</td>
+<td>No</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>SPI0</td>
 <td>No</td>
 <td>Non-shared</td>
 </tr>
-<tr class="row-even"><td>SPI1</td>
+<tr class="row-odd"><td>SPI1</td>
 <td>No</td>
 <td>Non-shared</td>
 </tr>
-<tr class="row-odd"><td>OSPI</td>
+<tr class="row-even"><td>OSPI</td>
 <td>No</td>
 <td>Non-shared</td>
 </tr>
-<tr class="row-even"><td>QSPI</td>
+<tr class="row-odd"><td>QSPI</td>
 <td>Yes</td>
 <td>None</td>
 </tr>
-<tr class="row-odd"><td>SD_eMMC0</td>
+<tr class="row-even"><td>SD_eMMC0</td>
 <td>Yes</td>
 <td>None</td>
 </tr>
-<tr class="row-even"><td>SD_eMMC1</td>
+<tr class="row-odd"><td>SD_eMMC1</td>
 <td>Yes</td>
 <td>None</td>
 </tr>
-<tr class="row-odd"><td>Gem_0</td>
+<tr class="row-even"><td>Gem_0</td>
 <td>Yes</td>
 <td>Non-shared</td>
 </tr>
-<tr class="row-even"><td>Gem_1</td>
+<tr class="row-odd"><td>Gem_1</td>
 <td>Yes</td>
 <td>Non-shared</td>
 </tr>
@@ -515,7 +515,7 @@ running standalone application on Lock-Step Cortex R5 cores.</p>
 </tr>
 <tr class="row-even"><th class="head">Device</th>
 <th class="head">Requested (Pre-alloced)</th>
-<th class="head">Access Permission Flags</th>
+<th class="head">Subsystem Flags</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -544,7 +544,7 @@ running standalone application on Lock-Step Cortex R5 cores.</p>
 </tr>
 <tr class="row-even"><th class="head">Device</th>
 <th class="head">Requested (Pre-alloced)</th>
-<th class="head">Access Permission Flags</th>
+<th class="head">Subsystem Flags</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -581,15 +581,16 @@ running standalone application on Lock-Step Cortex R5 cores.</p>
 <p>Detail subsystem definition is available in the sources under <em>hw/common/subsystem.cdo</em> file.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Uart_0 is set to have <em>None</em> access permission as it is being shared with plm for initial boot messages.</p>
+<ul class="last simple">
+<li><em>No</em> in Requested (Pre-alloced) column means the devices do not require to be pre-allocated. They can still be requested/accessed after booting.</li>
+<li>Uart_0 is set to have <em>None</em> flag as it is being shared with plm for initial boot messages.</li>
+<li>Access permission of Subsysten flags would be enforced both by hardware (using protection units) and software (using plm and pm permissions).</li>
+<li>The location and size of image store is also included.</li>
+</ul>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Access permissions will be enforced both by hardware (using protection units) and software (using plm and pm permissions).</p>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The location and size of image store is also included.</p>
+<p>The detailed setting of each subsystem can be configured through ACE (Advanced Configuration Editor) tool, whose GUI inteface is as follows. For VCK190 and VMK180 platforms, the top settings (debugger_access, enable_protection, and write_subsystems) are all enabled as default. However, at this TRD, we uncheck the enable_protection flag for <em>hw/common/subsystem.cdo</em> file.</p>
+<div class="figure">
+<img alt="../_images/setting_and_messages.png" src="../_images/setting_and_messages.png" />
 </div>
 </div>
 <div class="section" id="software-stack">
@@ -795,7 +796,7 @@ use of the design sl-restart-trdss any third party files supplied with the desig
   <div role="contentinfo" class="copyright">
     <p class="footerinfo">
       <span class="lastupdated">
-        Last updated on March 26, 2025.
+        Last updated on October 15, 2025.
       </span>
 
     </p>
