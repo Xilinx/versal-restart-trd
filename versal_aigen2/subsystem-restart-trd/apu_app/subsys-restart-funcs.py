@@ -11,8 +11,10 @@
 
 import utility as util
 
-DDR_RESERVED_ADDR1      = 0x3e400000                    # Action register base address
-DDR_RESERVED_ADDR2      = 0x3e400004                    # Status register base address
+DEV_CONF = {}           # DEV_CONF is device specific configuration which gets populated when building .rpm package
+
+DDR_RESERVED_ADDR1      = int(DEV_CONF["RESERVED_DDR_BASE_ADDRESS"], 16)        # Action register base address
+DDR_RESERVED_ADDR2      = DDR_RESERVED_ADDR1 + 0x4                              # Status register base address
 DDR_MESG_HEADER_ADDR    = DDR_RESERVED_ADDR1 + 0x40
 DDR_MESG_BUFFER_ADDR    = DDR_RESERVED_ADDR1 + 0x48
 

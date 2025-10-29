@@ -7,18 +7,32 @@ CYAN='\033[0;36m'
 PURPLE='\033[0;95m'
 RESET='\033[0m'
 
+VERBOSE=false
+CACHE=false
+DEVICE="xc2ve3858"
+
 set -e  # Exit on any error
 
 # Parse command line arguments
-VERBOSE=false
 while [[ $# -gt 0 ]]; do
     case $1 in
+        -dev|--device)
+            DEVICE=$2
+            shift
+            shift
+            ;;
+        -c|--cache)
+            CACHE=true
+            shift
+            ;;
         -v|--verbose)
             VERBOSE=true
             shift
             ;;
         -h|--help)
-            echo "Usage: $0 [-v|--verbose] [-h|--help]"
+            echo "Usage: $0 [-dev|--device <device>] [-c|--cache] [-v|--verbose] [-h|--help]"
+            echo "  -dev, --device   Specify the target device for the build (default: $DEVICE)"
+            echo "  -c, --cache      Use cached build artifacts (default: $CACHE)"
             echo "  -v, --verbose    Show detailed build output"
             echo "  -h, --help       Show this help message"
             exit 0
@@ -51,6 +65,12 @@ if [ "$VERBOSE" = true ]; then
     echo -e "${PURPLE}Verbose mode enabled${RESET}"
 else
     OUTPUT_REDIRECT=">/dev/null 2>&1"
+fi
+
+# freshly copy artifacts from apu_app to BUILD
+if [ "$CACHE" = false ]; then
+    echo -e "${YELLOW}Copying artifacts from apu_app to BUILD directory...${RESET}"
+    cp -r ../apu_app/*.py ${SOURCE_DIR}
 fi
 
 echo -e "${CYAN}Building RPM package: ${PACKAGE_NAME}-${PACKAGE_VERSION}-${PACKAGE_RELEASE}${RESET}"
@@ -95,14 +115,14 @@ echo -e "${GREEN}Source tarball created: $TARBALL${RESET}"
 echo -e "${CYAN}Building RPM package...${RESET}"
 if [ "$VERBOSE" = true ]; then
     # check if build is not succeeds
-    if rpmbuild --define "_topdir $(pwd)" -ba "$SPEC_FILE"; then
+    if rpmbuild --define "device $DEVICE" --define "_topdir $(pwd)" -ba "$SPEC_FILE"; then
         :
     else
         echo -e "${RED}Error: RPM build failed!${RESET}"
         exit 1
     fi
 else
-    if rpmbuild --define "_topdir $(pwd)" -ba "$SPEC_FILE" >/dev/null 2>&1; then
+    if rpmbuild --define "device $DEVICE" --define "_topdir $(pwd)" -ba "$SPEC_FILE" >/dev/null 2>&1; then
         :
     else
         echo -e "${RED}Error: RPM build failed!${RESET}"

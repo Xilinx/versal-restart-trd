@@ -18,6 +18,10 @@ This package installs subsys-restart-app.py, subsys-restart-cmd.py, subsys-resta
 
 %build
 # Nothing to build for Python scripts
+# configure subsys-restart-funcs.py as per build device
+
+# No build-time modifications needed for Python scripts
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -28,6 +32,18 @@ install -m 755 subsys-restart-app.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 install -m 755 subsys-restart-cmd.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 install -m 755 subsys-restart-funcs.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 install -m 755 utility.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
+
+# Extract configuration from config.json and update DEV_CONF in the installed subsys-restart-funcs.py
+CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' ../../../../%{device}/config.json | sed '1d;$d')
+if [ -n "$CONFIG_CONTENT" ]; then
+    sed -i "/^DEV_CONF = {}$/c\\
+DEV_CONF = {\\
+$CONFIG_CONTENT\\
+}" $RPM_BUILD_ROOT/opt/subsys-restart-app/subsys-restart-funcs.py
+    echo "Updated DEV_CONF in installed file with configuration from %{device}/config.json"
+else
+    echo "Warning: No configuration found in %{device}/config.json"
+fi
 
 # Install service setup scripts
 mkdir -p $RPM_BUILD_ROOT/opt/subsys-restart-app/scripts

@@ -252,7 +252,7 @@ main() {
         _build_subsystem_restart_trd
 
         echo ''
-        echo -e "${GREEN}TRD Build Completed... ${RESET}"
+        echo -e "${RESET}TRD Build Completed... ${RESET}"
         exit 0
 }
 

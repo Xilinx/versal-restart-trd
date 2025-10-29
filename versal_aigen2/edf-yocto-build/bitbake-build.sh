@@ -100,8 +100,14 @@ _edf_yocto_build() {
 main() {
         _edf_yocto_init
         _edf_yocto_trd_setup
-        # _edf_yocto_build
+        _edf_yocto_build
         echo -e "${GREEN}Build process completed.${RESET}"
+
+        EDF_YOCTO_MACHINE_UNDERSCORE=${EDF_YOCTO_MACHINE//-/_}
+        BOOT_bin=$(find "${EDF_YOCTO_DIR}/build/tmp/work/${EDF_YOCTO_MACHINE_UNDERSCORE}-amd-linux/xilinx-bootbin/" -path "*/image/*.bin")
+        if [ -f "$BOOT_bin" ]; then
+                echo -e "[Image]${CYAN} BOOT PDI -> "$(cd "$(dirname "$BOOT_bin")"; pwd)/$(basename "$BOOT_bin")" ${RESET}"
+        fi
 }
 
 main "$@"
