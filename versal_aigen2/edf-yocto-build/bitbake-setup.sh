@@ -18,9 +18,8 @@ RESET='\033[0m'
 
 RELEASE="2025.2"
 BASE_DIR=$(pwd)
-XC2VE3858_TRD="$1"
-SDTGEN_OUT_DIR="$2"
-SKIP_BOOTBIN="$3"
+SDTGEN_OUT_DIR="$1"
+SKIP_BOOTBIN="$2"
 
 REPO_BIN=""
 EDF_YOCTO_DIR="$BASE_DIR/yocto/edf"
@@ -52,9 +51,9 @@ fi
 # Set Development environment in repo
 "$REPO_BIN" sync
 timestamp=$(date +"%Y%m%d%H%M%S")
-branchname="xc2ve3858-${XC2VE3858_TRD}-$timestamp"
+branchname="xc2ve3858-$timestamp"
 "$REPO_BIN" start "$branchname" --all
 
 # Launch EDF Yocto build
 cd "$BASE_DIR"
-./bitbake-build.sh "$EDF_YOCTO_DIR" "$XC2VE3858_TRD" "$SDTGEN_OUT_DIR" "$SKIP_BOOTBIN"
+./bitbake-build.sh "$EDF_YOCTO_DIR" "$SDTGEN_OUT_DIR" "$SKIP_BOOTBIN"

@@ -92,7 +92,7 @@ _get_absolute_path(){
 __build_edf_yocto() {
         # initiate EDF Yocto setup and build
         cd "$BASE_DIR"
-        # ./bitbake-setup.sh "$SDTGEN_OUT_DIR" "$SKIP_BOOTBIN"
+        ./bitbake-setup.sh "$SDTGEN_OUT_DIR" "$SKIP_BOOTBIN"
 }
 
 ___convert_xsa_to_sdtgen() {
