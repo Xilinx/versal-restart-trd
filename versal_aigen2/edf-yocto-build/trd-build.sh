@@ -25,10 +25,20 @@ SDTGEN_OUT_DIR=""
 XSA_FILE=""
 
 OVERLAY_CDO=$BASE_DIR/../subsystem-restart-trd/isoutil-project/subsys-overlay.cdo
-BOARD_DTS="versal2-vek385-reva"
+OUT_DIR=""
+
+ARCH="versal2"
+BOARD="vek385"
+REV="revb"
 PLATFORM="versal-2ve-2vm"
-DEVICE="xc2ve3858"
+
+BOARD_DTS="${ARCH}-${BOARD}-${REV}"
+OUT_DIR=""
 SKIP_BOOTBIN=false
+DEBUG=false
+
+export SKIP_BOOTBIN
+export DEBUG
 
 # Function to display help
 _show_help() {
@@ -42,13 +52,16 @@ _show_help() {
         echo ""
         echo "Optional:"
         echo "  -cdo <CDO>          Specify overlay CDO file (default: $OVERLAY_CDO)"
+        echo "  -dir <DIR>          Specify output directory (default: "$PLATFORM-"$BOARD"_$VERSION")"
         echo "  --no-bootbin        Skip EDF bootbin generation (default: $SKIP_BOOTBIN)"
+        echo "  --debug             Enable debug output (default: $DEBUG)"
         echo "  --help              Display this help message and exit"
         echo ""
         echo "Examples:"
         echo "  $0 -sdt /path/to/sdtgen-output"
         echo "  $0 -xsa design.xsa"
         echo "  $0 -sdt /path/to/sdtgen-output -cdo custom.cdo --no-bootbin"
+        echo "  $0 -sdt /path/to/sdtgen-output -dir /path/to/output"
         echo ""
         echo -e "Developer: Kush Jain <kush.jain@amd.com>\nSSW Platform Management Team"
         exit 0
@@ -84,6 +97,28 @@ _sanity_check() {
         fi
 }
 
+__display_build_config() {
+        echo "========================================================"
+        echo -e "${CYAN}Build Configuration:${RESET}"
+        echo -e "  Architecture: ${GREEN}$ARCH${RESET}"
+        echo -e "  Platform: ${GREEN}$PLATFORM${RESET}"
+        echo -e "  Board: ${GREEN}$BOARD${RESET}"
+        echo -e "  Revision: ${GREEN}$REV${RESET}"
+        echo -e "  Version: ${GREEN}$VERSION${RESET}"
+        if [ -n "$OUT_DIR" ]; then
+        echo -e "  SDTGEN Output Dir: ${GREEN}$OUT_DIR${RESET}"
+        else
+        echo -e "  SDTGEN Output Dir: ${GREEN}"$PLATFORM-"$BOARD"-"$REV"_$VERSION"${RESET}"
+        fi
+        if [ -n "$XSA_FILE" ]; then
+        echo -e "  XSA File: ${GREEN}$XSA_FILE${RESET}"
+        fi
+        echo -e "  Overlay CDO: ${GREEN}$OVERLAY_CDO${RESET}"
+        echo -e "  Skip Bootbin EDF Build: ${GREEN}$SKIP_BOOTBIN${RESET}"
+        echo "========================================================"
+        echo ''
+}
+
 _get_absolute_path(){
         relativePath="$1"
         echo "$(cd "$(dirname "$relativePath")"; pwd)/$(basename "$relativePath")"
@@ -92,42 +127,57 @@ _get_absolute_path(){
 __build_edf_yocto() {
         # initiate EDF Yocto setup and build
         cd "$BASE_DIR"
-        ./bitbake-setup.sh "$SDTGEN_OUT_DIR" "$SKIP_BOOTBIN"
+        ./bitbake-setup.sh "$SDTGEN_OUT_DIR"
+        if [ $? -ne 0 ]; then
+        	echo -e "[Error] ${RED}EDF Yocto setup failed.${RESET}"
+        	exit 1
+        fi
 }
 
 ___convert_xsa_to_sdtgen() {
         # convert XSA to SDTGEN output directory
-        local workspace="$PLATFORM-"$DEVICE"_$VERSION"
+        local workspace=$1
         echo -e "[Info] ${CYAN}Converting XSA to SDTGEN output directory${RESET}"
         echo -e "[Info] ${PURPLE}Running: sdtgen -xsa $XSA_FILE -board_dts $BOARD_DTS -dir $workspace${RESET}"
-        sdtgen -xsa "$XSA_FILE" -board_dts "$BOARD_DTS" -dir "$workspace"
         
-        if [ $? -ne 0 ]; then
-                echo -e "[Error] ${RED}sdtgen failed to convert XSA to SDT${RESET}"
+        # Run sdtgen in non-interactive mode: redirect stdin from /dev/null and output to stderr
+        local output=$(sdtgen -xsa "$XSA_FILE" -board_dts "$BOARD_DTS" -dir "$workspace")
+        local ret=$?
+        if $DEBUG; then
+                echo -e "[Debug] ${PURPLE}sdtgen output:${RESET}"
+                echo "$output"
+        fi
+        if [ $ret -ne 0 ]; then
+                echo -e "[Error] ${RED}sdtgen failed to convert XSA to SDT (exit code: $ret)${RESET}"
                 exit 1
         fi
 }
 
-_build_power_states_trd() {
-        __build_edf_yocto
-}
-
 __apply_overlaycdo_to_sdtgen_out() {
 
-        local workspace="$PLATFORM-"$DEVICE"_$VERSION"
-        # create a new directory for SDT output ( delete a create new if already exists )
-        rm -rf $workspace
-        mkdir $workspace
+        local workspace=""
+        if [ -n "$OUT_DIR" ]; then
+                workspace="$OUT_DIR"
+        else
+                workspace="$PLATFORM-"$BOARD"-"$REV"_$VERSION"
+        fi
+        if [ -d "$workspace" ]; then
+                echo -e "[Warn] ${YELLOW}Workspace directory already exists, removing it...${RESET}"
+                rm -rf $workspace
+        fi
 
         # first convert xsa to sdtgen output directory is xsa is provided
         if [ -n "$XSA_FILE" ]; then
-                ___convert_xsa_to_sdtgen
+                ___convert_xsa_to_sdtgen "$workspace"
         else
+                mkdir $workspace
                 cp -r "$SDTGEN_OUT_DIR"/* $workspace/
         fi
 
+        workspace=$(_get_absolute_path "$workspace")
+
         # find and navigate to the directory with .bif file(s) inside the workspace
-        BIF_DIR=$(find "$BASE_DIR/$workspace" -type f -name "*.bif" -exec dirname {} \; | sort -u | head -1)
+        BIF_DIR=$(find "$workspace" -type f -name "*.bif" -exec dirname {} \; | sort -u | head -1)
         if [ -z "$BIF_DIR" ]; then
                 echo -e "[Error] ${RED} No .bif files found${RESET}"
                 exit 1
@@ -136,10 +186,10 @@ __apply_overlaycdo_to_sdtgen_out() {
         fi
 
         # Create backup directory at workspace root and backup original PDI files
-        mkdir -p "$BASE_DIR/$workspace/.orig_boot_files"
-        if compgen -G "$BASE_DIR/$workspace/*.pdi" > /dev/null; then
+        mkdir -p "$workspace/.orig_boot_files"
+        if compgen -G "$workspace/*.pdi" > /dev/null; then
                 echo -e "[Info] ${CYAN}Backing up original PDI files${RESET}"
-                cp "$BASE_DIR/$workspace"/*.pdi "$BASE_DIR/$workspace/.orig_boot_files/"
+                cp "$workspace"/*.pdi "$workspace/.orig_boot_files/"
         fi
 
         cd "$BIF_DIR"
@@ -158,10 +208,10 @@ __apply_overlaycdo_to_sdtgen_out() {
                 echo -e "${GREEN}Successfully generated new boot PDI: ${BOOT_BIF%.bif}.pdi${RESET}"
                 # Copy and replace the original PDI at workspace root
                 BOOT_PDI_NAME=$(basename "${BOOT_BIF%.bif}.pdi")
-                if [ -f "$BASE_DIR/$workspace/$BOOT_PDI_NAME" ]; then
+                if [ -f "$workspace/$BOOT_PDI_NAME" ]; then
                         echo -e "[Info] ${CYAN}Replacing original PDI at workspace root${RESET}"
-                        cp "${BOOT_BIF%.bif}.pdi" "$BASE_DIR/$workspace/$BOOT_PDI_NAME"
-                        echo -e "${GREEN}Successfully replaced: $BASE_DIR/$workspace/$BOOT_PDI_NAME${RESET}"
+                        cp "${BOOT_BIF%.bif}.pdi" "$workspace/$BOOT_PDI_NAME"
+                        echo -e "${GREEN}Successfully replaced: $workspace/$BOOT_PDI_NAME${RESET}"
                 else
                         echo -e "[Warning] ${YELLOW}Original PDI not found at workspace root, copying new PDI${RESET}"
                         cp "${BOOT_BIF%.bif}.pdi" "$BASE_DIR/$workspace/"
@@ -171,12 +221,11 @@ __apply_overlaycdo_to_sdtgen_out() {
                 exit 1
         fi
 
-        SDTGEN_OUT_DIR=$(_get_absolute_path "$BASE_DIR/$workspace")
+        SDTGEN_OUT_DIR=$workspace
 }
 
 _build_subsystem_restart_trd() {
         __apply_overlaycdo_to_sdtgen_out
-
         __build_edf_yocto
 }
 
@@ -214,8 +263,21 @@ main() {
                                         exit 1
                                 fi
                                 ;;
+                        -dir)
+                                if [[ -n "$2" && "$2" != -* ]]; then
+                                        OUT_DIR="$(_get_absolute_path "$2")"
+                                        shift 2
+                                else
+                                        echo -e "[Error] ${RED}Option -dir requires an output directory argument${RESET}"
+                                        exit 1
+                                fi
+                                ;;
                         --no-bootbin)
                                 SKIP_BOOTBIN=true
+                                shift
+                                ;;
+                        --debug)
+                                DEBUG=true
                                 shift
                                 ;;
                         -*)
@@ -241,12 +303,7 @@ main() {
         _sanity_check
 
         # Display configuration
-        echo -e "${CYAN}Configuration:${RESET}"
-        [[ -n "$SDTGEN_OUT_DIR" ]] && echo -e "  SDTGEN Output Dir: ${GREEN}$SDTGEN_OUT_DIR${RESET}"
-        [[ -n "$XSA_FILE" ]] && echo -e "  XSA File: ${GREEN}$XSA_FILE${RESET}"
-        echo -e "  Overlay CDO: ${GREEN}$OVERLAY_CDO${RESET}"
-        echo -e "  Skip Bootbin: ${GREEN}$SKIP_BOOTBIN${RESET}"
-        echo ""
+        __display_build_config
 
         # Build subsystem restart TRD
         _build_subsystem_restart_trd

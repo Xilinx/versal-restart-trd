@@ -9,15 +9,15 @@ RESET='\033[0m'
 
 VERBOSE=false
 CACHE=false
-DEVICE="xc2ve3858"
+BOARD="vek385"
 
 set -e  # Exit on any error
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -dev|--device)
-            DEVICE=$2
+        -b|--board)
+            BOARD=$2
             shift
             shift
             ;;
@@ -30,8 +30,8 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -h|--help)
-            echo "Usage: $0 [-dev|--device <device>] [-c|--cache] [-v|--verbose] [-h|--help]"
-            echo "  -dev, --device   Specify the target device for the build (default: $DEVICE)"
+            echo "Usage: $0 [-b|--board <board>] [-c|--cache] [-v|--verbose] [-h|--help]"
+            echo "  -b, --board      Specify the target board for the build (default: $BOARD)"
             echo "  -c, --cache      Use cached build artifacts (default: $CACHE)"
             echo "  -v, --verbose    Show detailed build output"
             echo "  -h, --help       Show this help message"
@@ -115,14 +115,14 @@ echo -e "${GREEN}Source tarball created: $TARBALL${RESET}"
 echo -e "${CYAN}Building RPM package...${RESET}"
 if [ "$VERBOSE" = true ]; then
     # check if build is not succeeds
-    if rpmbuild --define "device $DEVICE" --define "_topdir $(pwd)" -ba "$SPEC_FILE"; then
+    if rpmbuild --define "board $BOARD" --define "_topdir $(pwd)" -ba "$SPEC_FILE"; then
         :
     else
         echo -e "${RED}Error: RPM build failed!${RESET}"
         exit 1
     fi
 else
-    if rpmbuild --define "device $DEVICE" --define "_topdir $(pwd)" -ba "$SPEC_FILE" >/dev/null 2>&1; then
+    if rpmbuild --define "board $BOARD" --define "_topdir $(pwd)" -ba "$SPEC_FILE" >/dev/null 2>&1; then
         :
     else
         echo -e "${RED}Error: RPM build failed!${RESET}"

@@ -19,10 +19,18 @@ RESET='\033[0m'
 BASE_DIR=$(pwd)
 EDF_YOCTO_DIR="$1"
 SDTGEN_OUT_DIR="$2"
-SKIP_BOOTBIN="$3"
 
 EDF_YOCTO_MACHINE="vek385-subsystem-restart-trd"
 EDF_YOCTO_LAYER="meta-subsystem-restart-bsp"
+
+__debug_dump() {
+        message="$1"
+        output="$2"
+        if [ $DEBUG == true ]; then
+                echo -e "[Debug] ${PURPLE}${message}:${RESET}"
+                echo "$output"
+        fi
+}
 
 _edf_yocto_init() {
         # Initialize build environment
@@ -51,8 +59,14 @@ _edf_yocto_init() {
         fi
 
         echo -e "[Info] ${CYAN}Sourcing internal-edf-init-build-env...${RESET}"
-        if ! source internal-edf-init-build-env build; then
-                echo -e "[Error] ${RED}Failed to source internal-edf-init-build-env${RESET}"
+        if $DEBUG; then
+                source edf-init-build-env build
+        else
+                source edf-init-build-env build > /dev/null 2>&1
+        fi
+        ret=$?
+        if [ $ret -ne 0 ]; then
+                echo -e "[Error] ${RED}Failed to source edf-init-build-env${RESET}"
                 exit 1
         fi
 }
@@ -62,11 +76,17 @@ _edf_yocto_trd_setup() {
         echo -e "[Info] ${CYAN}Adding Subsystem Restart TRD layer to EDF Yocto...${RESET}"
 
         # check if commands executed successfully or not
-        if ! bitbake-layers create-layer ../sources/${EDF_YOCTO_LAYER}; then
+        output=$(bitbake-layers create-layer ../sources/${EDF_YOCTO_LAYER})
+        __debug_dump "Creating layer ${EDF_YOCTO_LAYER}" "$output"
+        ret=$?
+        if [ $ret -ne 0 ]; then
                 echo -e "[Error] ${RED}Failed to create layer ${EDF_YOCTO_LAYER}${RESET}"
                 exit 1
         fi
-        if ! bitbake-layers add-layer ../sources/${EDF_YOCTO_LAYER}; then
+        output=$(bitbake-layers add-layer ../sources/${EDF_YOCTO_LAYER})
+        __debug_dump "Adding layer ${EDF_YOCTO_LAYER}" "$output"
+        ret=$?
+        if [ $ret -ne 0 ]; then
                 echo -e "[Error] ${RED}Failed to add layer ${EDF_YOCTO_LAYER}${RESET}"
                 exit 1
         fi
