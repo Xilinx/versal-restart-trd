@@ -43,6 +43,9 @@ marker 0x65 "LPD_DATA/LPD_SLCR"
 # 
 marker 0x64 "LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU"
 # LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU: --START--
+#   Write register wprot0.ssss_active
+#     wprot0.ssss_active[0] = 0x0
+write 0xeb510000 0
 #   Write register MMUSECSID_CTRL_TBU
 #     tbu8_mmusecsid_ctrl[8] = 0x0
 #     tbu7_mmusecsid_ctrl[7] = 0x0
@@ -54,6 +57,9 @@ marker 0x64 "LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU"
 #     tbu1_mmusecsid_ctrl[1] = 0x0
 #     tbu0_mmusecsid_ctrl[0] = 0x0
 write 0xeb510b28 0
+#   Write register  wprot0.ssss_active
+#      wprot0.ssss_active[0] = 0x1
+write 0xeb510000 0x1
 # LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU: --END--
 marker 0x65 "LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU"
 # 
@@ -429,6 +435,9 @@ begin
     #     full_access[0] = 0x1
     #     timeout = 0xea60
     pm_add_requirement 0x1c000006 0x18250000 0x40 0 0x1 0xea60
+    # Set the error action (SRST) for HB_MON0 in case of subsystem not healthy
+    # Second Argument = error action; POR=0x1; SRST=0x2; ERR_OUT=0x4;
+    em_set_action 0x28110000 0x2 0x1
     #   Add virtual node HB_MON1 type healthy_boot_monitor to subsystem apu_subsys_linux
     #     requested[6] = 0x1
     #     aperture = 0x0
@@ -498,6 +507,13 @@ begin
     #     requested_full_access[0] = 0x1
     #     qos = 0x64
     pm_add_requirement 0x1c000006 0x1822403c 0x45 0 0x1 0x64
+    #   Add device LPD_GPIO to subsystem apu_subsys_linux, aperture 165 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224023 0x45 0 0x1 0x64
     #   Add device LPD_I3C0 to subsystem apu_subsys_linux, aperture 148 in PMC_XPPU
     #     allow_secure[2] = 0x1 due to secure = 0
     #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1

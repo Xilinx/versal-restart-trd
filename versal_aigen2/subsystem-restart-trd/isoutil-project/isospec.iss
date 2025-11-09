@@ -1149,6 +1149,12 @@
             "destinations": ["HB_MON1"],
             "type": "ss_management",
             "flags": {"requested": true, "timeout": 120000}
+          },
+          {
+            "name": "LPD_GPIO",
+            "comment": "EDF YOCTO",
+            "destinations": ["LPD_GPIO"],
+            "flags": {"requested": true, "requested_full_access": true, "shared": true}
           }
         ]
       }

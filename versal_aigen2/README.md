@@ -1,4 +1,4 @@
-# Subsystem Restart TRD for Versal AI Gen2 (xc2ve3858)
+# Subsystem Restart TRD for Versal AI Gen2 (vek385)
 
 ## Table of Contents:
 [![Introduction](https://img.shields.io/badge/-1._Introduction-darkgreen)](#introduction)<br>
@@ -17,7 +17,7 @@ Here are some key changes for 2025.2 and onward releases by PM Team:
 <br>
 
 ## Subsystem Restart TRD
-The xc2ve3858 device based on Versal AI Gen2 Architecture has 8 A78 Arm Cores and 10 R52 Arm Cores for APU and RPU respectively. Subsystem Restart TRD demonstrates how various components perform restarts with software level isolation using Subsystem Configuration. <br>
+The vek385 device based on Versal AI Gen2 Architecture has 8 A78 Arm Cores and 10 R52 Arm Cores for APU and RPU respectively. Subsystem Restart TRD demonstrates how various components perform restarts with software level isolation using Subsystem Configuration. <br>
 - This TRD consists of a Custom Subsystem 6 which isolates all the APU cores running linux.
 - User gets a comprehensive command-line interface to interact with; which helps them perform Subsystem and System level restarts.
 - This interface can run on both: Linux running on APU as well as our System Controllers.
@@ -80,8 +80,8 @@ Select an operation ID:
 |       └── RPMS
 |           └── noarch
 |               └── subsys-restart-app-2025.2-1.noarch.rpm      # install this package on APU and System Controller (built using build-package.sh)
-└── xc2ve3858                                                   # xc2ve3858 device specific files
-    └── config.json                                             # xc2ve3858 device configuration for the TRD application(s)
+└── vek385                                                      # vek385 device specific files
+    └── config.json                                             # vek385 device configuration for the TRD application(s)
 
 ```
 
