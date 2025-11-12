@@ -77,7 +77,7 @@ if [ ! -x $REPO_BIN ]; then
 	echo -e "[Error] ${RED}repo tool not found or not executable.${RESET}"
 	exit 1
 fi
-output="$("$REPO_BIN" init -u https://gitenterprise.xilinx.com/Yocto/yocto-manifests.git -b $RELEASE -m default-edf-internal.xml)"
+output="$("$REPO_BIN" init -u https://github.com/Xilinx/yocto-manifests.git -b rel-v$RELEASE -m default-edf.xml)"
 __debug_dump "EDF Yocto Initialization" "$output"
 ret=$?
 if [ $ret -ne 0 ]; then

@@ -7,7 +7,7 @@
 
 #
 # Build script for EDF Yocto Setup and EDF Yocto Build xc2ve3858 TRDs
-# sdtgen: "https://petalinux.xilinx.com/sswreleases/rel-v2025.1/sdt/2025.1.1/2025.1.1_0818_1_08190322/external/versal-2ve-2vm-vek385-sdt-seg/versal-2ve-2vm-vek385-sdt-seg_2025.1.1_0818_1_08190322.tar.gz"
+# sdtgen: "https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1111_1_11112340/external/versal-2ve-2vm-vek385-revb-sdt-seg/versal-2ve-2vm-vek385-revb-sdt-seg_2025.2_1111_1_11112340.tar.gz"
 # wic image: "https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html"
 #
 
@@ -229,6 +229,34 @@ _build_subsystem_restart_trd() {
         __build_edf_yocto
 }
 
+_copy_edf_build_artifacts() {
+        local edf_build_dir="yocto/edf/build/"
+        local xilinx_bootbin_dir="$edf_build_dir/tmp/work/*-amd-linux/xilinx-bootbin/*/xilinx-bootbin-*/"
+        local output_dir="$BASE_DIR/edf-yocto-build-artifacts/"
+
+        # create a new directory to copy build artifacts
+        if [ -d "$output_dir" ]; then
+                echo -e "[Warn] ${YELLOW}Output directory already exists, removing it...${RESET}"
+                rm -rf "$output_dir"
+        fi
+        mkdir -p "$output_dir"
+
+        # check if xilinx-bootbin directory exists
+        if [ ! -d $xilinx_bootbin_dir ]; then
+                echo -e "[Error] ${RED}Xilinx bootbin directory not found: $xilinx_bootbin_dir${RESET}"
+                exit 1
+        fi
+        # check if xilinx-bootbin directory is not empty
+        if [ -z "$(ls -A $xilinx_bootbin_dir)" ]; then
+                echo -e "[Error] ${RED}Xilinx bootbin directory is empty: $xilinx_bootbin_dir${RESET}"
+                exit 1
+        fi
+
+        cp -r $xilinx_bootbin_dir* "$output_dir"
+        echo -e "${GREEN}Successfully copied EDF Yocto build artifacts to $output_dir${RESET}"
+        find "$output_dir" -type f | sed "s|$output_dir|-> |"
+}
+
 main() {
         # command-line argument parser
         while [[ $# -gt 0 ]]; do
@@ -310,6 +338,10 @@ main() {
 
         echo ''
         echo -e "${RESET}TRD Build Completed... ${RESET}"
+
+        # Copy EDF Yocto build artifacts to current workspace
+        _copy_edf_build_artifacts
+
         exit 0
 }
 

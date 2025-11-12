@@ -52,13 +52,13 @@ _edf_yocto_init() {
                 exit 1
         fi
 
-        # Check if internal-edf-init-build-env exists
-        if [ ! -f "internal-edf-init-build-env" ]; then
-                echo -e "[Error] ${RED}internal-edf-init-build-env not found in $EDF_YOCTO_DIR${RESET}"
+        # Check if edf-init-build-env exists
+        if [ ! -f "edf-init-build-env" ]; then
+                echo -e "[Error] ${RED}edf-init-build-env not found in $EDF_YOCTO_DIR${RESET}"
                 exit 1
         fi
 
-        echo -e "[Info] ${CYAN}Sourcing internal-edf-init-build-env...${RESET}"
+        echo -e "[Info] ${CYAN}Sourcing edf-init-build-env...${RESET}"
         if $DEBUG; then
                 source edf-init-build-env build
         else
