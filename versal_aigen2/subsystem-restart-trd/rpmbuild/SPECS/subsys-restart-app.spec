@@ -18,7 +18,7 @@ This package installs subsys-restart-app.py, subsys-restart-cmd.py, subsys-resta
 
 %build
 # Nothing to build for Python scripts
-# configure subsys-restart-funcs.py as per build device
+# configure subsys-restart-funcs.py as per build board
 
 # No build-time modifications needed for Python scripts
 
@@ -34,15 +34,15 @@ install -m 755 subsys-restart-funcs.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 install -m 755 utility.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 
 # Extract configuration from config.json and update DEV_CONF in the installed subsys-restart-funcs.py
-CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' ../../../../%{device}/config.json | sed '1d;$d')
+CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' ../../../../%{board}/config.json | sed '1d;$d')
 if [ -n "$CONFIG_CONTENT" ]; then
-    sed -i "/^DEV_CONF = {}$/c\\
+    sed -i "/^DEV_CONF = {}/c\\
 DEV_CONF = {\\
 $CONFIG_CONTENT\\
 }" $RPM_BUILD_ROOT/opt/subsys-restart-app/subsys-restart-funcs.py
-    echo "Updated DEV_CONF in installed file with configuration from %{device}/config.json"
+    echo "Updated DEV_CONF in installed file with configuration from %{board}/config.json"
 else
-    echo "Warning: No configuration found in %{device}/config.json"
+    echo "Warning: No configuration found in %{board}/config.json"
 fi
 
 # Install service setup scripts

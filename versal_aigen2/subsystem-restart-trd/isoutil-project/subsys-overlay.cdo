@@ -270,6 +270,17 @@ marker 0x65 "PMC_EM"
 # 
 marker 0x64 "PMC_EM/software"
 # Software Errors: --START--
+begin
+  begin
+    # Skip HW configuration during PLM update
+    # PMC_GLOBAL.PPU1_ROM_INT_REASON.PLM_UPDT_REQ[3] @ 0xf1121508
+    mask_poll 0xf1121508 0x8 0 0x1 0x1000003
+    #   if HB_MON_0 then srst (2)
+    em_set_action 0x2811c000 0x2 0x1
+    break 0x2
+  end
+  log_string "INFO: Skipped Software Errors execution during in-place PLM update"
+end
 # Software Errors: --END--
 marker 0x65 "PMC_EM/software"
 # Not writing protection due to spec flag: enable_protection=false
@@ -283,9 +294,6 @@ begin
     #   Add nodeid for HB_MON0, used in subsystem apu_subsys_linux
     #     PM_POWER_PMC = 0x4208001
     pm_add_node 0x18250000 0x4208001 0 0 0
-    #   Add nodeid for HB_MON1, used in subsystem apu_subsys_linux
-    #     PM_POWER_PMC = 0x4208001
-    pm_add_node 0x18250001 0x4208001 0 0 0
     # 
     #  -- Add All Subsystems --
     #     add subsystem apu_subsys_linux id 0x1c000006
@@ -433,17 +441,8 @@ begin
     #     requested[6] = 0x1
     #     aperture = 0x0
     #     full_access[0] = 0x1
-    #     timeout = 0xea60
-    pm_add_requirement 0x1c000006 0x18250000 0x40 0 0x1 0xea60
-    # Set the error action (SRST) for HB_MON0 in case of subsystem not healthy
-    # Second Argument = error action; POR=0x1; SRST=0x2; ERR_OUT=0x4;
-    em_set_action 0x28110000 0x2 0x1
-    #   Add virtual node HB_MON1 type healthy_boot_monitor to subsystem apu_subsys_linux
-    #     requested[6] = 0x1
-    #     aperture = 0x0
-    #     full_access[0] = 0x1
     #     timeout = 0x1d4c0
-    pm_add_requirement 0x1c000006 0x18250001 0x40 0 0x1 0x1d4c0
+    pm_add_requirement 0x1c000006 0x18250000 0x40 0 0x1 0x1d4c0
     #   Add device IPI0 to subsystem apu_subsys_linux, aperture 51 in LPD_XPPU
     #     allow_secure[2] = 0x1 due to secure = 0
     #     non_shared[0] = 0x2

@@ -20,11 +20,7 @@ srd = importlib.import_module("subsys-restart-funcs")
 ApuTrdActions = {
         0x0 : ["echo subsystem > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
         0x1 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
-}
-
-ApuTrdActions2 = {
-        0x0 : ["Subsystem Restart", "Reboot"],
-        0x1 : ["System Restart", "Reboot"],
+        0x2 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"]
 }
 
 def app():

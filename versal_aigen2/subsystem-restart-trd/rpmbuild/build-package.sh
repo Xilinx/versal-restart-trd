@@ -49,7 +49,8 @@ done
 PACKAGE_NAME="subsys-restart-app"
 PACKAGE_VERSION="2025.2"
 PACKAGE_RELEASE="1"
-SOURCE_DIR="BUILD/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+# SOURCE_DIR="BUILD/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+SOURCE_DIR="BUILD/"
 TARBALL="SOURCES/${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz"
 SPEC_FILE="SPECS/${PACKAGE_NAME}.spec"
 
@@ -86,21 +87,21 @@ if [ ! -f "$SPEC_FILE" ]; then
     exit 1
 fi
 
-# Create necessary directories
-mkdir -p SOURCES BUILDROOT RPMS SRPMS
-
-# Clean previous builds
+# Clean previous builds directories
 echo -e "${YELLOW}Cleaning previous builds...${RESET}"
-rm -f SOURCES/*.tar.gz
-rm -f RPMS/noarch/*.rpm
-rm -f SRPMS/*.src.rpm
+rm -rf SOURCES
+rm -rf RPMS
+rm -rf SRPMS
+
+# Create necessary directories
+mkdir -p SOURCES RPMS/noarch SRPMS
 
 # Create source tarball
 echo -e "${CYAN}Creating source tarball...${RESET}"
 if [ "$VERBOSE" = true ]; then
-    tar -czf "$TARBALL" -C BUILD "${PACKAGE_NAME}-${PACKAGE_VERSION}"
+    tar -czf "$TARBALL" --transform "s,^,${PACKAGE_NAME}-${PACKAGE_VERSION}/," -C BUILD .
 else
-    tar -czf "$TARBALL" -C BUILD "${PACKAGE_NAME}-${PACKAGE_VERSION}" >/dev/null 2>&1
+    tar -czf "$TARBALL" --transform "s,^,${PACKAGE_NAME}-${PACKAGE_VERSION}/," -C BUILD . >/dev/null 2>&1
 fi
 
 # Verify tarball was created
@@ -128,6 +129,12 @@ else
         echo -e "${RED}Error: RPM build failed!${RESET}"
         exit 1
     fi
+fi
+
+# Cleanup artifacts
+if [ "$CACHE" = false ]; then
+    echo -e "${YELLOW}Deleting locally copied artifacts...${RESET}"
+    rm -rf BUILD/*.py "BUILD/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 fi
 
 # Check if build was successful

@@ -62,20 +62,19 @@ def app():
                         util.logPrint(f"APU> {srd.TssrTrdChoices[selectedChoice]['op-name']} - {srd.TssrTrdChoices[selectedChoice]['op-desc']}")
                         util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x1ULL!")
                         slave = "APU"
+                        time.sleep(5)
                         util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
                 elif "2" == selectedChoice:
                         util.logPrint(f"APU> {srd.TssrTrdChoices[selectedChoice]['op-name']} - {srd.TssrTrdChoices[selectedChoice]['op-desc']}")
                         util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x1001ULL!")
                         slave = "APU"
+                        time.sleep(5)
                         util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
-                # elif "5" == selectedChoice:
-                #         util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["RPU"]["action"]:#x} with value 0x0000ULL!")
-                #         slave = "RPU"
-                #         util.set_ddr_addr_value(srd.TssrDDRRegions["RPU"]["action"], srd.DDR_ADDR_32BITMASK, 0x0 | (coreId << 4) | (actionId << 12), 'w')
-                # elif "6" == selectedChoice:
-                #         util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["RPU"]["action"]:#x} with value 0x1000ULL!")
-                #         slave = "RPU"
-                #         util.set_ddr_addr_value(srd.TssrDDRRegions["RPU"]["action"], srd.DDR_ADDR_32BITMASK, 0x0 | (coreId << 4) | (actionId << 12), 'w')
+                elif "3" == selectedChoice:
+                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x0000ULL!")
+                        slave = "APU"
+                        time.sleep(5)
+                        util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
 
                 # wait for slave to accept and generate response
                 time.sleep(10)

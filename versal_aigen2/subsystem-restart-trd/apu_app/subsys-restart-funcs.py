@@ -75,8 +75,8 @@ TssrTrdCores = {
 TssrTrdActions = {
         "ACTION_SUBSYSTEM_RESTART"      : 0x0,
         "ACTION_SYSTEM_RESTART"         : 0x1,
-        "ACTION_WATCHDOG_RECOVERY"      : 0x2,
-        "ACTION_HEALTHY_BOOT_TEST"      : 0x3,
+        "ACTION_HEALTHY_BOOT_TEST"      : 0x2,
+        "ACTION_WATCHDOG_RECOVERY"      : 0x3,
         "ACTION_IMAGE_STORE_BOOT"       : 0x4
 }
 '''
@@ -101,18 +101,12 @@ TssrTrdChoices = {
                 "op-desc"     : "APU performs a system restart. APU talks to PLM to perform system shutdown scope",
                 "action"      : TssrTrdActions["ACTION_SYSTEM_RESTART"]
         },
-        # "5" : {
-        #         "core-id"     : TssrTrdCores["2.0"],
-        #         "op-name"     : "RPU Subsystem Restart",
-        #         "op-desc"     : "RPU performs a self-subsystem restart. RPU talks to PLM to perform subsystem shutdown scope",
-        #         "action"      : TssrTrdActions["ACTION_SUBSYSTEM_RESTART"]
-        # },
-        # "6" : {
-        #         "core-id"     : TssrTrdCores["2.0"],
-        #         "op-name"     : "RPU System Restart",
-        #         "op-desc"     : "RPU performs a system restart. RPU talks to PLM to perform system shutdown scope",
-        #         "action"      : TssrTrdActions["ACTION_SYSTEM_RESTART"]
-        # },
+        "3" : {
+                "core-id"     : TssrTrdCores["0.0"],
+                "op-name"     : "APU Healthy Boot Recovery",
+                "op-desc"     : "APU fails to boot, triggering PLM to perform system wide restart as part of Healthy Boot Recovery",
+                "action"      : TssrTrdActions["ACTION_HEALTHY_BOOT_TEST"]
+        },
         "0" : {
                 "core-id"     : "NaN",
                 "op-name"     : "Exit",
