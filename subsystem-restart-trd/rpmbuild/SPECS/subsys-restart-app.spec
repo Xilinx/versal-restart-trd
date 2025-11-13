@@ -1,7 +1,7 @@
 Name:           subsys-restart-app
 Version:        2025.2
 Release:        1%{?dist}
-Summary:        APU app for Telluride Subsystem Restart TRD
+Summary:        APU app for Subsystem Restart TRD
 
 License:        Proprietary
 Source0:        %{name}-%{version}.tar.gz
@@ -10,7 +10,7 @@ BuildArch:      noarch
 Requires:       /usr/bin/python3
 
 %description
-Subsystem Restart Application containing Python scripts for telluride restart functionality on the APU side.
+Subsystem Restart Application containing Python scripts for versal restart functionality on the APU side.
 This package installs subsys-restart-app.py, subsys-restart-cmd.py, subsys-restart-funcs.py, and utility.py.
 
 %prep

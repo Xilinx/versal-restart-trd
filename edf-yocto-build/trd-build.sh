@@ -177,7 +177,7 @@ _sanity_check() {
                 echo -e "[Error] ${RED}Overlay CDO file not found: $OVERLAY_CDO${RESET}"
                 exit 1
         elif [ -z "$OVERLAY_CDO" ]; then
-                OVERLAY_CDO=$(_get_absolute_path "../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/isoutil-project/subsys-overlay.cdo")
+                OVERLAY_CDO=$(_get_absolute_path "../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/ace-project/subsys-overlay.cdo")
                 if [ -f "$OVERLAY_CDO" ]; then
                         echo -e "[Info] ${CYAN}Using Overlay CDO: $OVERLAY_CDO${RESET}"
                 else
@@ -350,7 +350,7 @@ _copy_edf_build_artifacts() {
 
 main() {
         # load support board information
-        _load_board_info "../boards-info.yaml"
+        _load_board_info $BASE_DIR/"../boards-info.yaml"
 
         # command-line argument parser
         while [[ $# -gt 0 ]]; do
@@ -434,6 +434,9 @@ main() {
                 _show_help
                 exit 1
         fi
+
+        # Navigate to current script directory
+        cd "$BASE_DIR"
 
         _sanity_check
 
