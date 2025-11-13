@@ -34,15 +34,15 @@ install -m 755 subsys-restart-funcs.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 install -m 755 utility.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 
 # Extract configuration from config.json and update DEV_CONF in the installed subsys-restart-funcs.py
-CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' ../../../../%{board}/config.json | sed '1d;$d')
+CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' ../../../../%{platform}/%{board}/config.json | sed '1d;$d')
 if [ -n "$CONFIG_CONTENT" ]; then
     sed -i "/^DEV_CONF = {}/c\\
 DEV_CONF = {\\
 $CONFIG_CONTENT\\
 }" $RPM_BUILD_ROOT/opt/subsys-restart-app/subsys-restart-funcs.py
-    echo "Updated DEV_CONF in installed file with configuration from %{board}/config.json"
+    echo "Updated DEV_CONF in installed file with configuration from ../../../../%{platform}/%{board}/config.json"
 else
-    echo "Warning: No configuration found in %{board}/config.json"
+    echo "Warning: No configuration found in ../../../../%{platform}/%{board}/config.json"
 fi
 
 # Install service setup scripts
@@ -128,13 +128,3 @@ if [ $1 -eq 0 ]; then
     echo "Subsystem Restart Application, services, and auto-login configuration have been completely removed"
     echo "System will return to default login behavior after reboot"
 fi
-
-%changelog
-* Wed Oct 22 2025 Kush Jain <kushj@amd.com> - 2025.2-1
-- Renamed all the artifacts from tssr-app to subsys-restart-app
-- Enhanced the auto service start script to handle versal2 and sysctl devices
-* Tue Oct 08 2025 Kush Jain <kushj@amd.com> - 2025.2-1
-- Updated to version 2025.2
-- Fixed Python dependency to use /usr/bin/python3
-- Added auto-login and auto-start service scripts
-- Enhanced post-installation automation
