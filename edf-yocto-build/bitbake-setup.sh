@@ -18,7 +18,10 @@ RESET='\033[0m'
 
 RELEASE="2025.2"
 BASE_DIR=$(pwd)
+
 SDTGEN_OUT_DIR="$1"
+BOARD="$2"
+PLATFORM="$3"
 
 REPO_BIN=""
 EDF_YOCTO_DIR="$BASE_DIR/yocto/edf"
@@ -94,7 +97,7 @@ if [ $ret -ne 0 ]; then
 	exit 1
 fi
 timestamp=$(date +"%Y%m%d%H%M%S")
-branchname="vek385-$timestamp"
+branchname="$BOARD-$timestamp"
 output="$("$REPO_BIN" start "$branchname" --all)"
 __debug_dump "EDF Yocto setup" "$output"
 ret=$?
@@ -105,7 +108,7 @@ fi
 
 # Launch EDF Yocto build
 cd "$BASE_DIR"
-./bitbake-build.sh "$EDF_YOCTO_DIR" "$SDTGEN_OUT_DIR"
+./bitbake-build.sh "$EDF_YOCTO_DIR" "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM"
 if [ $? -ne 0 ]; then
 	echo -e "[Error] ${RED}EDF Yocto build failed.${RESET}"
 	exit 1

@@ -24,18 +24,18 @@ BASE_DIR=$(pwd)
 SDTGEN_OUT_DIR=""
 XSA_FILE=""
 
-OVERLAY_CDO=$BASE_DIR/../subsystem-restart-trd/isoutil-project/subsys-overlay.cdo
-OUT_DIR=""
-
 ARCH="versal2"
 BOARD="vek385"
 REV="revb"
 PLATFORM="versal-2ve-2vm"
 
 BOARD_DTS="${ARCH}-${BOARD}-${REV}"
+OVERLAY_CDO=""
 OUT_DIR=""
 SKIP_BOOTBIN=false
 DEBUG=false
+
+declare -A boardMap
 
 export SKIP_BOOTBIN
 export DEBUG
@@ -51,20 +51,83 @@ _show_help() {
         echo "  -xsa <XSA>          Specify hardware design file"
         echo ""
         echo "Optional:"
-        echo "  -cdo <CDO>          Specify overlay CDO file (default: $OVERLAY_CDO)"
-        echo "  -dir <DIR>          Specify output directory (default: "$PLATFORM-"$BOARD"_$VERSION")"
+        echo "  -brd <BRD>          Specify board name (default: $BOARD)"
+        echo "  -cdo <CDO>          Specify overlay CDO file"
+        echo "  -dir <DIR>          Specify output directory (default: "$(echo "$PLATFORM" | sed 's/_/-/g')-"$BOARD"_$VERSION")"
         echo "  --no-bootbin        Skip EDF bootbin generation (default: $SKIP_BOOTBIN)"
         echo "  --debug             Enable debug output (default: $DEBUG)"
+        echo "  --list-boards       List all supported boards"
         echo "  --help              Display this help message and exit"
         echo ""
         echo "Examples:"
         echo "  $0 -sdt /path/to/sdtgen-output"
         echo "  $0 -xsa design.xsa"
         echo "  $0 -sdt /path/to/sdtgen-output -cdo custom.cdo --no-bootbin"
-        echo "  $0 -sdt /path/to/sdtgen-output -dir /path/to/output"
+        echo "  $0 -sdt /path/to/sdtgen-output -brd vek385 -dir /path/to/output"
         echo ""
         echo -e "Developer: Kush Jain <kush.jain@amd.com>\nSSW Platform Management Team"
         exit 0
+}
+
+_get_absolute_path(){
+        readlink -f "$1"
+}
+
+_load_board_info() {
+	local yaml_file="$1"
+	
+	if [ ! -f "$yaml_file" ]; then
+		echo -e "[Error] ${RED}Board configuration file not found: $yaml_file${RESET}"
+		exit 1
+	fi
+	
+	# Format: platform:board or platform:board:property
+	while IFS='|' read -r key value; do
+		boardMap["$key"]="$value"
+	done < <(awk '
+		BEGIN { platform = ""; board = "" }
+		
+		# Skip empty lines and comments
+		/^[[:space:]]*$/ || /^[[:space:]]*#/ { next }
+		
+		{
+			# Calculate indent level (0, 2, 4+ spaces)
+			indent = match($0, /[^[:space:]]/) - 1
+			gsub(/^[[:space:]]+|[[:space:]]+$/, "")  # Trim whitespace
+			
+			# Extract key and value
+			if (match($0, /^([^:]+):[[:space:]]*(.*)[[:space:]]*$/, arr)) {
+				key = arr[1]
+				value = arr[2]
+				
+				if (indent == 0) {
+					# Platform level
+					platform = key
+					board = ""
+				} else if (indent < 4 && platform != "") {
+					# Board level (indent 2)
+					board = key
+					print platform ":" board "|"
+				} else if (indent >= 4 && platform != "" && board != "") {
+					# Property level (indent 4+)
+					print platform ":" board ":" key "|" value
+				}
+			}
+		}
+	' "$yaml_file")
+
+}
+
+_list_supported_boards() {
+        echo -e "${CYAN}Supported boards:${RESET}"
+        for key in "${!boardMap[@]}"; do
+                # Only list board entries (platform:board), skip property entries (platform:board:property)
+                local colon_count=$(echo "$key" | tr -cd ':' | wc -c)
+                if [ $colon_count -eq 1 ]; then
+                        IFS=':' read -r platform board <<< "$key"
+                        echo -e "-> Board: ${YELLOW}$board${RESET}, Platform: ${YELLOW}$platform${RESET}"
+                fi
+        done
 }
 
 _sanity_check() {
@@ -90,25 +153,52 @@ _sanity_check() {
                 exit 1
         fi
 
-        # check if overlay cdo exists or not
-        if [ ! -f "$OVERLAY_CDO" ]; then
-                echo -e "[Error] ${RED}Overlay CDO file not found: $OVERLAY_CDO${RESET}"
+        # check if given $BOARD is supported or not
+        local found_board=false
+        for key in "${!boardMap[@]}"; do
+                IFS=':' read -r platform board <<< "$key"
+                if [[ "$board" == "$BOARD" ]]; then
+                        found_board=true
+                        PLATFORM="$platform"
+                        if $DEBUG; then
+                                echo -e "[Debug] ${PURPLE}Board: $board Platform: $platform${RESET}"
+                        fi
+                        break
+                fi
+        done
+        if ! $found_board; then
+                echo -e "[Error] ${RED}Unsupported board: $BOARD${RESET}"
+                echo -e "[Info] ${RESET}Use '--list-boards' to see available options.${RESET}"
                 exit 1
         fi
+
+        # check if overlay cdo is provided and it exists
+        if [ -n "$OVERLAY_CDO" ] && [ ! -f "$OVERLAY_CDO" ]; then
+                echo -e "[Error] ${RED}Overlay CDO file not found: $OVERLAY_CDO${RESET}"
+                exit 1
+        elif [ -z "$OVERLAY_CDO" ]; then
+                OVERLAY_CDO=$(_get_absolute_path "../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/isoutil-project/subsys-overlay.cdo")
+                if [ -f "$OVERLAY_CDO" ]; then
+                        echo -e "[Info] ${CYAN}Using Overlay CDO: $OVERLAY_CDO${RESET}"
+                else
+                        OVERLAY_CDO=""
+                fi
+        fi
+
 }
 
 __display_build_config() {
         echo "========================================================"
         echo -e "${CYAN}Build Configuration:${RESET}"
         echo -e "  Architecture: ${GREEN}$ARCH${RESET}"
-        echo -e "  Platform: ${GREEN}$PLATFORM${RESET}"
+        echo -e "  Platform: ${GREEN}$(echo "$PLATFORM" | sed 's/-/_/g')${RESET}"
         echo -e "  Board: ${GREEN}$BOARD${RESET}"
         echo -e "  Revision: ${GREEN}$REV${RESET}"
         echo -e "  Version: ${GREEN}$VERSION${RESET}"
         if [ -n "$OUT_DIR" ]; then
         echo -e "  SDTGEN Output Dir: ${GREEN}$OUT_DIR${RESET}"
         else
-        echo -e "  SDTGEN Output Dir: ${GREEN}"$PLATFORM-"$BOARD"-"$REV"_$VERSION"${RESET}"
+        echo -e "  SDTGEN Output Dir: ${GREEN}"$(echo "$PLATFORM" | sed 's/_/-/g')-"$BOARD"-"$REV"_$VERSION"${RESET}"
         fi
         if [ -n "$XSA_FILE" ]; then
         echo -e "  XSA File: ${GREEN}$XSA_FILE${RESET}"
@@ -119,15 +209,10 @@ __display_build_config() {
         echo ''
 }
 
-_get_absolute_path(){
-        relativePath="$1"
-        echo "$(cd "$(dirname "$relativePath")"; pwd)/$(basename "$relativePath")"
-}
-
 __build_edf_yocto() {
         # initiate EDF Yocto setup and build
         cd "$BASE_DIR"
-        ./bitbake-setup.sh "$SDTGEN_OUT_DIR"
+        ./bitbake-setup.sh "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM"
         if [ $? -ne 0 ]; then
         	echo -e "[Error] ${RED}EDF Yocto setup failed.${RESET}"
         	exit 1
@@ -159,7 +244,7 @@ __apply_overlaycdo_to_sdtgen_out() {
         if [ -n "$OUT_DIR" ]; then
                 workspace="$OUT_DIR"
         else
-                workspace="$PLATFORM-"$BOARD"-"$REV"_$VERSION"
+                workspace="$(echo "$PLATFORM" | sed 's/_/-/g')-"$BOARD"-"$REV"_$VERSION"
         fi
         if [ -d "$workspace" ]; then
                 echo -e "[Warn] ${YELLOW}Workspace directory already exists, removing it...${RESET}"
@@ -175,6 +260,12 @@ __apply_overlaycdo_to_sdtgen_out() {
         fi
 
         workspace=$(_get_absolute_path "$workspace")
+
+        if [ -z "$OVERLAY_CDO" ]; then
+                echo -e "[Debug] ${PURPLE}No Overlay CDO provided, skipping bootgen...${RESET}"
+                SDTGEN_OUT_DIR=$workspace
+                return
+        fi
 
         # find and navigate to the directory with .bif file(s) inside the workspace
         BIF_DIR=$(find "$workspace" -type f -name "*.bif" -exec dirname {} \; | sort -u | head -1)
@@ -258,6 +349,9 @@ _copy_edf_build_artifacts() {
 }
 
 main() {
+        # load support board information
+        _load_board_info "../boards-info.yaml"
+
         # command-line argument parser
         while [[ $# -gt 0 ]]; do
                 case $1 in
@@ -281,6 +375,19 @@ main() {
                                         echo -e "[Error] ${RED}Option -xsa requires a file argument${RESET}"
                                         exit 1
                                 fi
+                                ;;
+                        -brd)
+                                if [[ -n "$2" && "$2" != -* ]]; then
+                                        BOARD="$2"
+                                        shift 2
+                                else
+                                        echo -e "[Error] ${RED}Option -brd requires a board argument${RESET}"
+                                        exit 1
+                                fi
+                                ;;
+                        --list-boards)
+                                _list_supported_boards
+                                exit 0
                                 ;;
                         -cdo)
                                 if [[ -n "$2" && "$2" != -* ]]; then

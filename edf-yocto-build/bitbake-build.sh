@@ -17,10 +17,13 @@ PURPLE='\033[0;95m'
 RESET='\033[0m'
 
 BASE_DIR=$(pwd)
+
 EDF_YOCTO_DIR="$1"
 SDTGEN_OUT_DIR="$2"
+BOARD="$3"
+PLATFORM="$4"
 
-EDF_YOCTO_MACHINE="vek385-subsystem-restart-trd"
+EDF_YOCTO_MACHINE="$BOARD-subsystem-restart-trd"
 EDF_YOCTO_LAYER="meta-subsystem-restart-bsp"
 
 __debug_dump() {
@@ -91,9 +94,9 @@ _edf_yocto_trd_setup() {
                 exit 1
         fi
 
-        # use gen-machine-conf to generate custom machine conf by inheriting default vek385 machine
+        # use gen-machine-conf to generate custom machine conf by inheriting default $BOARD machine
         echo -e "[Info] ${CYAN}Generating custom machine configuration for Subsystem Restart TRD...${RESET}"
-        if ! gen-machineconf parse-sdt --hw-description ${SDTGEN_OUT_DIR} --template ../sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machineyaml/versal-2ve-2vm-vek385-sdt-seg.yaml --machine-name ${EDF_YOCTO_MACHINE} -c ../sources/${EDF_YOCTO_LAYER}/conf; then
+        if ! gen-machineconf parse-sdt --hw-description ${SDTGEN_OUT_DIR} --template ../sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machineyaml/$(echo "$PLATFORM" | sed 's/_/-/g')-$BOARD-sdt-seg.yaml --machine-name ${EDF_YOCTO_MACHINE} -c ../sources/${EDF_YOCTO_LAYER}/conf; then
                 echo -e "[Error] ${RED}Failed to generate custom machine configuration${RESET}"
                 exit 1
         fi
@@ -101,7 +104,7 @@ _edf_yocto_trd_setup() {
         # copy recipe bsp files for pdi customization ( only for Subsystem Restart TRD )
         echo -e "[Info] ${CYAN}Copying recipe bsp files for Subsystem Restart TRD...${RESET}"
         mkdir -p ../sources/${EDF_YOCTO_LAYER}/recipes-bsp/bootbin
-        cp -r $BASE_DIR/recipes-bsp/bootbin/* ../sources/${EDF_YOCTO_LAYER}/recipes-bsp/bootbin/
+        cp -r $BASE_DIR/../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/recipes-* ../sources/${EDF_YOCTO_LAYER}/
 }
 
 _edf_yocto_build() {
@@ -125,6 +128,12 @@ main() {
 
         EDF_YOCTO_MACHINE_UNDERSCORE=${EDF_YOCTO_MACHINE//-/_}
         BOOT_bin=$(find "${EDF_YOCTO_DIR}/build/tmp/work/${EDF_YOCTO_MACHINE_UNDERSCORE}-amd-linux/xilinx-bootbin/" -path "*/image/*.bin")
+        __debug_dump "Searching BOOT PDI..." "$BOOT_bin"
+        ret=$?
+        if [ $ret -ne 0 ]; then
+                echo -e "[Error] ${RED}Failed to search BOOT PDI${RESET}"
+                exit 1
+        fi
         if [ -f "$BOOT_bin" ]; then
                 echo -e "[Image]${CYAN} BOOT PDI -> "$(cd "$(dirname "$BOOT_bin")"; pwd)/$(basename "$BOOT_bin")" ${RESET}"
         fi
