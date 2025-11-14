@@ -1,5 +1,10 @@
 # Subsystem Restart TRD
 
+> **[ IMPORTANT ]** <br>
+> Versal VCK190 and Versal VMK180 boards are not supported for 2025.2 release with the new EDF Yocto flow. <br>
+> Both VCK190 and VMK180 still work on the older Petalinux flow and are available under `versal/` directory. <br>
+> Users can also checkout the older tag/commit at **amd/xilinx-v2024.1.1** to build VCK190 and VMK180. <br>
+
 ## Table of Contents:
 [![Introduction](https://img.shields.io/badge/-1._Introduction-teal)](#introduction)<br>
 [![Subsystem Restart TRD](https://img.shields.io/badge/-2_Subsystem_Restart_TRD-purple)](#subsystem-restart-trd)<br>
@@ -135,16 +140,4 @@ edf-yocto-build-artifacts/
 
 <br>
 
-## Changelog
-### 2025.2
-> Please checkout the release tag: **amd/xilinx-v2025.2**
-- Initial release of Subsystem Restart TRD for Versal AI Edge Gen2 (vek385)
-- Support for APU Subsystem/System Restarts
-- Support for System Controller Application
-- EDF Yocto Baseline Support
-
-### 2024.1
-> Please checkout the release tag: **amd/xilinx-v2024.1.1**
-- Support for Versal AI Core Series (vck190)
-- Support for Versal Prime Series (vmk180)
-- Petalinux based build
+> For Detailed Changelog/Revisions, please refer: [CHANGELOG.md](./CHANGELOG.md)
