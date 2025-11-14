@@ -97,7 +97,7 @@ def sanity_check():
         # check whether application launched under root user
         if not os.getuid() == 0:
                 logDebug("Application must run as a root user!")
-                return
+                return False
 
         if DEV_HOST == "versal2":
                 # check whether required linux packages are installed and available in environment
@@ -128,7 +128,7 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
 
         if not os.getuid() == 0:
                 logDebug("DDR Memory Writes require Root Privileges!")
-                return
+                return False
 
         currValue, _ = get_ddr_addr_value(addr)  # Read the current value before writing
         currValue = currValue & ~mask       # Apply mask to clear bits to write 
@@ -159,7 +159,7 @@ def get_ddr_addr_value(addr, length='l'):
 
         if not os.getuid() == 0:
                 logDebug("DDR Memory Reads require Root Privileges!")
-                return
+                return False
 
         addrMap = 0x0
         value = 0xFFFFFFFF

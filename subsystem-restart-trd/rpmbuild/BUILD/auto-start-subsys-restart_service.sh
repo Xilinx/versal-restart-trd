@@ -21,7 +21,7 @@ fi
 
 echo -e "${GREEN}Subsystem Restart Application found at /opt/subsys-restart-app/${RESET}"
 
-# if 'sc_app' is present then skip everything and exist as success
+# if 'sc_app' is present then skip everything and exit as success
 if [ -x "$(which sc_app)" ]; then
     echo -e "${YELLOW}Package installation on System Controller${RESET}"
     echo -e "${CYAN}Nothing further needed, please also install the .rpm package on Versal2${RESET}"

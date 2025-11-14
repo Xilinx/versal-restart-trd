@@ -6,7 +6,7 @@
 ###############################################################################
 
 #
-# Python application running on APU (linux) to exercise Telluride Subsystem Restart TRD
+# Python application running on APU (linux) to exercise Versal Subsystem Restart TRD
 #
 
 import os
@@ -119,7 +119,7 @@ if __name__ == "__main__":
                 util.logInfo("Package running on System Controller")
 
         if (False == util.sanity_check()):
-                util.logErr(f"Sanity check failed for power-states application running on {util.DEV_HOST}")
+                util.logErr(f"Sanity check failed for subsystem restart application running on {util.DEV_HOST}")
                 sys.exit(1)
 
         app()

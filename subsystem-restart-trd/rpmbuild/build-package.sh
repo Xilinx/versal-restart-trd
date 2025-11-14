@@ -91,7 +91,7 @@ _sanity_check() {
             if [[ "$board" == "$BOARD" ]]; then
                     found_board=true
                     PLATFORM="$platform"
-                    if $DEBUG; then
+                    if $VERBOSE; then
                             echo -e "[Debug] ${PURPLE}Board: $board Platform: $platform${RESET}"
                     fi
                     break
@@ -151,7 +151,7 @@ _build_rpm_package() {
     # Build RPM package
     echo -e "${CYAN}Building RPM package...${RESET}"
     if [ "$VERBOSE" = true ]; then
-        # check if build is not succeeds
+        # check if build succeeds
         if rpmbuild --define "board $BOARD" --define "platform $PLATFORM" --define "_topdir $(pwd)" -ba "$SPEC_FILE"; then
             :
         else
@@ -186,7 +186,7 @@ _build_rpm_package() {
 }
 
 main() {
-    _load_board_info "../../boards-info.yaml"
+    _load_board_info $(dirname "${BASH_SOURCE[0]}")/"../../supported-boards.yaml"
 
     # Parse command line arguments
     while [[ $# -gt 0 ]]; do

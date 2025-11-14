@@ -17,6 +17,8 @@ import importlib
 
 srd = importlib.import_module("subsys-restart-funcs")
 
+ACK_READ_TIMEOUT = 15
+
 ApuTrdActions = {
         0x0 : ["echo subsystem > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
         0x1 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
@@ -37,7 +39,7 @@ def app():
                 if ((isAlive & 0x1) == 0x0) and (isSlave & 0x1):
                         # send another acknowledgement indicating previous action is completed and that slave is now alive
                         util.set_ddr_addr_value(srd.TssrDDRRegions['APU']['status'], srd.DDR_ADDR_32BITMASK, (0x1) | (0x0 << 4) | (srd.SLAVE_ACK_DONE << 8) | (0x1 << 28) | (0x1 << 30), 'w')
-                        time.sleep(15)   # wait for the ack to be received and read
+                        time.sleep(ACK_READ_TIMEOUT)   # wait for the ack to be received and read
 
         # reset action & status registers on initial run
         util.set_ddr_addr_value(srd.TssrDDRRegions['APU']['action'], srd.DDR_ADDR_32BITMASK, srd.DDR_ADDR_32BITMASK, 'w')
@@ -64,7 +66,7 @@ def app():
 
 if __name__ == "__main__":
         if (False == util.sanity_check()):
-                util.logErr(f"Sanity check failed for power-states application running on {util.DEV_HOST}")
+                util.logErr(f"Sanity check failed for subsystem restart application running on {util.DEV_HOST}")
                 sys.exit(1)
 
         app()

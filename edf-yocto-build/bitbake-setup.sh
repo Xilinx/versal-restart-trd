@@ -25,6 +25,8 @@ PLATFORM="$3"
 
 REPO_BIN=""
 EDF_YOCTO_DIR="$BASE_DIR/yocto/edf"
+YOCTO_GIT_REPO="https://github.com/Xilinx/yocto-manifests.git"
+REPO_TOOL_URL="https://storage.googleapis.com/git-repo-downloads/repo"
 
 __debug_dump() {
         message="$1"
@@ -36,7 +38,7 @@ __debug_dump() {
 }
 
 # Download Repo Tools
-curl -fSL https://storage.googleapis.com/git-repo-downloads/repo -o repo
+curl -fSL $REPO_TOOL_URL -o repo
 if [ $? -ne 0 ]; then
 	echo -e "[Error] ${RED}Failed to download repo tool.${RESET}"
 	exit 1
@@ -80,7 +82,7 @@ if [ ! -x $REPO_BIN ]; then
 	echo -e "[Error] ${RED}repo tool not found or not executable.${RESET}"
 	exit 1
 fi
-output="$("$REPO_BIN" init -u https://github.com/Xilinx/yocto-manifests.git -b rel-v$RELEASE -m default-edf.xml)"
+output="$("$REPO_BIN" init -u $YOCTO_GIT_REPO -b rel-v$RELEASE -m default-edf.xml)"
 __debug_dump "EDF Yocto Initialization" "$output"
 ret=$?
 if [ $ret -ne 0 ]; then

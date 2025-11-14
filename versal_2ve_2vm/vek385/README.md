@@ -68,9 +68,7 @@ Following tables describe examples of some peripheral/device permission for APU 
 | Device | Requested (Pre-allocated) | Access Permission |
 |--------|---------------------------|-------------------|
 | Swdt_fpd | Yes | Concurrent-Shared |
-| DDR_0 | No | Time-shared |
 | HB_MON_0 | Yes | Non-shared |
-| HB_MON_1 | Yes | Non-shared |
 <br>
 
 **Peripheral Devices**
@@ -90,6 +88,7 @@ Following tables describe examples of some peripheral/device permission for APU 
 | GEM_1 | Yes | Concurrent-Shared |
 | USB_0 | Yes | Concurrent-Shared |
 | USB_1 | Yes | Concurrent-Shared |
+| DMA[0-7] | Yes | Concurrent-Shared |
 <br>
 
 **ACE GUI Overview**
@@ -115,6 +114,7 @@ cd edf-yocto-build
 
 - Build rpm package
 ```bash
+cd subsystem-restart-trd/rpmbuild
 ./build-package.sh --board vek385
 ```
 

@@ -65,7 +65,6 @@ _show_help() {
         echo "  $0 -sdt /path/to/sdtgen-output -cdo custom.cdo --no-bootbin"
         echo "  $0 -sdt /path/to/sdtgen-output -brd vek385 -dir /path/to/output"
         echo ""
-        echo -e "Developer: Kush Jain <kush.jain@amd.com>\nSSW Platform Management Team"
         exit 0
 }
 
@@ -131,7 +130,7 @@ _list_supported_boards() {
 }
 
 _sanity_check() {
-        # check whether Vitis or Vivado are present in the enviorment
+        # check whether Vitis or Vivado are present in the environment
         VITIS_BIN=$(which vitis)
         VIVADO_BIN=$(which vivado)
         if [ -z "$VITIS_BIN" ] && [ -z "$VIVADO_BIN" ]; then
@@ -196,9 +195,9 @@ __display_build_config() {
         echo -e "  Revision: ${GREEN}$REV${RESET}"
         echo -e "  Version: ${GREEN}$VERSION${RESET}"
         if [ -n "$OUT_DIR" ]; then
-        echo -e "  SDTGEN Output Dir: ${GREEN}$OUT_DIR${RESET}"
+        echo -e "  SDTGen Output Dir: ${GREEN}$OUT_DIR${RESET}"
         else
-        echo -e "  SDTGEN Output Dir: ${GREEN}"$(echo "$PLATFORM" | sed 's/_/-/g')-"$BOARD"-"$REV"_$VERSION"${RESET}"
+        echo -e "  SDTGen Output Dir: ${GREEN}"$(echo "$PLATFORM" | sed 's/_/-/g')-"$BOARD"-"$REV"_$VERSION"${RESET}"
         fi
         if [ -n "$XSA_FILE" ]; then
         echo -e "  XSA File: ${GREEN}$XSA_FILE${RESET}"
@@ -220,9 +219,9 @@ __build_edf_yocto() {
 }
 
 ___convert_xsa_to_sdtgen() {
-        # convert XSA to SDTGEN output directory
+        # convert XSA to SDTGen output directory
         local workspace=$1
-        echo -e "[Info] ${CYAN}Converting XSA to SDTGEN output directory${RESET}"
+        echo -e "[Info] ${CYAN}Converting XSA to SDTGen output directory${RESET}"
         echo -e "[Info] ${PURPLE}Running: sdtgen -xsa $XSA_FILE -board_dts $BOARD_DTS -dir $workspace${RESET}"
         
         # Run sdtgen in non-interactive mode: redirect stdin from /dev/null and output to stderr
@@ -268,13 +267,13 @@ __apply_overlaycdo_to_sdtgen_out() {
         fi
 
         # find and navigate to the directory with .bif file(s) inside the workspace
-        BIF_DIR=$(find "$workspace" -type f -name "*.bif" -exec dirname {} \; | sort -u | head -1)
-        if [ -z "$BIF_DIR" ]; then
+        BOOT_BIF=$(find "$workspace" -type f -name "*boot.bif" | head -1)
+        if [ -z "$BOOT_BIF" ]; then
                 echo -e "[Error] ${RED} No .bif files found${RESET}"
                 exit 1
-        else
-                echo -e "[Info] ${CYAN}Found .bif files in directory: $BIF_DIR${RESET}"
         fi
+        BIF_DIR=$(dirname "$BOOT_BIF")
+        echo -e "[Info] ${CYAN}Found .bif files in directory: $BIF_DIR${RESET}"
 
         # Create backup directory at workspace root and backup original PDI files
         mkdir -p "$workspace/.orig_boot_files"
@@ -305,7 +304,7 @@ __apply_overlaycdo_to_sdtgen_out() {
                         echo -e "${GREEN}Successfully replaced: $workspace/$BOOT_PDI_NAME${RESET}"
                 else
                         echo -e "[Warning] ${YELLOW}Original PDI not found at workspace root, copying new PDI${RESET}"
-                        cp "${BOOT_BIF%.bif}.pdi" "$BASE_DIR/$workspace/"
+                        cp "${BOOT_BIF%.bif}.pdi" "$workspace/"
                 fi
         else
                 echo -e "[Error] ${RED} generating new boot pdi with overlay cdo failed!${RESET}"
@@ -350,7 +349,7 @@ _copy_edf_build_artifacts() {
 
 main() {
         # load support board information
-        _load_board_info $BASE_DIR/"../boards-info.yaml"
+        _load_board_info $(dirname "${BASH_SOURCE[0]}")/"../supported-boards.yaml"
 
         # command-line argument parser
         while [[ $# -gt 0 ]]; do

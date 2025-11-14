@@ -7,7 +7,7 @@
 [![Changelog](https://img.shields.io/badge/-4._Changelog-grey)](#changelog)<br>
 
 ## Introduction
-A TRD, i.e Techincal Reference Design, is a very insightful way to demostrate what features and capabilities PLM Firmware has to offer. Each TRD developed aims to target specific set of features for our customers and their usability.<br>
+A TRD, i.e Technical Reference Design, is a very insightful way to demonstrate what features and capabilities PLM Firmware has to offer. Each TRD developed aims to target specific set of features for our customers and their usability.<br>
 Here are some key changes for 2025.2 and onward releases by PM Team:
 - All our TRDs will now be based on the new EDF Yocto Flow.
 - When it comes to pre-built images, users/customers can just download the published .wic image and build PDI using EDF flow as described later in the documents.
@@ -24,7 +24,7 @@ The Subsystem Restart TRD demonstrates the capability of PLM Firmware to restart
 ### Software Scripts
 ```
 .
-├── boards-info.yaml
+├── supported-boards.yaml
 ├── edf-yocto-build
 │   ├── trd-build.sh                                          # TRD build and install script
 │   ├── bitbake-setup.sh                                      # helper script to setup EDF Yocto environment
@@ -100,6 +100,7 @@ cd edf-yocto-build
 
 - Build rpm package
 ```bash
+cd subsystem-restart-trd/rpmbuild
 ./build-package.sh --board <provide-board-name>
 ```
 

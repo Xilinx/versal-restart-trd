@@ -25,6 +25,7 @@ PLATFORM="$4"
 
 EDF_YOCTO_MACHINE="$BOARD-subsystem-restart-trd"
 EDF_YOCTO_LAYER="meta-subsystem-restart-bsp"
+EDF_VEK385_DEFAULT_MACHINE_YAML="../sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machineyaml/$(echo "$PLATFORM" | sed 's/_/-/g')-$BOARD-sdt-seg.yaml"
 
 __debug_dump() {
         message="$1"
@@ -96,7 +97,7 @@ _edf_yocto_trd_setup() {
 
         # use gen-machine-conf to generate custom machine conf by inheriting default $BOARD machine
         echo -e "[Info] ${CYAN}Generating custom machine configuration for Subsystem Restart TRD...${RESET}"
-        if ! gen-machineconf parse-sdt --hw-description ${SDTGEN_OUT_DIR} --template ../sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machineyaml/$(echo "$PLATFORM" | sed 's/_/-/g')-$BOARD-sdt-seg.yaml --machine-name ${EDF_YOCTO_MACHINE} -c ../sources/${EDF_YOCTO_LAYER}/conf; then
+        if ! gen-machineconf parse-sdt --hw-description ${SDTGEN_OUT_DIR} --template ${EDF_VEK385_DEFAULT_MACHINE_YAML} --machine-name ${EDF_YOCTO_MACHINE} -c ../sources/${EDF_YOCTO_LAYER}/conf; then
                 echo -e "[Error] ${RED}Failed to generate custom machine configuration${RESET}"
                 exit 1
         fi
@@ -130,7 +131,7 @@ main() {
         BOOT_bin=$(find "${EDF_YOCTO_DIR}/build/tmp/work/${EDF_YOCTO_MACHINE_UNDERSCORE}-amd-linux/xilinx-bootbin/" -path "*/image/*.bin")
         __debug_dump "Searching BOOT PDI..." "$BOOT_bin"
         ret=$?
-        if [ $ret -ne 0 ]; then
+        if [ -z "$BOOT_bin" ]; then
                 echo -e "[Error] ${RED}Failed to search BOOT PDI${RESET}"
                 exit 1
         fi
