@@ -1,0 +1,67 @@
+/******************************************************************************
+*
+* Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
+* Copyright (c) 2022 - 2025 Advanced Micro Devices, Inc.  All rights reserved.
+*
+******************************************************************************/
+
+image_store_rpu:
+{
+ id_code = 0x14caa093
+ extended_id_code = 0x01
+ id = 0x2
+ image {
+    name = rpu_subsystem
+    id = 0x1c000004
+	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_lpd_wdt.cdo }
+	{ core=r5-lockstep, file=./rpu_app.elf }
+ }
+}
+
+image_store_apu:
+{
+ id_code = 0x14caa093
+ extended_id_code = 0x01
+ id = 0x3
+ image {
+	name=fpd, id = 0x420c003
+	{ type=cdo, file=project-spec/hw-description/extracted/versal_restart_trd_wrapper_0/pdi_files/gen_files/fpd_data.cdo }
+ }
+ image {
+	id = 0x1c000003, name=apu_subsystem
+	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_fpd_wdt.cdo }
+	{ type=raw, load=0x00001000, file=images/linux/system.dtb }
+	{ core=a72-0, exception_level=el-3, trustzone, file=images/linux/bl31.elf }
+	{ core=a72-0, exception_level=el-2, file=images/linux/u-boot.elf }
+ }
+}
+
+the_ROM_image:
+{
+image {
+	{ type=bootimage, file=project-spec/hw-description/versal_restart_trd_wrapper.pdi }
+	{ type=bootloader, file=images/linux/plm.elf }
+	{ core=psm, file=images/linux/psmfw.elf }
+}
+image {
+	id = 0x1c000004, name=rpu_subsystem
+	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_lpd_wdt.cdo }
+	{ core=r5-lockstep,  file=./rpu_app.elf }
+}
+image {
+	name = IMAGE_STORE, id = 0x1c000004
+	{ imagestore = 0xAA , section = image_store_rpu }
+}
+
+image {
+	id = 0x1c000003, name=apu_subsystem
+	{ type=cdo, file=project-spec/meta-vssr-trd/scripts/bif_files/config_fpd_wdt.cdo }
+	{ type=raw, load=0x00001000, file=images/linux/system.dtb }
+	{ core=a72-0, exception_level=el-3, trustzone, file=images/linux/bl31.elf }
+	{ core=a72-0, exception_level=el-2, file=images/linux/u-boot.elf }
+}
+image {
+	name = IMAGE_STORE_APU, id = 0x1c000003
+	{ imagestore = 0xAB , section = image_store_apu }
+}
+}

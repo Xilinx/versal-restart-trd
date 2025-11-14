@@ -1,228 +1,143 @@
-# Versal Restart TRD
-[![Docs](https://img.shields.io/badge/-Documention-blue)](https://xilinx.github.io/versal-restart-trd/)
-[![prebuilt](https://img.shields.io/badge/-Prebuilt_Images-blueviolet)](#prebuilt-images)
-[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Tools](https://img.shields.io/badge/Xilinx_Tools_Version-2024.1-orange)](https://www.xilinx.com/)
+# Subsystem Restart TRD
 
-The Versal System and Subsystem Restart TRD (**VSSR TRD**), also referred to as
-**Versal Restart TRD**, demonstrates how to restart various components of a system.
-It also showcases the liveliness of a subsystem while another subsystem is undergoing
-restart.
+> **[ IMPORTANT ]** <br>
+> Versal VCK190 and Versal VMK180 boards are not supported for 2025.2 release with the new EDF Yocto flow. <br>
+> Both VCK190 and VMK180 still work on the older Petalinux flow and are available under `versal/` directory. <br>
+> Users can also checkout the older tag/commit at **amd/xilinx-v2024.1.1** to build VCK190 and VMK180. <br>
 
-The TRD consists of a baseline Vivado design, Petalinux, Jupyter notebooks and other
-software components to demonstrate different restart scenarios.
+## Table of Contents:
+[![Introduction](https://img.shields.io/badge/-1._Introduction-teal)](#introduction)<br>
+[![Subsystem Restart TRD](https://img.shields.io/badge/-2_Subsystem_Restart_TRD-purple)](#subsystem-restart-trd)<br>
+[![Build Instructions and Artifacts](https://img.shields.io/badge/-3._Build_Instructions_and_Artifacts-darkblue)](#build-instructions-and-artifacts)<br>
+[![Changelog](https://img.shields.io/badge/-4._Changelog-grey)](#changelog)<br>
 
-This repository provides all the sources of TRD and their build infrastructure.
+## Introduction
+A TRD, i.e Technical Reference Design, is a very insightful way to demonstrate what features and capabilities PLM Firmware has to offer. Each TRD developed aims to target specific set of features for our customers and their usability.<br>
+Here are some key changes for 2025.2 and onward releases by PM Team:
+- All our TRDs will now be based on the new EDF Yocto Flow.
+- When it comes to pre-built images, users/customers can just download the published .wic image and build PDI using EDF flow as described later in the documents.
+- The standard boot flow is OSPI + SD Card
 
-## Links
+<br>
 
-### [Documentation](https://xilinx.github.io/versal-restart-trd/)
+## Subsystem Restart TRD
+The Subsystem Restart TRD demonstrates the capability of PLM Firmware to restart a specific subsystem (e.g., Application Processing Unit, Real-Time Processing Unit, etc.) without affecting the operation of other subsystems. This feature is crucial for maintaining system stability and uptime, especially in scenarios where a subsystem may encounter an error or require a reset.
 
-### Prebuilt Images
-#### Prebuilt Images for Production Silicon
-##### TODO: Need to update prebuilt images and their licenses for 2024.1
-Board   | Silicon        | Download Link
---------|----------------|--------------
-VCK190  | Production     | [vssr-trd-pb-vck190-prod-2024.1.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vck190-prod-2024.1.zip)
-VMK180  | Production     | [vssr-trd-pb-vmk180-prod-2024.1.zip](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-vmk180-prod-2024.1.zip)
+<br>
 
-#### Prebuilt Images for ES Silicon
-> Engineering Samples or ES (including es1) design support is dropped in release 2022.1. Use [previous release 2021.2](https://github.com/Xilinx/versal-restart-trd/tree/xilinx-v2021.2) for ES1 silicon.
-
-#### Licenses for Prebuilt Images : [vssr-trd-pb-licenses-2024.1.tar.gz](https://www.xilinx.com/member/forms/download/xef.html?filename=vssr-trd-pb-licenses-2024.1.tar.gz)
-
-### Xilinx Tools
-Tools       | Download Link
-------------|--------------
-Vivado      | [2024.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2024.1.html)
-Vitis       | [2024.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2024.1.html)
-Petalinux   | [2024.1](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2024.1.html)
-
-## Directory Structure
-
-### Top Level Files
+# Build Instructions and Artifacts
+### Software Scripts
 ```
-├── hw              # Sources to build hardware design
-├── sw              # Sources to build software components and SD image
-├── docs            # Sources to build documentation
-├── Makefile        # Top level makefile to build docs, sw, and hw
-├── LICENSE         # Project License information
-└── README.md       # This Readme file
-```
+.
+├── supported-boards.yaml
+├── edf-yocto-build
+│   ├── trd-build.sh                                          # TRD build and install script
+│   ├── bitbake-setup.sh                                      # helper script to setup EDF Yocto environment
+│   └── bitbake-build.sh                                      # helper script to build TRD within EDF Yocto environment
+│
+├── subsystem-restart-trd
+│   ├── apu_app
+│   │   ├── subsys-restart-app.py                             # Runs on APU (linux) in the background
+│   │   ├── subsys-restart-cmd.py                             # User friendly command-line interface for subsystem restart (APU or System Controller)
+│   │   ├── subsys-restart-funcs.py                           # Contains all subsystem restart level TRD processing
+│   │   └── utility.py
+│   └── rpmbuild
+│       ├── BUILD
+│       │   ├── auto-login_service.sh                         # starts linux service on APU to auto-login to root user
+│       │   ├── auto-start-subsys-restart_service.sh          # starts linux service on APU to auto-start subsystem restart app
+│       │   └── package-install-verify.sh
+│       ├── build-package.sh                                  # Build script to package rpm project
+│       └── SPECS
+│           └── subsys-restart-app.spec                       # RPM spec file to build the package
+│
+└──versal_2ve_2vm                                             # versal_2ve_2vm platform specific artifacts
+.  └── vek385                                                 # vek385 board specific artifacts
+.  .
+.  .
+.  .
 
-### Hardware Sources
-```
-hw
-├── common             # Common files used across all designs
-├── ip_repo            # Common files used across all designs
-├── Makefile           # Makefile to build hardware designs
-├── vck190_prod_base   # Source files for specific board variant and design
-└── vmk180_prod_base   # Source files for specific board variant and design
 ```
 
-### Software Sources
-```
-sw
-├── Makefile            # Makefile to build software components
-├── scripts
-│   ├── plnx-cfg        # Script to configure petalinux project
-│   └── rpu_build.tcl   # Script to build rpu application through xsct
-├── standalone-srcs
-│   └── rpu_app         # Rpu application sources
-└── yocto-layers
-    └── meta-vssr-trd   # Yocto layer for the TRD
-```
+### Common Artifacts
+- EDF .wic image: https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html
+- EDF SGTGen Directory: https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1111_1_11112340/external/versal-2ve-2vm-vek385-revb-sdt-seg/
 
-## Build Instruction
-The hardware design and the software components can be build using the Makefile(s)
-in the repository. The top level Makefile invokes sub makefiles inside docs, hw
-and sw to build documentation, hardware and software respectively.
+### Installation Steps
+- source vitis / vivado `settings64.sh` script
 
-### Setting Environment
+- `trd-build` script `--help`
+```bash
+./trd-build.sh --help
+Usage: ./trd-build.sh [OPTIONS]
 
-Following environment setup is required for various component builds:
+Build/Install script for Subsystem Restart TRD using EDF Yocto Setup
 
-Component | Environment
-----------|------------
-Hardware  | Vivado: To build hardware design
-Software  | Petalinux: To build petalinux project and sd card images<br> Vitis/Vivado: To invoke xsct for RPU application build
-Documentations | Sphinx
+Required (choose one):
+  -sdt <DIR>          Specify sdtgen output directory
+  -xsa <XSA>          Specify hardware design file
 
-- Vivado: Source the `settings64.sh` script from the Vivado installation path.
-- Petalinux: Source the `settings.sh` script from the Petalinux installation path.
-- Sphinx: Install [Sphinx](https://www.sphinx-doc.org/en/master/usage/installation.html), [recommonmark](https://recommonmark.readthedocs.io/en/latest/), [sphinx-markdown-tables](https://pypi.org/project/sphinx-markdown-tables/) & [rst2pdf](https://rst2pdf.org/)
+Optional:
+  -brd <BRD>          Specify board name (default: vek385)
+  -cdo <CDO>          Specify overlay CDO file
+  -dir <DIR>          Specify output directory (default: versal-2ve-2vm-vek385_2025.2)
+  --no-bootbin        Skip EDF bootbin generation (default: false)
+  --debug             Enable debug output (default: false)
+  --list-boards       List all supported boards
+  --help              Display this help message and exit
 
-### Makefiles
-
-The top level makefile can be invoked using `make` command with following format:
-
-```
-make [<target>] [<Option1>=<val1> [<Option2>=<val2>]...]
+Examples:
+  ./trd-build.sh -sdt /path/to/sdtgen-output
+  ./trd-build.sh -xsa design.xsa
+  ./trd-build.sh -sdt /path/to/sdtgen-output -cdo custom.cdo --no-bootbin
+  ./trd-build.sh -sdt /path/to/sdtgen-output -brd vek385 -dir /path/to/output
 ```
 
-Each make invocation is with respect to specific build configuration. The build configuration is defined as combination of
-- Board (vck190, vmk180)
-- Silicon (production)
-- Design (base)
-
-Currently there is only one design and one silicon, but in future there can be more. Build configuration is selected using various make options.
-
-To build the default image for vck190 board with production silicon, just run
-
+- run provided trd build script
+```bash
+cd edf-yocto-build
+./trd-build.sh -sdt <provide-sdt-gen-directory-path> -brd <provide-board-name>
 ```
-make
+OR
+```bash
+cd edf-yocto-build
+./trd-build.sh -xsa <provide-xsa-file-path>  -brd <provide-board-name>
 ```
 
-To build just hardware images for the vmk180 production silicon, run
-
-```
-make build_hw BOARD=vmk180 SIL=prod
-```
-
-To see various possible targets, options and examples run
-
-```
-make help
+- Build rpm package
+```bash
+cd subsystem-restart-trd/rpmbuild
+./build-package.sh --board <provide-board-name>
 ```
 
-
-Below are various **targets and options**:
-
-Targets | Description
---------|------------
-build_sw<br>build_sdcard | Default target. Builds everything required to generate the sd card image for the chosen build configuration.
-build_hw                 | Builds hardware images
-build_docs               | Generate html documentation
-clean                    | Clean the build area for sw and hw for the given build-config
-nuke                     | Remove build and deploy(output) area completely for given config
-
-Options       | Possible Values | Default | Description          | Applies to Target
---------------|----------------|---------|----------------------|----------------------
-BOARD=\<val\>   | vck190, vmk180 | vck190  | Choose board variant | All, except build_docs
-SIL=\<val\>     | prod           | prod    | Choose silicon variant | All, except build_docs
-DESIGN=\<val\>  | base           | base    | Choose Design variant(for future) | All, except build_docs
-BUILD_DIR=\<path\> | Valid Absolute path | ./build | Choose custom build scratchpad area(Min 50GB) | All
-XSA_FILE=\<file\> | XSA file | generated xsa | Custom XSA file for sw build | build_sw<br>build_sdcard
-
-> XSA_FILE: During build_hw, the xsa file generated and deployed at `./output/<build-config>/reference_images/versal_restart_trd_wrapper.xsa`. This is referred as generated xsa in above table. During the software build, If default xsa file does not exist and no XSA_FILE is provided, build_hw target is automatically invoked to build the hardware.
-
-> Note: Experienced users can read, understand use the sub-make files in the sub directories directly. But it recommended to use the top level Makefile to track the dependencies.
-
-### Build and Deploy Area
-
-All the sources are built under build directory (default to ./build, unless changed by `BUILD_DIR` option).
-
-Following are the build areas for various components:
-- Hardware: `${BUILD_DIR}/${BOARD}-${SIL}-${DESIGN}/hw`
-- Software: `${BUILD_DIR}/${BOARD}-${SIL}-${DESIGN}/sw`
-- Documentation: `${BUILD_DIR}/docs`
-
-After the build is completed, the artifacts are copied to deploy area:
-- Hardware: `./output/${BOARD}-${SIL}-${DESIGN}/hw`
-- Software: `.output/${BOARD}-${SIL}-${DESIGN}/sw`
-- Documentation: `.output/docs`
-
-Final deploy output will look as follow:
-```
-  output/
-  ├── docs
-  │   ├── ...doc-files
-  │   └── index.html
-  ├── vck190-prod-base
-  │   ├── petalinux-sdimage.wic.xz
-  │   └── reference_images
-  └── vmk180-prod-base
-      ├── petalinux-sdimage.wic.xz
-      └── reference_images
+- Install the rpm package on both Versal device and System Controller
+```bash
+rpm -ivh subsys-restart-app-2025.2-1.noarch.rpm
 ```
 
-**petalinux-sdimage.wic.xz** file is used for flashing the sd card and running on target as described in the [documentation](#links). The files under reference_images are all included in the wic image and not required to be consumed separately. Following reference artifacts are copied after the build.
-
-```
-      └── reference_images
-          ├── bl31.elf
-          ├── boot.bif
-          ├── BOOT.BIN
-          ├── boot.scr
-          ├── Image
-          ├── plm.elf
-          ├── psmfw.elf
-          ├── ramdisk.cpio.gz.u-boot
-          ├── rootfs.tar.gz
-          ├── rpu_app.elf
-          ├── system.dtb
-          ├── u-boot.elf
-          ├── versal_restart_trd_wrapper.pdi
-          └── versal_restart_trd_wrapper.xsa
+- Launch command-line interface either on Versal device or System Controller (we recommend System Controller for better experience)
+```bash
+python3 /opt/subsys-restart-app/subsys-restart-cmd.py
 ```
 
-Refer [documentation](#links) for detail build instructions for hardware and software.
-
-## Run Instructions
-
-Refer **Run Images on Target** section in the [documentation](#links).
-
-## License
-
+### Generated Artifacts
+```bash
+edf-yocto-build-artifacts/
+├── arm-trusted-firmware.elf
+├── base-design.pdi
+├── base-pdi-unique-id-vek385-subsystem-restart-trd.txt
+├── BOOT_bh.bin
+├── BOOT.bin
+├── bootbin-version-header-vek385-subsystem-restart-trd.bin
+├── bootbin-version-string-vek385-subsystem-restart-trd.txt
+├── bootgen.bif
+├── cortexa78-linux.dtb
+├── hello-world-vek385-subsystem-restart-trd-vek385-subsystem-restart-trd-cortexr52-1-baremetal.elf
+├── plmfw.elf
+├── qemu-ospi.bin
+├── tee-raw.bin
+└── u-boot.elf
 ```
-Copyright (C) 2019 - 2021 Xilinx, Inc.  All rights reserved.
-Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc.  ALL rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+<br>
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
+> For Detailed Changelog/Revisions, please refer: [CHANGELOG.md](./CHANGELOG.md)

@@ -1,0 +1,772 @@
+###############################################################################
+#
+# Copyright (C) 2025 Advanced Micro Devices, Inc. All Rights Reserved.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+###############################################################################
+
+version 2.0
+# device: 2ve3858
+# 
+marker 0x64 "LPD_DATA/OCM_ASIL_D_INT"
+# RPU Coherency: --START--
+#   not writing if_rpu0a_intocm_merb___route_bit_cr due to RPU_A0.coherent = 0
+#   not writing if_rpu1a_intocm_merb___route_bit_cr due to RPU_A1.coherent = 0
+#   not writing if_rpu0b_intocm_merb___route_bit_cr due to RPU_B0.coherent = 0
+#   not writing if_rpu1b_intocm_merb___route_bit_cr due to RPU_B1.coherent = 0
+#   not writing if_rpu0c_intocm_merb___route_bit_cr due to RPU_C0.coherent = 0
+#   not writing if_rpu1c_intocm_merb___route_bit_cr due to RPU_C1.coherent = 0
+#   not writing if_rpu0d_intocm_merb___route_bit_cr due to RPU_D0.coherent = 0
+#   not writing if_rpu1d_intocm_merb___route_bit_cr due to RPU_D1.coherent = 0
+#   not writing if_rpu0e_intocm_merb___route_bit_cr due to RPU_E0.coherent = 0
+#   not writing if_rpu1e_intocm_merb___route_bit_cr due to RPU_E1.coherent = 0
+# RPU Coherency: --END--
+marker 0x65 "LPD_DATA/OCM_ASIL_D_INT"
+# 
+# IPI is not enabled, not writing IPI marker
+# 
+# IPI is not enabled, not writing ASU_CONFIG/3-IPI_CONFIG marker
+# 
+marker 0x64 "LPD_DATA/LPD_SLCR"
+# LPD_SLCR ADMA Coherency: --START--
+#   not writing ADMA0_ROUTE_CR_0 due to LPD_DMA0_CH0.coherent = 0
+#   not writing ADMA0_ROUTE_CR_1 due to LPD_DMA0_CH1.coherent = 0
+#   not writing ADMA0_ROUTE_CR_2 due to LPD_DMA0_CH2.coherent = 0
+#   not writing ADMA0_ROUTE_CR_3 due to LPD_DMA0_CH3.coherent = 0
+#   not writing ADMA0_ROUTE_CR_4 due to LPD_DMA0_CH4.coherent = 0
+#   not writing ADMA0_ROUTE_CR_5 due to LPD_DMA0_CH5.coherent = 0
+#   not writing ADMA0_ROUTE_CR_6 due to LPD_DMA0_CH6.coherent = 0
+#   not writing ADMA0_ROUTE_CR_7 due to LPD_DMA0_CH7.coherent = 0
+#   not writing SDMA_ROUTE_CR_0 due to LPD_DMA1_CH0.coherent = 0
+#   not writing SDMA_ROUTE_CR_1 due to LPD_DMA1_CH1.coherent = 0
+#   not writing SDMA_ROUTE_CR_2 due to LPD_DMA1_CH2.coherent = 0
+#   not writing SDMA_ROUTE_CR_3 due to LPD_DMA1_CH3.coherent = 0
+#   not writing SDMA_ROUTE_CR_4 due to LPD_DMA1_CH4.coherent = 0
+#   not writing SDMA_ROUTE_CR_5 due to LPD_DMA1_CH5.coherent = 0
+#   not writing SDMA_ROUTE_CR_6 due to LPD_DMA1_CH6.coherent = 0
+#   not writing SDMA_ROUTE_CR_7 due to LPD_DMA1_CH7.coherent = 0
+# LPD_SLCR ADMA Coherency: --END--
+marker 0x65 "LPD_DATA/LPD_SLCR"
+# 
+marker 0x64 "LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU"
+# LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU: --START--
+#   Write register wprot0.ssss_active
+#     wprot0.ssss_active[0] = 0x0
+write 0xeb510000 0
+#   Write register MMUSECSID_CTRL_TBU
+#     tbu8_mmusecsid_ctrl[8] = 0x0
+#     tbu7_mmusecsid_ctrl[7] = 0x0
+#     tbu6_mmusecsid_ctrl[6] = 0x0
+#     tbu5_mmusecsid_ctrl[5] = 0x0
+#     tbu4_mmusecsid_ctrl[4] = 0x0
+#     tbu3_mmusecsid_ctrl[3] = 0x0
+#     tbu2_mmusecsid_ctrl[2] = 0x0
+#     tbu1_mmusecsid_ctrl[1] = 0x0
+#     tbu0_mmusecsid_ctrl[0] = 0x0
+write 0xeb510b28 0
+#   Write register  wprot0.ssss_active
+#      wprot0.ssss_active[0] = 0x1
+write 0xeb510000 0x1
+# LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU: --END--
+marker 0x65 "LPD_DATA/LPD_SLCR_SECURE/MMUSECSID_CTRL_TBU"
+# 
+marker 0x64 "ASU_CONFIG/4-RTCA_CONFIG"
+# ASU: --START--
+#   not writing key_vault due to ASU_key_vault.size = 0
+# ASU: --END--
+marker 0x65 "ASU_CONFIG/4-RTCA_CONFIG"
+# 
+marker 0x64 "MMI_FINISH/MMI_GPU_SLCR_SECURE/SMID_OVRD"
+# MMI_GPU_SLCR_SECURE SMID OVERRIDE: --START--
+#   not writing MMI_GPU0 due to MMI_GPU0.SMID_OVRD_EN = 0
+#   not writing MMI_GPU1 due to MMI_GPU1.SMID_OVRD_EN = 0
+#   not writing MMI_GPU2 due to MMI_GPU2.SMID_OVRD_EN = 0
+#   not writing MMI_GPU3 due to MMI_GPU3.SMID_OVRD_EN = 0
+#   not writing MMI_GPU4 due to MMI_GPU4.SMID_OVRD_EN = 0
+#   Write register MMI_GPU5.SMID_OVRD_VAL
+#     MMI_GPU5.SMID_OVRD_VAL[0] = 0x25f
+write 0xed722258 0x25f
+#   Write register MMI_GPU5.SMID_OVRD_MASK
+#     MMI_GPU5.SMID_OVRD_MASK[0] = 0x3ff
+write 0xed72225c 0x3ff
+#   Write register MMI_GPU5.SMID_OVRD_EN
+#     MMI_GPU5.SMID_OVRD_EN[0] = 0x1
+write 0xed722250 0x1
+#   Write register MMI_GPU5.SMID_OVRD_LOCK
+#     MMI_GPU5.SMID_OVRD_LOCK[0] = 0x1
+write 0xed722254 0x1
+#   Write register MMI_GPU6.SMID_OVRD_VAL
+#     MMI_GPU6.SMID_OVRD_VAL[0] = 0x20c
+write 0xed722268 0x20c
+#   Write register MMI_GPU6.SMID_OVRD_MASK
+#     MMI_GPU6.SMID_OVRD_MASK[0] = 0x3ff
+write 0xed72226c 0x3ff
+#   Write register MMI_GPU6.SMID_OVRD_EN
+#     MMI_GPU6.SMID_OVRD_EN[0] = 0x1
+write 0xed722260 0x1
+#   Write register MMI_GPU6.SMID_OVRD_LOCK
+#     MMI_GPU6.SMID_OVRD_LOCK[0] = 0x1
+write 0xed722264 0x1
+#   not writing MMI_GPU7 due to MMI_GPU7.SMID_OVRD_EN = 0
+#   not writing MMI_GPU8 due to MMI_GPU8.SMID_OVRD_EN = 0
+#   not writing MMI_GPU9 due to MMI_GPU9.SMID_OVRD_EN = 0
+# MMI_GPU_SLCR_SECURE SMID OVERRIDE: --END--
+marker 0x65 "MMI_FINISH/MMI_GPU_SLCR_SECURE/SMID_OVRD"
+# 
+marker 0x64 "LPD_DATA/IOU_SLCR"
+# LPD_IOP_SLCR Coherency: --START--
+#   not writing if_gem0_intiou_merb___route_bit_cr due to GEM0.coherent = 0
+#   not writing if_gem1_intiou_merb___route_bit_cr due to GEM1.coherent = 0
+#   not writing if_usb0_intiou_merb___route_bit_cr due to USB0_CSR.coherent = 0
+#   not writing if_usb1_intiou_merb___route_bit_cr due to USB1_CSR.coherent = 0
+# LPD_IOP_SLCR Coherency: --END--
+marker 0x65 "LPD_DATA/IOU_SLCR"
+# 
+# PLM: --START--
+#   not writing image_store due to PLM_image_store.size = 0
+#   not writing in_place_update due to PLM_in_place_update.size = 0
+#   not writing RTCA_SecureCtrl due to !pdi_copy_optimization | clear_red_keys | kat_on_config = 0
+# PLM: --END--
+# 
+marker 0x64 "NPI_PRE_STARTUP/ISP0/SMID"
+# NPI_PRE_STARTUP/ISP0/SMID: --START--
+#   Write register NPI_PCSR_unLOCK
+#     NPI_PCSR_unLOCK = 0xf9e8d7c6
+write 0xf69c000c 0xf9e8d7c6
+#   Write register ISP0_SMID
+#     DMA[10] = 0xe0
+#     stats_dma[0] = 0xe1
+write 0xf69c0060 0x380e1
+#   Write register ISP0_SMID_LOCK
+#     lock[0] = 0x1
+write 0xf69c005c 0x1
+#   Write register ISP1_SMID
+#     DMA[10] = 0xe2
+#     stats_dma[0] = 0xe3
+write 0xf69c0068 0x388e3
+#   Write register ISP1_SMID_LOCK
+#     lock[0] = 0x1
+write 0xf69c0064 0x1
+#   Write register NPI_PCSR_LOCK
+#     NPI_PCSR_LOCK = 0x0
+write 0xf69c000c 0
+# NPI_PRE_STARTUP/ISP0/SMID: --END--
+marker 0x65 "NPI_PRE_STARTUP/ISP0/SMID"
+# 
+marker 0x64 "NPI_PRE_STARTUP/VCU/SMID"
+# NPI_PRE_STARTUP/VCU/SMID: --START--
+#   Write register NPI_PCSR_unLOCK
+#     NPI_PCSR_unLOCK = 0xf9e8d7c6
+write 0xf6a4000c 0xf9e8d7c6
+#   Write register DEC_AXI_ARUSER_SMID_VAL
+#     DEC_AXI_ARUSER_SMID_VAL = 0xd8
+write 0xf6a40148 0xd8
+#   Write register DEC_AXI_ARUSER_SMID_LOCK
+#     DEC_AXI_ARUSER_SMID_LOCK = 0x1
+write 0xf6a40144 0x1
+#   Write register DEC_AXI_AWUSER_SMID_VAL
+#     DEC_AXI_AWUSER_SMID_VAL = 0xd9
+write 0xf6a40150 0xd9
+#   Write register DEC_AXI_AWUSER_SMID_LOCK
+#     DEC_AXI_AWUSER_SMID_LOCK = 0x1
+write 0xf6a4014c 0x1
+#   Write register DEC_MCU_AXI_ARUSER_SMID_VAL
+#     DEC_MCU_AXI_ARUSER_SMID_VAL = 0xda
+write 0xf6a40158 0xda
+#   Write register DEC_MCU_AXI_ARUSER_SMID_LOCK
+#     DEC_MCU_AXI_ARUSER_SMID_LOCK = 0x1
+write 0xf6a40154 0x1
+#   Write register DEC_MCU_AXI_AWUSER_SMID_VAL
+#     DEC_MCU_AXI_AWUSER_SMID_VAL = 0xdb
+write 0xf6a40160 0xdb
+#   Write register DEC_MCU_AXI_AWUSER_SMID_LOCK
+#     DEC_MCU_AXI_AWUSER_SMID_LOCK = 0x1
+write 0xf6a4015c 0x1
+#   Write register ENC_AXI_ARUSER_SMID_VAL
+#     ENC_AXI_ARUSER_SMID_VAL = 0xdc
+write 0xf6a40168 0xdc
+#   Write register ENC_AXI_ARUSER_SMID_LOCK
+#     ENC_AXI_ARUSER_SMID_LOCK = 0x1
+write 0xf6a40164 0x1
+#   Write register ENC_AXI_AWUSER_SMID_VAL
+#     ENC_AXI_AWUSER_SMID_VAL = 0xdd
+write 0xf6a40170 0xdd
+#   Write register ENC_AXI_AWUSER_SMID_LOCK
+#     ENC_AXI_AWUSER_SMID_LOCK = 0x1
+write 0xf6a4016c 0x1
+#   Write register ENC_MCU_AXI_ARUSER_SMID_VAL
+#     ENC_MCU_AXI_ARUSER_SMID_VAL = 0xde
+write 0xf6a40178 0xde
+#   Write register ENC_MCU_AXI_ARUSER_SMID_LOCK
+#     ENC_MCU_AXI_ARUSER_SMID_LOCK = 0x1
+write 0xf6a40174 0x1
+#   Write register ENC_MCU_AXI_AWUSER_SMID_VAL
+#     ENC_MCU_AXI_AWUSER_SMID_VAL = 0xdf
+write 0xf6a40180 0xdf
+#   Write register ENC_MCU_AXI_AWUSER_SMID_LOCK
+#     ENC_MCU_AXI_AWUSER_SMID_LOCK = 0x1
+write 0xf6a4017c 0x1
+#   Write register NPI_PCSR_LOCK
+#     NPI_PCSR_LOCK = 0x0
+write 0xf6a4000c 0
+# NPI_PRE_STARTUP/VCU/SMID: --END--
+marker 0x65 "NPI_PRE_STARTUP/VCU/SMID"
+# 
+marker 0x64 "NPI_PRE_STARTUP/ISP1/SMID"
+# NPI_PRE_STARTUP/ISP1/SMID: --START--
+#   Write register NPI_PCSR_unLOCK
+#     NPI_PCSR_unLOCK = 0xf9e8d7c6
+write 0xf6a9000c 0xf9e8d7c6
+#   Write register ISP0_SMID
+#     DMA[10] = 0xe4
+#     stats_dma[0] = 0xe5
+write 0xf6a90060 0x390e5
+#   Write register ISP0_SMID_LOCK
+#     lock[0] = 0x1
+write 0xf6a9005c 0x1
+#   Write register ISP1_SMID
+#     DMA[10] = 0xe6
+#     stats_dma[0] = 0xe7
+write 0xf6a90068 0x398e7
+#   Write register ISP1_SMID_LOCK
+#     lock[0] = 0x1
+write 0xf6a90064 0x1
+#   Write register NPI_PCSR_LOCK
+#     NPI_PCSR_LOCK = 0x0
+write 0xf6a9000c 0
+# NPI_PRE_STARTUP/ISP1/SMID: --END--
+marker 0x65 "NPI_PRE_STARTUP/ISP1/SMID"
+# 
+marker 0x64 "NPI_PRE_STARTUP/ISP2/SMID"
+# NPI_PRE_STARTUP/ISP2/SMID: --START--
+#   Write register NPI_PCSR_unLOCK
+#     NPI_PCSR_unLOCK = 0xf9e8d7c6
+write 0xf6af000c 0xf9e8d7c6
+#   Write register ISP0_SMID
+#     DMA[10] = 0xe8
+#     stats_dma[0] = 0xe9
+write 0xf6af0060 0x3a0e9
+#   Write register ISP0_SMID_LOCK
+#     lock[0] = 0x1
+write 0xf6af005c 0x1
+#   Write register ISP1_SMID
+#     DMA[10] = 0xea
+#     stats_dma[0] = 0xeb
+write 0xf6af0068 0x3a8eb
+#   Write register ISP1_SMID_LOCK
+#     lock[0] = 0x1
+write 0xf6af0064 0x1
+#   Write register NPI_PCSR_LOCK
+#     NPI_PCSR_LOCK = 0x0
+write 0xf6af000c 0
+# NPI_PRE_STARTUP/ISP2/SMID: --END--
+marker 0x65 "NPI_PRE_STARTUP/ISP2/SMID"
+# 
+# PLM Commands: --START--
+# PLM Commands: --END--
+# 
+marker 0x64 "LPD_FINISH/EM"
+# PS Errors: --START--
+# PS Errors: --END--
+marker 0x65 "LPD_FINISH/EM"
+# 
+marker 0x64 "PMC_EM"
+# PMC Errors: --START--
+# PMC Errors: --END--
+marker 0x65 "PMC_EM"
+# 
+marker 0x64 "PMC_EM/software"
+# Software Errors: --START--
+begin
+  begin
+    # Skip HW configuration during PLM update
+    # PMC_GLOBAL.PPU1_ROM_INT_REASON.PLM_UPDT_REQ[3] @ 0xf1121508
+    mask_poll 0xf1121508 0x8 0 0x1 0x1000003
+    #   if HB_MON_0 then srst (2)
+    em_set_action 0x2811c000 0x2 0x1
+    break 0x2
+  end
+  log_string "INFO: Skipped Software Errors execution during in-place PLM update"
+end
+# Software Errors: --END--
+marker 0x65 "PMC_EM/software"
+# Not writing protection due to spec flag: enable_protection=false
+# 
+marker 0x64 "SUBSYSTEM_DEFINITION/SUBSYSTEMS"
+begin
+  begin
+    # Skip HW configuration during PLM update
+    # PMC_GLOBAL.PPU1_ROM_INT_REASON.PLM_UPDT_REQ[3] @ 0xf1121508
+    mask_poll 0xf1121508 0x8 0 0x1 0x1000003
+    #   Add nodeid for HB_MON0, used in subsystem apu_subsys_linux
+    #     PM_POWER_PMC = 0x4208001
+    pm_add_node 0x18250000 0x4208001 0 0 0
+    # 
+    #  -- Add All Subsystems --
+    #     add subsystem apu_subsys_linux id 0x1c000006
+    pm_add_subsystem 0x1c000006
+    # 
+    #  -- Start Subsystem apu_subsys_linux Requirements --
+    #   Add CPU APU_A0 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0af 0x42 0 0x1 0x64
+    #   Add CPU APU_A1 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0b0 0x42 0 0x1 0x64
+    #   Add CPU APU_B0 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0b3 0x42 0 0x1 0x64
+    #   Add CPU APU_B1 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0b4 0x42 0 0x1 0x64
+    #   Add CPU APU_C0 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0b7 0x42 0 0x1 0x64
+    #   Add CPU APU_C1 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0b8 0x42 0 0x1 0x64
+    #   Add CPU APU_D0 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0bb 0x42 0 0x1 0x64
+    #   Add CPU APU_D1 to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1810c0bc 0x42 0 0x1 0x64
+    #   Add APU_A_SWDT to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x182240db 0x45 0 0x1 0x64
+    #   Add APU_B_SWDT to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x182240dc 0x45 0 0x1 0x64
+    #   Add APU_C_SWDT to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x182240dd 0x45 0 0x1 0x64
+    #   Add APU_D_SWDT to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x182240de 0x45 0 0x1 0x64
+    #   Add device CANFD0 to subsystem apu_subsys_linux, aperture 158 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822401f 0x45 0 0x1 0x64
+    #   Add device CANFD1 to subsystem apu_subsys_linux, aperture 159 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224020 0x45 0 0x1 0x64
+    #   Add device CANFD2 to subsystem apu_subsys_linux, aperture 160 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822411d 0x45 0 0x1 0x64
+    #   Add device CANFD3 to subsystem apu_subsys_linux, aperture 161 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822411e 0x45 0 0x1 0x64
+    #   Add device EMMC to subsystem apu_subsys_linux, aperture 5 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822402f 0x45 0 0x1 0x64
+    #   Add device GEM0 to subsystem apu_subsys_linux, aperture 166 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     requested_preserve_context[1] = 0x1
+    #     requested_emit_wakeup[2] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224019 0x45 0 0x7 0x64
+    #   Add device GEM1 to subsystem apu_subsys_linux, aperture 167 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     requested_preserve_context[1] = 0x1
+    #     requested_emit_wakeup[2] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822401a 0x45 0 0x7 0x64
+    #   Add virtual node HB_MON0 type healthy_boot_monitor to subsystem apu_subsys_linux
+    #     requested[6] = 0x1
+    #     aperture = 0x0
+    #     full_access[0] = 0x1
+    #     timeout = 0x1d4c0
+    pm_add_requirement 0x1c000006 0x18250000 0x40 0 0x1 0x1d4c0
+    #   Add device IPI0 to subsystem apu_subsys_linux, aperture 51 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822403d 0x46 0 0x1 0x64
+    #   Add device LPD_DMA0_CH0 to subsystem apu_subsys_linux, aperture 208 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224035 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH1 to subsystem apu_subsys_linux, aperture 209 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224036 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH2 to subsystem apu_subsys_linux, aperture 210 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224037 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH3 to subsystem apu_subsys_linux, aperture 211 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224038 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH4 to subsystem apu_subsys_linux, aperture 212 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224039 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH5 to subsystem apu_subsys_linux, aperture 213 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822403a 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH6 to subsystem apu_subsys_linux, aperture 214 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822403b 0x45 0 0x1 0x64
+    #   Add device LPD_DMA0_CH7 to subsystem apu_subsys_linux, aperture 215 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822403c 0x45 0 0x1 0x64
+    #   Add device LPD_GPIO to subsystem apu_subsys_linux, aperture 165 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224023 0x45 0 0x1 0x64
+    #   Add device LPD_I3C0 to subsystem apu_subsys_linux, aperture 148 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822401d 0x45 0 0x1 0x64
+    #   Add device LPD_I3C1 to subsystem apu_subsys_linux, aperture 149 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822401e 0x45 0 0x1 0x64
+    #   Add MMI_DC to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224137 0x45 0 0x1 0x64
+    #   Add MMI_PCIEGEM_10GBE to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822413a 0x45 0 0x1 0x64
+    #   Add MMI_USB_CFG to subsystem apu_subsys_linux
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224135 0x45 0 0x1 0x64
+    #   Add device OSPI to subsystem apu_subsys_linux, aperture 1 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822402a 0x45 0 0x1 0x64
+    #   Add device PMC_GPIO to subsystem apu_subsys_linux, aperture 2 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822402c 0x45 0 0x1 0x64
+    #   Add device QSPI to subsystem apu_subsys_linux, aperture 3 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822402b 0x45 0 0x1 0x64
+    #   Add virtual node RST_NOC type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc41000c 0x10001
+    #   Add virtual node RST_NOC_POR type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc30c005 0x10001
+    #   Add virtual node RST_NPI type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc41000d 0x10001
+    #   Add virtual node RST_PL0 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc410012 0x10001
+    #   Add virtual node RST_PL1 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc410013 0x10001
+    #   Add virtual node RST_PL2 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc410014 0x10001
+    #   Add virtual node RST_PL3 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc410015 0x10001
+    #   Add virtual node RST_PL_POR type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc30c004 0x10001
+    #   Add virtual node RST_PL_SRST type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc41000b 0x10001
+    #   Add virtual node RST_PMC type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc410002 0x10001
+    #   Add virtual node RST_PMC_POR type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc30c001 0x10001
+    #   Add virtual node RST_SYS_RST_1 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc41000e 0x10001
+    #   Add virtual node RST_SYS_RST_2 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc41000f 0x10001
+    #   Add virtual node RST_SYS_RST_3 type reset to subsystem apu_subsys_linux
+    #     write[0] = 0x1 due to !secure = 1
+    #     secure_write[16] = 0x1
+    pm_add_requirement 0x1c000006 0xc410010 0x10001
+    #   Add device SD to subsystem apu_subsys_linux, aperture 4 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822402e 0x45 0 0x1 0x64
+    #   Add device SPI0 to subsystem apu_subsys_linux, aperture 156 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822401b 0x45 0 0x1 0x64
+    #   Add device SPI1 to subsystem apu_subsys_linux, aperture 157 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822401c 0x45 0 0x1 0x64
+    #   Add device TTC0 to subsystem apu_subsys_linux, aperture 230 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224024 0x45 0 0x1 0x64
+    #   Add device TTC1 to subsystem apu_subsys_linux, aperture 231 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224025 0x45 0 0x1 0x64
+    #   Add device TTC2 to subsystem apu_subsys_linux, aperture 232 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224026 0x45 0 0x1 0x64
+    #   Add device TTC3 to subsystem apu_subsys_linux, aperture 233 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224027 0x45 0 0x1 0x64
+    #   Add device TTC4 to subsystem apu_subsys_linux, aperture 234 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x1822411f 0x45 0 0x1 0x64
+    #   Add device TTC5 to subsystem apu_subsys_linux, aperture 235 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224120 0x45 0 0x1 0x64
+    #   Add device TTC6 to subsystem apu_subsys_linux, aperture 236 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224121 0x45 0 0x1 0x64
+    #   Add device TTC7 to subsystem apu_subsys_linux, aperture 237 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224122 0x45 0 0x1 0x64
+    #   Add device UART0 to subsystem apu_subsys_linux, aperture 146 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     requested_preserve_context[1] = 0x1
+    #     requested_emit_wakeup[2] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224021 0x45 0 0x7 0x64
+    #   Add device UART1 to subsystem apu_subsys_linux, aperture 147 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     requested_preserve_context[1] = 0x1
+    #     requested_emit_wakeup[2] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224022 0x45 0 0x7 0x64
+    #   Add device UFS_XHCI to subsystem apu_subsys_linux, aperture 11 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224116 0x45 0 0x1 0x64
+    #   Add device USB0_CSR to subsystem apu_subsys_linux, aperture 238 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224018 0x45 0 0x1 0x64
+    #   Add device USB1_CSR to subsystem apu_subsys_linux, aperture 239 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x182240d7 0x45 0 0x1 0x64
+    #  -- End Subsystem apu_subsys_linux Requirements --
+    break 0x2
+  end
+  log_string "INFO: Skipped SUBSYSTEM_DEFINITION/SUBSYSTEMS execution during in-place PLM update"
+end
+marker 0x65 "SUBSYSTEM_DEFINITION/SUBSYSTEMS"
