@@ -50,8 +50,8 @@ The Subsystem Restart TRD demonstrates the capability of PLM Firmware to restart
 │       └── SPECS
 │           └── subsys-restart-app.spec                       # RPM spec file to build the package
 │
-└──versal_2ve_2vm                                             # versal_2ve_2vm platform specific artifacts
-.  └── vek385                                                 # vek385 board specific artifacts
+└── versal_2ve_2vm                                            # versal_2ve_2vm platform specific artifacts
+.   └── vek385                                                # vek385 board specific artifacts
 .  .
 .  .
 .  .

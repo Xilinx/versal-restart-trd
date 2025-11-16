@@ -128,7 +128,7 @@ echo "   • View logs: journalctl -u subsystem-restart -f"
 # Stop and disable services before removal (only on complete removal, not upgrade)
 if [ $1 -eq 0 ]; then
     echo "Preparing to remove Subsystem Restart Application services..."
-    
+
     # Remove subsystem-restart service safely
     systemctl stop subsystem-restart.service 2>/dev/null || true
     systemctl disable subsystem-restart.service 2>/dev/null || true
@@ -141,6 +141,10 @@ if [ $1 -eq 0 ]; then
 
     # Reload systemd configuration
     systemctl daemon-reload 2>/dev/null || true
+
+    # remove all the scripts
+    rm -rf /opt/power-states-app/scripts/ 2>/dev/null || true
+    rm -rf /opt/power-states-app/ 2>/dev/null || true
 
     echo "Subsystem Restart Application services removed. Auto-login will be disabled after next reboot."
     echo "Current session will remain active."

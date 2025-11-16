@@ -24,7 +24,7 @@
 ###############################################################################
 
 #
-# Python application to exercise TSSR TRD
+# Python application to exercise Subsystem Restart TRD
 #
 
 import sys

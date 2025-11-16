@@ -1138,22 +1138,27 @@
           },
           {
             "name": "HB_MON0",
-            "comment": "Wait for 60seconds before Healthy Boot Trigger",
+            "comment": "Wait for 120seconds before Healthy Boot Trigger",
             "destinations": ["HB_MON0"],
             "type": "ss_management",
-            "flags": {"requested": true, "timeout": 60000}
+            "flags": {"requested": true, "timeout": 120000}
           },
           {
             "name": "HB_MON1",
-            "comment": "Wait for 120seconds before Healthy Boot Trigger",
+            "comment": "Wait for 240seconds before Healthy Boot Trigger",
             "destinations": ["HB_MON1"],
             "type": "ss_management",
-            "flags": {"requested": true, "timeout": 120000}
+            "flags": {"ignore": true, "requested": true, "timeout": 240000}
           },
           {
             "name": "LPD_GPIO",
             "comment": "EDF YOCTO",
             "destinations": ["LPD_GPIO"],
+            "flags": {"requested": true, "requested_full_access": true, "shared": true}
+          },
+          {
+            "name": "RTC",
+            "destinations": ["PMC_RTC"],
             "flags": {"requested": true, "requested_full_access": true, "shared": true}
           }
         ]
