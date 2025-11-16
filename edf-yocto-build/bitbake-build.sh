@@ -40,10 +40,11 @@ EDF_YOCTO_DIR="$1"
 SDTGEN_OUT_DIR="$2"
 BOARD="$3"
 PLATFORM="$4"
+REV="$5"
 
 EDF_YOCTO_MACHINE="$BOARD-subsystem-restart-trd"
 EDF_YOCTO_LAYER="meta-subsystem-restart-bsp"
-EDF_VEK385_DEFAULT_MACHINE_YAML="../sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machineyaml/$(echo "$PLATFORM" | sed 's/_/-/g')-$BOARD-sdt-seg.yaml"
+EDF_VEK385_DEFAULT_MACHINE_YAML="../sources/meta-amd-adaptive-socs/meta-amd-adaptive-socs-bsp/conf/machineyaml/$(echo "$PLATFORM" | sed 's/_/-/g')-$BOARD-$REV-sdt-seg.yaml"
 
 __debug_dump() {
         message="$1"
@@ -121,10 +122,13 @@ _edf_yocto_trd_setup() {
                 exit 1
         fi
 
-        # copy recipe bsp files for pdi customization ( only for Subsystem Restart TRD )
-        echo -e "[Info] ${CYAN}Copying recipe bsp files for Subsystem Restart TRD...${RESET}"
-        mkdir -p ../sources/${EDF_YOCTO_LAYER}/recipes-bsp/bootbin
-        cp -r $BASE_DIR/../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/recipes-* ../sources/${EDF_YOCTO_LAYER}/
+        # check if any recipe directories exist or not
+        if compgen -G "$BASE_DIR/../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/recipes-*" > /dev/null; then
+                # copy recipe bsp files for pdi customization ( only for Subsystem Restart TRD )
+                echo -e "[Info] ${CYAN}Copying recipe bsp files for Subsystem Restart TRD...${RESET}"
+                mkdir -p ../sources/${EDF_YOCTO_LAYER}/recipes-bsp/bootbin
+                cp -r "$BASE_DIR/../$(echo "$PLATFORM" | sed 's/-/_/g')/$BOARD/recipes-"* ../sources/${EDF_YOCTO_LAYER}/
+        fi
 }
 
 _edf_yocto_build() {
@@ -149,7 +153,6 @@ main() {
         EDF_YOCTO_MACHINE_UNDERSCORE=${EDF_YOCTO_MACHINE//-/_}
         BOOT_bin=$(find "${EDF_YOCTO_DIR}/build/tmp/work/${EDF_YOCTO_MACHINE_UNDERSCORE}-amd-linux/xilinx-bootbin/" -path "*/image/*.bin")
         __debug_dump "Searching BOOT PDI..." "$BOOT_bin"
-        ret=$?
         if [ -z "$BOOT_bin" ]; then
                 echo -e "[Error] ${RED}Failed to search BOOT PDI${RESET}"
                 exit 1

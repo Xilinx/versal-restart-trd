@@ -40,6 +40,7 @@ BASE_DIR=$(pwd)
 SDTGEN_OUT_DIR="$1"
 BOARD="$2"
 PLATFORM="$3"
+REV="$4"
 
 REPO_BIN=""
 EDF_YOCTO_DIR="$BASE_DIR/yocto/edf"
@@ -128,7 +129,7 @@ fi
 
 # Launch EDF Yocto build
 cd "$BASE_DIR"
-./bitbake-build.sh "$EDF_YOCTO_DIR" "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM"
+./bitbake-build.sh "$EDF_YOCTO_DIR" "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM" "$REV"
 if [ $? -ne 0 ]; then
 	echo -e "[Error] ${RED}EDF Yocto build failed.${RESET}"
 	exit 1
