@@ -3,15 +3,18 @@
 # Table of Contents:
 [![Introduction](https://img.shields.io/badge/-1._Introduction-teal)](#introduction)<br>
 [![Build Instructions and Artifacts](https://img.shields.io/badge/-2._Build_Instructions_and_Artifacts-darkblue)](#build-instructions-and-artifacts)<br>
-[![Developer's Guide](https://img.shields.io/badge/-3._Developer's_Guide-white)](#developers-guide)<br>
-
+[![References](https://img.shields.io/badge/-3._References-grey)](#references)<br>
 
 # Introduction
 The vek385 device based on Versal AI Gen2 Architecture has 8 A78 Arm Cores and 10 R52 Arm Cores for APU and RPU respectively. Subsystem Restart TRD demonstrates how various components perform restarts with software level isolation using Subsystem Configuration. <br>
 - This TRD consists of a Custom Subsystem 6 which isolates all the APU cores running linux.
 - User gets a comprehensive command-line interface to interact with; which helps them perform Subsystem and System level restarts.
 - This interface can run on both: Linux running on APU as well as the System Controllers.
-- We recommend running the interface on System Controller to get the full experience of what this TRD aims at. 
+- We recommend running the interface on System Controller to get the full experience of what this TRD aims at.
+
+### VEK385 Board Overview
+[VEK385 Evaluation Kit](https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/vek385.html)<br>
+![VEK385 Board](https://www.amd.com/content/dam/amd/en/images/products/boards/vek385/3697171-versal-ai-edge-series-gen2-vek385-features.jpg)
 
 ### Running Command-Line Interface
 ```console
@@ -127,3 +130,8 @@ rpm -ivh subsys-restart-app-2025.2-1.noarch.rpm
 ```bash
 python3 /opt/subsys-restart-app/subsys-restart-cmd.py
 ```
+# References
+- [AMD Versal AI Edge Series Gen 2 Porfolio](https://www.amd.com/en/products/adaptive-socs-and-fpgas/versal/gen2/ai-edge-series.html)
+- [AMD VEK385 Evaluation Kit](https://www.amd.com/en/products/adaptive-socs-and-fpgas/evaluation-boards/vek385.html)
+- [Xilinx Wiki - Versal Evaluation Board](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/2273738753/Versal+Evaluation+Board+-+System+Controller+-+Update+7)
+- [Versal AI Edge Series Gen 2 Technical Reference Manual](https://docs.amd.com/r/en-US/am026-versal-ai-edge-prime-gen2-trm)
