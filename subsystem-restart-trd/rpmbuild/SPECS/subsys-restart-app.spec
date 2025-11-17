@@ -143,8 +143,8 @@ if [ $1 -eq 0 ]; then
     systemctl daemon-reload 2>/dev/null || true
 
     # remove all the scripts
-    rm -rf /opt/power-states-app/scripts/ 2>/dev/null || true
-    rm -rf /opt/power-states-app/ 2>/dev/null || true
+    rm -rf /opt/subsys-restart-app/scripts/ 2>/dev/null || true
+    rm -rf /opt/subsys-restart-app/ 2>/dev/null || true
 
     echo "Subsystem Restart Application services removed. Auto-login will be disabled after next reboot."
     echo "Current session will remain active."
