@@ -1,5 +1,10 @@
 # Subsystem Restart TRD
 
+Copyright (C) 2019 - 2021 Xilinx, Inc. All rights reserved.<br>
+Copyright (C) 2023 - 2025, Advanced Micro Devices, Inc. All rights reserved.<br>
+
+SPDX-License-Identifier: MIT
+
 > **[ IMPORTANT ]** <br>
 > Versal VCK190 and Versal VMK180 boards are not supported for 2025.2 release with the new EDF Yocto flow. <br>
 > Both VCK190 and VMK180 still work on the older Petalinux flow and are available under `versal/` directory. <br>
@@ -50,8 +55,8 @@ The Subsystem Restart TRD demonstrates the capability of PLM Firmware to restart
 │       └── SPECS
 │           └── subsys-restart-app.spec                       # RPM spec file to build the package
 │
-└──versal_2ve_2vm                                             # versal_2ve_2vm platform specific artifacts
-.  └── vek385                                                 # vek385 board specific artifacts
+└── versal_2ve_2vm                                            # versal_2ve_2vm platform specific artifacts
+.   └── vek385                                                # vek385 board specific artifacts
 .  .
 .  .
 .  .

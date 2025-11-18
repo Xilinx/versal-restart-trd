@@ -23,6 +23,15 @@
 # THE SOFTWARE.
 ###############################################################################
 
+#************************************************************************************
+#
+# Subsystem Restart Auto-Login Script
+#
+# This script configures the auto-login feature for the Subsystem Restart application
+# on the specified TTYs. (auto login to root user)
+#
+#************************************************************************************
+
 # Configure auto-login for ttyAMA0
 mkdir -p /etc/systemd/system/serial-getty@ttyAMA1.service.d/
 cat > /etc/systemd/system/serial-getty@ttyAMA1.service.d/autologin.conf << 'EOF'

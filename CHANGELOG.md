@@ -1,5 +1,9 @@
 # Changelogs
 
+Copyright (C) 2019 - 2021 Xilinx, Inc. All rights reserved.<br>
+
+Copyright (c) 2022 - 2025 Advanced Micro Devices, Inc.  ALL rights reserved.
+
 All notable changes to the Subsystem Restart TRD project will be documented in this file.
 
 ### 2025.2

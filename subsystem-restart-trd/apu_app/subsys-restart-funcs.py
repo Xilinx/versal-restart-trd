@@ -24,7 +24,7 @@
 ###############################################################################
 
 #
-# Python Module has all the handlers needed for TSSR TRD
+# Python Module has all the handlers needed for Subsystem Restart TRD
 #
 
 import utility as util

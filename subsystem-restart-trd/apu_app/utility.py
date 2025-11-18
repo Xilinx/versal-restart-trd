@@ -24,7 +24,7 @@
 ###############################################################################
 
 #
-# Python Module is a utility tool for TSSR TRD
+# Python Module is a utility tool for Subsystem Restart TRD
 #
 
 import sys
@@ -160,7 +160,7 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
                 logDebug(f"ret: {ret}")
                 if (ret != 0):
                         logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
-                        return
+                        return False
                 addrMap = int(stdout.strip().splitlines()[-1].split()[-4].strip('():'), 16)
                 logDebug(f"DDR Write> [{addr:#x}] @ {addrMap:#x} : {value:#x} -> {newValue:#x}")
         # sysctl device write using xsdb
@@ -169,7 +169,7 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
                 ret, stdout = execute_command(cmd)
                 if (ret != 0):
                         logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
-                        return
+                        return False
                 logDebug(f"DDR Write> [{addr:#x}] : {value:#x} -> {newValue:#x}")
 
 def get_ddr_addr_value(addr, length='l'):
@@ -190,7 +190,7 @@ def get_ddr_addr_value(addr, length='l'):
                 logDebug(f"ret: {ret}")
                 if (ret != 0):
                         logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
-                        return
+                        return False, False
                 value = int(stdout.strip().splitlines()[-1].split()[-1], 16)
                 addrMap = int(stdout.strip().splitlines()[-1].split()[-2].strip('():'), 16)
                 logDebug(f"DDR Read> [{addr:#x}] @ {addrMap:#x} : {value:#x}")
@@ -200,7 +200,7 @@ def get_ddr_addr_value(addr, length='l'):
                 ret, stdout = execute_command(cmd)
                 if (ret != 0):
                         logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
-                        return
+                        return False, False
                 value = int(stdout.strip().split()[-1], 16)
                 logDebug(f"DDR Read> [{addr:#x}] : {value:#x}")
 

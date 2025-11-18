@@ -293,17 +293,6 @@ marker 0x65 "PMC_EM"
 # 
 marker 0x64 "PMC_EM/software"
 # Software Errors: --START--
-begin
-  begin
-    # Skip HW configuration during PLM update
-    # PMC_GLOBAL.PPU1_ROM_INT_REASON.PLM_UPDT_REQ[3] @ 0xf1121508
-    mask_poll 0xf1121508 0x8 0 0x1 0x1000003
-    #   if HB_MON_0 then srst (2)
-    em_set_action 0x2811c000 0x2 0x1
-    break 0x2
-  end
-  log_string "INFO: Skipped Software Errors execution during in-place PLM update"
-end
 # Software Errors: --END--
 marker 0x65 "PMC_EM/software"
 # Not writing protection due to spec flag: enable_protection=false
@@ -585,6 +574,13 @@ begin
     #     requested_full_access[0] = 0x1
     #     qos = 0x64
     pm_add_requirement 0x1c000006 0x1822402c 0x45 0 0x1 0x64
+    #   Add device PMC_RTC to subsystem apu_subsys_linux, aperture 42 in PMC_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000006 0x18224034 0x45 0 0x1 0x64
     #   Add device QSPI to subsystem apu_subsys_linux, aperture 3 in PMC_XPPU
     #     allow_secure[2] = 0x1 due to secure = 0
     #     concurrent_shared[0] = 0x1 due to shared && !timeshare = 1

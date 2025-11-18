@@ -1,3 +1,7 @@
+Copyright (C) 2019 - 2021 Xilinx, Inc. All rights reserved.<br>
+
+Copyright (c) 2022 - 2025 Advanced Micro Devices, Inc.  ALL rights reserved.
+
 # Table of Contents:
 [![Developer's Guide](https://img.shields.io/badge/-1._Developer's_Guide-white)](#developers-guide)<br>
 

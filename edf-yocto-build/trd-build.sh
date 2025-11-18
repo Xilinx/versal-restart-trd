@@ -229,7 +229,7 @@ __display_build_config() {
 __build_edf_yocto() {
         # initiate EDF Yocto setup and build
         cd "$BASE_DIR"
-        ./bitbake-setup.sh "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM"
+        ./bitbake-setup.sh "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM" "$REV"
         if [ $? -ne 0 ]; then
         	echo -e "[Error] ${RED}EDF Yocto setup failed.${RESET}"
         	exit 1

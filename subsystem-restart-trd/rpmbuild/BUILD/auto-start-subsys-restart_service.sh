@@ -23,6 +23,15 @@
 # THE SOFTWARE.
 ###############################################################################
 
+#*******************************************************************************
+#
+# Subsystem Restart Application Auto-Start Script
+#
+# This script creates a background service for the Subsystem Restart application
+# on boot after initial rpm Package installation
+#
+#*******************************************************************************
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
