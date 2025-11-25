@@ -36,6 +36,14 @@ import importlib
 import utility as util
 srd = importlib.import_module("subsys-restart-funcs")
 
+def _display_action_info(slave:str, actionName: str, actionDesc: str):
+        '''displays action information with countdown'''
+        util.logPrint(f"{slave}> {actionName} - {actionDesc}")
+        for i in range(5, 0, -1):
+                print(f"Executing in {i} seconds...", end='\r')
+                time.sleep(1)
+        print()
+
 def app():
         '''main application entry point'''
 
@@ -77,21 +85,21 @@ def app():
                 slave = ""
 
                 if "1" == selectedChoice:
-                        util.logPrint(f"APU> {srd.TssrTrdChoices[selectedChoice]['op-name']} - {srd.TssrTrdChoices[selectedChoice]['op-desc']}")
-                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x1ULL!")
                         slave = "APU"
-                        time.sleep(5)
+                        _display_action_info(slave, srd.TssrTrdChoices[selectedChoice]['op-name'], srd.TssrTrdChoices[selectedChoice]['op-desc'])
+                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x1ULL!")
                         util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
                 elif "2" == selectedChoice:
-                        util.logPrint(f"APU> {srd.TssrTrdChoices[selectedChoice]['op-name']} - {srd.TssrTrdChoices[selectedChoice]['op-desc']}")
-                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x1001ULL!")
                         slave = "APU"
-                        time.sleep(5)
+                        _display_action_info(slave, srd.TssrTrdChoices[selectedChoice]['op-name'], srd.TssrTrdChoices[selectedChoice]['op-desc'])
+                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x1001ULL!")
                         util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
                 elif "3" == selectedChoice:
-                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x0000ULL!")
                         slave = "APU"
-                        time.sleep(5)
+                        _display_action_info(slave, srd.TssrTrdChoices[selectedChoice]['op-name'], srd.TssrTrdChoices[selectedChoice]['op-desc'])
+                        time.sleep(2)
+                        util.logWarn("On re-boot, please stop at u-boot prompt and wait until Healthy Boot Recovery kicks in!")
+                        util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x0000ULL!")
                         util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
 
                 # wait for slave to accept and generate response
@@ -100,25 +108,25 @@ def app():
                 while (True):
                         ack, isSlave, isAlive = srd.get_slave_response(slave)
                         if (ack == srd.SLAVE_ACK_OK):
-                                util.logInfo(f"Slave executing the task: ACK={ack:#x}, isAlive={isAlive}")
+                                util.logInfo(f"{slave} executing the task: ACK={ack:#x}, isAlive={isAlive}")
                                 print()
-
-                                # wait for slave to reboot and come back alive
-                                if ((actionId == srd.TssrTrdActions["ACTION_SYSTEM_RESTART"]) or (actionId == srd.TssrTrdActions["ACTION_SUBSYSTEM_RESTART"])):
-                                        time.sleep(40)  # wait for slave to complete boot
-                                        while (True):
-                                                ack, isSlave, isAlive = srd.get_slave_response(slave)
-                                                if ((isAlive) and (ack == srd.SLAVE_ACK_DONE)):
-                                                        util.logDebug(f"Slave completed executing: ACK={ack:#x}, isAlive={isAlive}")
-                                                        util.logOut(f"Slave is back alive after {srd.TssrTrdChoices[selectedChoice]['op-name']}")
-                                                        print()
-                                                        break
-                                                util.logDebug(f"Waiting for Slave to come back alive: ACK={ack:#x}, isSlave={isSlave}, isAlive={isAlive}")
-                                                time.sleep(0.5)
-
                                 break
-                        util.logDebug(f"Status Address: ACK={ack:#x}, isSlave={isSlave}, isAlive={isAlive}")
                         time.sleep(0.5)
+
+                # wait for slave to reboot and come back alive
+                endTime = time.time() + 120
+                while time.time() < endTime:
+                        ack, isSlave, isAlive = srd.get_slave_response(slave)
+                        if ((isAlive) and (ack == srd.SLAVE_ACK_DONE)):
+                                print()
+                                util.logOut(f"{slave} is back alive after {srd.TssrTrdChoices[selectedChoice]['op-name']}")
+                                util.logDebug(f"{slave} completed executing: ACK={ack:#x}, isAlive={isAlive}")
+                                print()
+                                break
+                        time.sleep(0.1)
+                if time.time() >= endTime:
+                        util.logErr(f"TIME OUT! {slave} failed to resume...")
+                        sys.exit(1)
 
                 selectedChoice = srd.get_trd_options()
 

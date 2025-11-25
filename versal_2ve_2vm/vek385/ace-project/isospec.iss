@@ -995,7 +995,9 @@
         "PMC_XPPU": {"same_as_default": true},
         "PMC_XPPU_NPI": {"same_as_default": true},
         "SECURE_REG_ACCESS": {"same_as_default": true},
-        "SW_EM": {"same_as_default": true}
+        "SW_EM": {
+          "flags": {"HB_MON_0": "srst"}
+        }
       }
     },
     "subsystems": {

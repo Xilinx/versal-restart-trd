@@ -146,7 +146,6 @@ write 0xed722264 0x1
 marker 0x65 "MMI_FINISH/MMI_GPU_SLCR_SECURE/SMID_OVRD"
 # 
 marker 0x64 "LPD_DATA/IOU_SLCR"
-log_string "==================== Fixing CMN Routing ===================="
 # LPD_IOP_SLCR Coherency: --START--
 #   Write register if_gem0_intiou_merb___route_bit_cr
 #     if_gem0_intiou_merb___route_bit_cr = 0x1
@@ -320,6 +319,17 @@ marker 0x65 "PMC_EM"
 # 
 marker 0x64 "PMC_EM/software"
 # Software Errors: --START--
+begin
+  begin
+    # Skip HW configuration during PLM update
+    # PMC_GLOBAL.PPU1_ROM_INT_REASON.PLM_UPDT_REQ[3] @ 0xf1121508
+    mask_poll 0xf1121508 0x8 0 0x1 0x1000003
+    #   if HB_MON_0 then srst (2)
+    em_set_action 0x2811c000 0x2 0x1
+    break 0x2
+  end
+  log_string "INFO: Skipped Software Errors execution during in-place PLM update"
+end
 # Software Errors: --END--
 marker 0x65 "PMC_EM/software"
 # Not writing protection due to spec flag: enable_protection=false
