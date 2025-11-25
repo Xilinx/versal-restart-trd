@@ -117,7 +117,8 @@ _edf_yocto_trd_setup() {
         # use gen-machine-conf to generate custom machine conf by inheriting default $BOARD machine
         echo -e "[Info] ${CYAN}Generating custom machine configuration for Subsystem Restart TRD...${RESET}"
         echo -e "[Info] ${PURPLE}Disabling Zephyr R52-0 multiconfig build...${RESET}"
-        if ! gen-machineconf parse-sdt --hw-description ${SDTGEN_OUT_DIR} --template ${EDF_VEK385_DEFAULT_MACHINE_YAML} --machine-name ${EDF_YOCTO_MACHINE} -c ../sources/${EDF_YOCTO_LAYER}/conf --add-config CONFIG_YOCTO_BBMC_CORTEXR52_0_ZEPHYR=n; then
+        if ! gen-machineconf parse-sdt --hw-description ${SDTGEN_OUT_DIR} --template ${EDF_VEK385_DEFAULT_MACHINE_YAML} --machine-name ${EDF_YOCTO_MACHINE} --config-dir ../sources/${EDF_YOCTO_LAYER}/conf \
+                --add-config CONFIG_YOCTO_BBMC_CORTEXR52_0_ZEPHYR=n --machine-overrides $(echo "$PLATFORM" | sed 's/_/-/g')-$BOARD-$REV-sdt-seg; then
                 echo -e "[Error] ${RED}Failed to generate custom machine configuration${RESET}"
                 exit 1
         fi

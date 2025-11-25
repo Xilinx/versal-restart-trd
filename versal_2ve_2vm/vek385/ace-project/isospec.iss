@@ -1009,7 +1009,7 @@
           },
           {
             "name": "BOOT_MEDIA",
-            "destinations": ["EMMC", "OSPI", "QSPI", "SD", "UFS_XHCI"],
+            "destinations": ["EMMC", "OSPI", "QSPI", "SD"],
             "flags": {"requested": true, "requested_full_access": true, "shared": true}
           },
           {
@@ -1034,7 +1034,7 @@
             "name": "ETHERNET",
             "comment": "EDF YOCTO",
             "destinations": ["GEM0", "GEM1"],
-            "flags": {"requested": true, "requested_emit_wakeup": true, "requested_full_access": true, "requested_preserve_context": true, "shared": true}
+            "flags": {"requested": true, "requested_coherent": true, "requested_emit_wakeup": true, "requested_full_access": true, "requested_preserve_context": true, "requested_virtualized": true, "shared": true}
           },
           {
             "name": "DMA",
@@ -1049,7 +1049,7 @@
               "LPD_DMA0_CH6",
               "LPD_DMA0_CH7"
             ],
-            "flags": {"requested": true, "requested_full_access": true, "shared": true}
+            "flags": {"requested": true, "requested_coherent": true, "requested_full_access": true, "requested_virtualized": true, "shared": true}
           },
           {
             "name": "TTC",
@@ -1160,6 +1160,17 @@
             "name": "RTC",
             "destinations": ["PMC_RTC"],
             "flags": {"requested": true, "requested_full_access": true, "shared": true}
+          },
+          {
+            "name": "MEM_CTRL",
+            "destinations": ["DDR0"],
+            "type": "ss_management",
+            "flags": {"shared": true}
+          },
+          {
+            "name": "UFS",
+            "destinations": ["UFS_XHCI"],
+            "flags": {"requested": true, "requested_coherent": true, "requested_full_access": true, "requested_virtualized": true, "shared": true}
           }
         ]
       }
