@@ -95,6 +95,10 @@ if [ -d "$EDF_YOCTO_DIR" ]; then
 			;;
 	esac
 fi
+
+#
+# Initialize EDF Yocto repo
+#
 mkdir -p "$EDF_YOCTO_DIR"
 cd "$EDF_YOCTO_DIR"
 if [ ! -x $REPO_BIN ]; then
@@ -109,7 +113,9 @@ if [ $ret -ne 0 ]; then
 	exit 1
 fi
 
-# Set Development environment in repo
+#
+# Sync and setup EDF Yocto repo
+#
 output="$("$REPO_BIN" sync)"
 __debug_dump "EDF Yocto Repo sync" "$output"
 ret=$?
@@ -127,7 +133,9 @@ if [ $ret -ne 0 ]; then
 	exit 1
 fi
 
-# Launch EDF Yocto build
+#
+# Call EDF Yocto build script
+#
 cd "$BASE_DIR"
 ./bitbake-build.sh "$EDF_YOCTO_DIR" "$SDTGEN_OUT_DIR" "$BOARD" "$PLATFORM" "$REV"
 if [ $? -ne 0 ]; then

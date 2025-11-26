@@ -126,6 +126,7 @@ def sanity_check():
                         if not shutil.which(pkg):
                                 logErr(f"Required package '{pkg}' is not installed.")
                                 return False
+        # check for sc_app version if app is running on System Controller device
         elif DEV_HOST == "sysctl":
                 sysctlVerCheckCmd = "sc_app -c version"
                 ret, stdout = execute_command(sysctlVerCheckCmd)
@@ -134,10 +135,19 @@ def sanity_check():
                         return False
 
                 versionInfo = stdout.lstrip().splitlines()[0]
-                scVersion = float(versionInfo.split()[-1].lstrip())
-                if (scVersion < 1.25):
-                        logErr(f"sc_app version found: {scVersion}, need >= 1.25 for app!")
-                        logWarn("Please update the SC image using: 'dnf update' and try again...")
+                versionStr = versionInfo.split()[-1].lstrip()
+                try:
+                        # Parse version as tuple of integers (handling for minor release versions)
+                        versionParts = tuple(int(x) for x in versionStr.split('.'))
+                        minVersion = (1, 25)
+
+                        # Compare tuples element-by-element
+                        if versionParts < minVersion:
+                                logErr(f"sc_app version found: {versionStr}, need >= 1.25 for app!")
+                                logWarn("Please update the System Controller image...")
+                                return False
+                except ValueError:
+                        logErr(f"Failed to parse sc_app version: {versionStr}")
                         return False
 
         print()

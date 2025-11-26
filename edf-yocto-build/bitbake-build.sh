@@ -55,6 +55,9 @@ __debug_dump() {
         fi
 }
 
+#
+# Initialize EDF Yocto build environment
+#
 _edf_yocto_init() {
         # Initialize build environment
         if [ -n "$TEMPLATECONF" ]; then
@@ -94,6 +97,12 @@ _edf_yocto_init() {
         fi
 }
 
+#
+# Setup EDF Yocto for Power States TRD
+#
+# Note: This function creates a new layer for Power States TRD
+# Note: This function also generates a custom machine configuration by inheriting the default machine
+#
 _edf_yocto_trd_setup() {
         # create new layer for trd in EDF Yocto
         echo -e "[Info] ${CYAN}Adding Subsystem Restart TRD layer to EDF Yocto...${RESET}"
@@ -132,6 +141,9 @@ _edf_yocto_trd_setup() {
         fi
 }
 
+#
+# Build Yocto recipe "xilinx-bootbin" for EDF Subsystem Restart TRD
+#
 _edf_yocto_build() {
         # Build EDF Images using pre-built Machine
         if [ "$SKIP_BOOTBIN" = false ]; then
