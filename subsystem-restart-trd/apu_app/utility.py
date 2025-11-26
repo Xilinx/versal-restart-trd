@@ -78,8 +78,10 @@ def execute_command(command):
                         stderr=subprocess.STDOUT,
                 )
         except subprocess.CalledProcessError as e:
-                logPrint(e.stdout)
-                logErr(e.stderr)
+                if e.stdout:
+                        logPrint(e.stdout)
+                if e.stderr:
+                        logErr(e.stderr)
                 raise
 
         return ret.returncode, ret.stdout
@@ -124,6 +126,7 @@ def sanity_check():
                         if not shutil.which(pkg):
                                 logErr(f"Required package '{pkg}' is not installed.")
                                 return False
+        # check for sc_app version if app is running on System Controller device
         elif DEV_HOST == "sysctl":
                 sysctlVerCheckCmd = "sc_app -c version"
                 ret, stdout = execute_command(sysctlVerCheckCmd)
@@ -132,10 +135,19 @@ def sanity_check():
                         return False
 
                 versionInfo = stdout.lstrip().splitlines()[0]
-                scVersion = float(versionInfo.split()[-1].lstrip())
-                if (scVersion < 1.25):
-                        logErr(f"sc_app version found: {scVersion}, need >= 1.25 for app!")
-                        logWarn("Please update the SC image using: 'dnf update' and try again...")
+                versionStr = versionInfo.split()[-1].lstrip()
+                try:
+                        # Parse version as tuple of integers (handling for minor release versions)
+                        versionParts = tuple(int(x) for x in versionStr.split('.'))
+                        minVersion = (1, 25)
+
+                        # Compare tuples element-by-element
+                        if versionParts < minVersion:
+                                logErr(f"sc_app version found: {versionStr}, need >= 1.25 for app!")
+                                logWarn("Please update the System Controller image...")
+                                return False
+                except ValueError:
+                        logErr(f"Failed to parse sc_app version: {versionStr}")
                         return False
 
         print()
@@ -146,62 +158,81 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
 
         if not os.getuid() == 0:
                 logDebug("DDR Memory Writes require Root Privileges!")
-                return False
+                sys.exit(1)
 
         currValue, _ = get_ddr_addr_value(addr)  # Read the current value before writing
+        if currValue is False:
+                logErr("Failed to read current DDR value before writing...")
+                sys.exit(1)
         currValue = currValue & ~mask       # Apply mask to clear bits to write 
         newValue = currValue | value          # set the bits to write
 
         # versal device write using devmem
         if DEV_HOST == "versal2":
-                cmd = f"devmem2 {addr} {length} {newValue:#x}"
-                ret, stdout = execute_command(cmd)
-                logDebug(f"cmd: {cmd}")
-                logDebug(f"ret: {ret}")
-                if (ret != 0):
-                        logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
-                        return False
-                addrMap = int(stdout.strip().splitlines()[-1].split()[-4].strip('():'), 16)
-                logDebug(f"DDR Write> [{addr:#x}] @ {addrMap:#x} : {value:#x} -> {newValue:#x}")
+                try:
+                        cmd = f"devmem2 {addr} {length} {newValue:#x}"
+                        ret, stdout = execute_command(cmd)
+                        logDebug(f"cmd: {cmd}")
+                        logDebug(f"ret: {ret}")
+                        if (ret != 0):
+                                logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
+                                return False
+                        addrMap = int(stdout.strip().splitlines()[-1].split()[-4].strip('():'), 16)
+                        logDebug(f"DDR Write> [{addr:#x}] @ {addrMap:#x} : {value:#x} -> {newValue:#x}")
+                except subprocess.CalledProcessError:
+                        logErr(f"Writing to DDR failed for address {addr:#x}")
+                        sys.exit(1)
         # sysctl device write using xsdb
         elif DEV_HOST == "sysctl":
-                cmd = f"xsdb /root/write.tcl {addr} {newValue:#x}"
-                ret, stdout = execute_command(cmd)
-                if (ret != 0):
-                        logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
-                        return False
-                logDebug(f"DDR Write> [{addr:#x}] : {value:#x} -> {newValue:#x}")
+                try:
+                        cmd = f"xsdb /root/write.tcl {addr} {newValue:#x}"
+                        ret, stdout = execute_command(cmd)
+                        if (ret != 0):
+                                logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
+                                return False
+                        logDebug(f"DDR Write> [{addr:#x}] : {value:#x} -> {newValue:#x}")
+                except subprocess.CalledProcessError:
+                        logErr(f"Writing to DDR failed for address {addr:#x}")
+                        sys.exit(1)
 
 def get_ddr_addr_value(addr, length='l'):
         '''Performs DDR reads for given address ( by default reads all 64-bits / 8 bytes )'''
 
         if not os.getuid() == 0:
                 logDebug("DDR Memory Reads require Root Privileges!")
-                return False
+                sys.exit(1)
 
         addrMap = 0x0
         value = 0xFFFFFFFF
 
         # versal device write using devmem
         if DEV_HOST == "versal2":
-                cmd = f"devmem2 {addr} {length}"
-                ret, stdout = execute_command(cmd)
-                logDebug(f"cmd: {cmd}")
-                logDebug(f"ret: {ret}")
-                if (ret != 0):
-                        logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
-                        return False, False
-                value = int(stdout.strip().splitlines()[-1].split()[-1], 16)
-                addrMap = int(stdout.strip().splitlines()[-1].split()[-2].strip('():'), 16)
-                logDebug(f"DDR Read> [{addr:#x}] @ {addrMap:#x} : {value:#x}")
+                try:
+                        cmd = f"devmem2 {addr} {length}"
+                        ret, stdout = execute_command(cmd)
+                        logDebug(f"cmd: {cmd}")
+                        logDebug(f"ret: {ret}")
+                        if (ret != 0):
+                                logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
+                                return False, False
+                        value = int(stdout.strip().splitlines()[-1].split()[-1], 16)
+                        addrMap = int(stdout.strip().splitlines()[-1].split()[-2].strip('():'), 16)
+                        logDebug(f"DDR Read> [{addr:#x}] @ {addrMap:#x} : {value:#x}")
+                except subprocess.CalledProcessError:
+                        logErr(f"Reading from DDR failed for address {addr:#x}")
+                        sys.exit(1)
         # sysctl device write using xsdb
         elif DEV_HOST == "sysctl":
-                cmd = f"xsdb /root/read.tcl {addr}"
-                ret, stdout = execute_command(cmd)
-                if (ret != 0):
-                        logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
-                        return False, False
-                value = int(stdout.strip().split()[-1], 16)
-                logDebug(f"DDR Read> [{addr:#x}] : {value:#x}")
+                try:
+                        cmd = f"xsdb /root/read.tcl {addr}"
+                        ret, stdout = execute_command(cmd)
+                        if (ret != 0):
+                                logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
+                                return False, False
+                        value = int(stdout.strip().split()[-1], 16)
+                        logDebug(f"DDR Read> [{addr:#x}] : {value:#x}")
+                except subprocess.CalledProcessError:
+                        logErr(f"Reading from DDR failed for address {addr:#x}")
+                        sys.exit(1)
 
         return value, addrMap

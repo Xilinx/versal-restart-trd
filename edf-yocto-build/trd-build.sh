@@ -90,6 +90,9 @@ _get_absolute_path(){
         readlink -f "$1"
 }
 
+#
+# Load supported board/platform information from YAML file
+#
 _load_board_info() {
 	local yaml_file="$1"
 	
@@ -135,6 +138,9 @@ _load_board_info() {
 
 }
 
+#
+# List all the supported boards
+#
 _list_supported_boards() {
         echo -e "${CYAN}Supported boards:${RESET}"
         for key in "${!boardMap[@]}"; do
@@ -147,6 +153,9 @@ _list_supported_boards() {
         done
 }
 
+#
+# Sanity Checker for TRD Scripts
+#
 _sanity_check() {
         # check whether Vitis or Vivado are present in the environment
         VITIS_BIN=$(which vitis)
@@ -204,6 +213,9 @@ _sanity_check() {
 
 }
 
+#
+# Display Build Configuration
+#
 __display_build_config() {
         echo "========================================================"
         echo -e "${CYAN}Build Configuration:${RESET}"
@@ -226,6 +238,9 @@ __display_build_config() {
         echo ''
 }
 
+#
+# Call EDF Yocto setup and build scripts
+#
 __build_edf_yocto() {
         # initiate EDF Yocto setup and build
         cd "$BASE_DIR"
@@ -236,6 +251,9 @@ __build_edf_yocto() {
         fi
 }
 
+#
+# Convert XSA Design into SDTGen output directory
+#
 ___convert_xsa_to_sdtgen() {
         # convert XSA to SDTGen output directory
         local workspace=$1
@@ -255,6 +273,12 @@ ___convert_xsa_to_sdtgen() {
         fi
 }
 
+#
+# Apply Overlay CDO to Base PDI of SDTGen output directory
+#
+# Note: This function is only applicable if an Overlay CDO file is present
+# Note: This function also takes care of converting XSA to SDTGen output directory if XSA is provided
+#
 __apply_overlaycdo_to_sdtgen_out() {
 
         local workspace=""
@@ -332,11 +356,17 @@ __apply_overlaycdo_to_sdtgen_out() {
         SDTGEN_OUT_DIR=$workspace
 }
 
+#
+# Build Subsystem Restart TRD
+#
 _build_subsystem_restart_trd() {
         __apply_overlaycdo_to_sdtgen_out
         __build_edf_yocto
 }
 
+#
+# Copy EDF Yocto build artifacts to current workspace for the user
+#
 _copy_edf_build_artifacts() {
         local edf_build_dir="yocto/edf/build/"
         local xilinx_bootbin_dir="$edf_build_dir/tmp/work/*-amd-linux/xilinx-bootbin/*/xilinx-bootbin-*/"
