@@ -54,10 +54,7 @@ DEV_HOST = "versal2"            # indicates whether application is running on Ve
 LOG_DEBUG = 0
 
 logPrint = lambda msg: print(fmt["DEFAULT"](msg))
-if LOG_DEBUG:
-        logDebug = lambda msg: print("[DEBUG]" + fmt["PURPLE"](msg))
-else:
-        logDebug = lambda msg: None
+logDebug = lambda msg: print("[DEBUG] " + fmt["PURPLE"](msg)) if LOG_DEBUG == 1 else None
 logOut = lambda msg: print(fmt["GREEN"](msg))
 logInfo = lambda msg: print("[INFO] " + fmt["CYAN"](msg))
 logWarn = lambda msg: print("[WARNING] " + fmt["YELLOW"](msg))
@@ -67,7 +64,7 @@ def is_root_user():
         """Checks if the current user is root."""
         return os.getuid() == 0
 
-def execute_command(command):
+def execute_command(command, dump:bool = True):
         try:
                 ret = subprocess.run(
                         command,
@@ -78,10 +75,11 @@ def execute_command(command):
                         stderr=subprocess.STDOUT,
                 )
         except subprocess.CalledProcessError as e:
-                if e.stdout:
-                        logPrint(e.stdout)
-                if e.stderr:
-                        logErr(e.stderr)
+                if dump == True:
+                        if e.stdout:
+                                logPrint(e.stdout)
+                        if e.stderr:
+                                logErr(e.stderr)
                 raise
 
         return ret.returncode, ret.stdout
@@ -146,6 +144,7 @@ def sanity_check():
                                 logErr(f"sc_app version found: {versionStr}, need >= 1.25 for app!")
                                 logWarn("Please update the System Controller image...")
                                 return False
+                        logDebug(f"sc_app version found: {versionStr}")
                 except ValueError:
                         logErr(f"Failed to parse sc_app version: {versionStr}")
                         return False
@@ -164,6 +163,7 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
         if currValue is False:
                 logErr("Failed to read current DDR value before writing...")
                 sys.exit(1)
+        origValue = currValue                           # create a copy of original value
         currValue = currValue & ~mask       # Apply mask to clear bits to write 
         newValue = currValue | value          # set the bits to write
 
@@ -178,7 +178,7 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
                                 logErr(f"Writing to DDR failed: {stdout if stdout else 'NULL'}")
                                 return False
                         addrMap = int(stdout.strip().splitlines()[-1].split()[-4].strip('():'), 16)
-                        logDebug(f"DDR Write> [{addr:#x}] @ {addrMap:#x} : {value:#x} -> {newValue:#x}")
+                        logDebug(f"DDR Write> [{addr:#x}] @ {addrMap:#x} : {origValue:#x} -> {newValue:#x}")
                 except subprocess.CalledProcessError:
                         logErr(f"Writing to DDR failed for address {addr:#x}")
                         sys.exit(1)
@@ -195,12 +195,17 @@ def set_ddr_addr_value(addr, mask, value, length='l'):
                         logErr(f"Writing to DDR failed for address {addr:#x}")
                         sys.exit(1)
 
-def get_ddr_addr_value(addr, length='l'):
+def get_ddr_addr_value(addr, length='l', mode="NON_TOLERANT_READ"):
         '''Performs DDR reads for given address ( by default reads all 64-bits / 8 bytes )'''
 
         if not os.getuid() == 0:
                 logDebug("DDR Memory Reads require Root Privileges!")
                 sys.exit(1)
+
+        if mode == "TOLERANT_READ":
+                printError = False
+        else:
+                printError = True
 
         addrMap = 0x0
         value = 0xFFFFFFFF
@@ -209,7 +214,7 @@ def get_ddr_addr_value(addr, length='l'):
         if DEV_HOST == "versal2":
                 try:
                         cmd = f"devmem2 {addr} {length}"
-                        ret, stdout = execute_command(cmd)
+                        ret, stdout = execute_command(cmd, dump=printError)
                         logDebug(f"cmd: {cmd}")
                         logDebug(f"ret: {ret}")
                         if (ret != 0):
@@ -220,19 +225,40 @@ def get_ddr_addr_value(addr, length='l'):
                         logDebug(f"DDR Read> [{addr:#x}] @ {addrMap:#x} : {value:#x}")
                 except subprocess.CalledProcessError:
                         logErr(f"Reading from DDR failed for address {addr:#x}")
-                        sys.exit(1)
+                        if mode == "NON_TOLERANT_READ":
+                                sys.exit(1)
+                        elif mode == "TOLERANT_READ":
+                                return False, False
         # sysctl device write using xsdb
         elif DEV_HOST == "sysctl":
                 try:
                         cmd = f"xsdb /root/read.tcl {addr}"
-                        ret, stdout = execute_command(cmd)
+                        ret, stdout = execute_command(cmd, dump=printError)
                         if (ret != 0):
                                 logErr(f"Reading from DDR failed: {stdout if stdout else 'NULL'}")
                                 return False, False
                         value = int(stdout.strip().split()[-1], 16)
                         logDebug(f"DDR Read> [{addr:#x}] : {value:#x}")
                 except subprocess.CalledProcessError:
-                        logErr(f"Reading from DDR failed for address {addr:#x}")
-                        sys.exit(1)
+                        if mode == "NON_TOLERANT_READ":
+                                logErr(f"Reading from DDR failed for address {addr:#x}")
+                                sys.exit(1)
+                        elif mode == "TOLERANT_READ":
+                                return False, False
 
         return value, addrMap
+
+def check_if_plm_booted():
+        '''Checks whether PLM boot is complete or not'''
+
+        cmd = f"sc_app -c getgpio -t VERSAL_DONE"
+        try:
+                ret, stdout = execute_command(cmd)
+                if (ret != 0):
+                        logErr(f"PLM Boot Status check failed: {stdout if stdout else 'NULL'}")
+                        return False
+                doneStatus = stdout.strip().split()[-1]
+                return doneStatus
+        except:
+                logErr("PLM Boot Status check failed!")
+                return False

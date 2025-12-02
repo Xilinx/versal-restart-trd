@@ -38,9 +38,9 @@ srd = importlib.import_module("subsys-restart-funcs")
 ACK_READ_TIMEOUT = 15
 
 ApuTrdActions = {
-        0x0 : ["echo subsystem > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
-        0x1 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
-        0x2 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"]
+        0x1 : ["echo subsystem > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
+        0x2 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"],
+        0x3 : ["echo system > /sys/devices/platform/firmware\\:versal2-firmware/shutdown_scope", "reboot"]
 }
 
 def app():
@@ -55,7 +55,9 @@ def app():
                 isSlave = (ddrStatusValue >> 28) & 0x1
                 isAlive = (ddrStatusValue >> 30) & 0x1
                 if ((isAlive & 0x1) == 0x0) and (isSlave & 0x1):
+                        prevActionId = (util.get_ddr_addr_value(srd.TssrDDRRegions['APU']['action'], 'w')[0] >> 12) & 0xF
                         # send another acknowledgement indicating previous action is completed and that slave is now alive
+                        print(f"================= APU is alive from {srd.TssrTrdChoices[str(prevActionId)]['op-name']} =================")
                         util.set_ddr_addr_value(srd.TssrDDRRegions['APU']['status'], srd.DDR_ADDR_32BITMASK, (0x1) | (0x0 << 4) | (srd.SLAVE_ACK_DONE << 8) | (0x1 << 28) | (0x1 << 30), 'w')
                         time.sleep(ACK_READ_TIMEOUT)   # wait for the ack to be received and read
 
@@ -71,12 +73,14 @@ def app():
                         pass
                 # check whether action is intended for APU
                 elif (ddrActionValue & 0x1) == 0x1:
-                        coreId = (ddrActionValue >> 8) & 0xFF
-                        actionId = (ddrActionValue >> 12) & 0xFF
+                        coreId = (ddrActionValue >> 4) & 0xF
+                        actionId = (ddrActionValue >> 12) & 0xF
                         util.logDebug(f"APU> Core Id: {coreId} Action: {actionId}\n")
+                        print(f"APU> Executing Action: {srd.TssrTrdChoices[str(actionId)]['op-name']}")
 
                         # set slave acknowledgement
                         util.set_ddr_addr_value(srd.TssrDDRRegions['APU']['status'], srd.DDR_ADDR_32BITMASK, (0x1) | (coreId << 4) | (srd.SLAVE_ACK_OK << 8) | (0x1 << 28) | (0x0 << 30), 'w')
+                        # time.sleep(5)   # wait for the ack to be received and read
                         for cmd in ApuTrdActions[actionId]:
                                 util.execute_command(cmd)
 

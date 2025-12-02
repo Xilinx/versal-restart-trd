@@ -99,11 +99,11 @@ TssrTrdCores = {
 '''
 
 TssrTrdActions = {
-        "ACTION_SUBSYSTEM_RESTART"      : 0x0,
-        "ACTION_SYSTEM_RESTART"         : 0x1,
-        "ACTION_HEALTHY_BOOT_TEST"      : 0x2,
-        "ACTION_WATCHDOG_RECOVERY"      : 0x3,
-        "ACTION_IMAGE_STORE_BOOT"       : 0x4
+        "ACTION_SUBSYSTEM_RESTART"      : 0x1,
+        "ACTION_SYSTEM_RESTART"         : 0x2,
+        "ACTION_HEALTHY_BOOT_TEST"      : 0x3,
+        "ACTION_WATCHDOG_RECOVERY"      : 0x4,
+        "ACTION_IMAGE_STORE_BOOT"       : 0x5
 }
 '''
 TrdActions = {
@@ -172,11 +172,21 @@ def get_trd_options():
         print("\n")
         return selectedID.lstrip()
 
-def get_slave_response(slave:str):
+def get_slave_response(slave:str, mode:str="TOLERANT_READ"):
         '''get acknowledgment from the slave'''
-        status, _ = util.get_ddr_addr_value(TssrDDRRegions[slave]["status"], 'w')
-        ack = (status >> 8) & 0xFF
-        isSlave = (status >> 28) & 0x1
-        isAlive = (status >> 30) & 0x1
+        if util.check_if_plm_booted() == "1":
+                status, _ = util.get_ddr_addr_value(TssrDDRRegions[slave]["status"], 'w', mode=mode)
+                if status is False:
+                        util.logDebug("Failed to read DDR status register.")
+                        return None, None, None
+                ack = (status >> 8) & 0xFF
+                isSlave = (status >> 28) & 0x1
+                isAlive = (status >> 30) & 0x1
+                util.logDebug(f"DDR Status[{TssrDDRRegions[slave]['status']:#x}]: [{status:#x}], ACK=[{ack:#x}], isSlave=[{isSlave:#x}], isAlive=[{isAlive}]")
+        else:
+                util.logDebug("PLM is not booted. Cannot read DDR status register.")
+                ack = None
+                isSlave = None
+                isAlive = None
 
         return ack, isSlave, isAlive
