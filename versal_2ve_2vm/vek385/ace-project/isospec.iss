@@ -1175,6 +1175,23 @@
             "flags": {"requested": true, "requested_coherent": true, "requested_full_access": true, "requested_virtualized": true, "shared": true}
           }
         ]
+      },
+      "rpu_subsys_bm": {
+        "id": "0x1c000007",
+        "access": [
+          {
+            "name": "RPU",
+            "comment": "RPU Cluster 1 (Baremetal)",
+            "type": "cpu_list",
+            "flags": {"coherent": true},
+            "SMIDs": ["RPU_B"]
+          },
+          {
+            "name": "IPI",
+            "destinations": ["IPI2"],
+            "flags": {"requested": true}
+          }
+        ]
       }
     }
   }
