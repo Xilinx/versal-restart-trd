@@ -37,7 +37,7 @@ BIF_SSBL_ATTR       ??= "u-boot-xlnx"
 BIF_PARTITION_ATTR  ??= "${BIF_FSBL_ATTR} ${BIF_ASU_ATTR} ${BIF_DEVICETREE_ATTR} ${BIF_ATF_ATTR} ${BIF_OPTEE_ATTR} ${BIF_SSBL_ATTR}"
 
 # .bif file Image section name and Subsystem ID ( for APU running Linux )
-BIF_PARTITION_NAME[0x1c000006] ?= "apu_ss"
+BIF_PARTITION_NAME[0x1c000006] ?= "apu_subsys"
 # Custom Subsystem ID for Device Tree
 BIF_PARTITION_ID[device-tree] = "0x1c000006"
 # Custom Subsystem ID for u-boot

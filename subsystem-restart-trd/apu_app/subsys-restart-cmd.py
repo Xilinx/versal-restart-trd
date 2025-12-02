@@ -97,26 +97,33 @@ def app():
                 elif "3" == selectedChoice:
                         slave = "APU"
                         _display_action_info(slave, srd.TssrTrdChoices[selectedChoice]['op-name'], srd.TssrTrdChoices[selectedChoice]['op-desc'])
-                        time.sleep(2)
                         util.logWarn("On re-boot, please stop at u-boot prompt and wait until Healthy Boot Recovery kicks in!")
                         util.logDebug(f"Write @ DDR Address {srd.TssrDDRRegions["APU"]["action"]:#x} with value 0x0000ULL!")
                         util.set_ddr_addr_value(srd.TssrDDRRegions["APU"]["action"], srd.DDR_ADDR_32BITMASK, 0x1 | (coreId << 4) | (actionId << 12), 'w')
 
-                # wait for slave to accept and generate response
-                time.sleep(10)
-
                 while (True):
                         ack, isSlave, isAlive = srd.get_slave_response(slave)
+                        # util.logDebug(f"DDR Status[{srd.TssrDDRRegions[slave]['status']:#x}]: [{ack:#x}], isSlave=[{isSlave:#x}], isAlive=[{isAlive}]", end='\r')
                         if (ack == srd.SLAVE_ACK_OK):
                                 util.logInfo(f"{slave} executing the task: ACK={ack:#x}, isAlive={isAlive}")
                                 print()
                                 break
                         time.sleep(0.5)
 
+                handshakeSleep = 40
+
+                # add extra timeout for healthy boot recovery case
+                if "3" == selectedChoice:
+                        handshakeSleep += int(srd.DEV_CONF["HB_MON_TIMEOUT_MS"]) / 1000
+
+                util.logDebug(f"Waiting for {handshakeSleep} seconds for {slave} to complete the operation...")
+                time.sleep(handshakeSleep)
+
                 # wait for slave to reboot and come back alive
                 endTime = time.time() + 120
                 while time.time() < endTime:
                         ack, isSlave, isAlive = srd.get_slave_response(slave)
+                        # print(f"DDR Status[{srd.TssrDDRRegions[slave]['status']:#x}]: [{ack:#x}], isSlave=[{isSlave:#x}], isAlive=[{isAlive}]", end='\r')
                         if ((isAlive) and (ack == srd.SLAVE_ACK_DONE)):
                                 print()
                                 util.logOut(f"{slave} is back alive after {srd.TssrTrdChoices[selectedChoice]['op-name']}")
@@ -135,6 +142,7 @@ def app():
 if __name__ == "__main__":
 
         if '-D' in sys.argv:
+                print("DEBUG mode enabled")
                 util.LOG_DEBUG = 1
 
         if shutil.which("sc_app") == None:

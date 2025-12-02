@@ -57,15 +57,32 @@ install -m 755 subsys-restart-funcs.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 install -m 755 utility.py $RPM_BUILD_ROOT/opt/subsys-restart-app/
 
 # Extract configuration from config.json and update DEV_CONF in the installed subsys-restart-funcs.py
-CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' ../../../../%{platform}/%{board}/config.json | sed '1d;$d')
-if [ -n "$CONFIG_CONTENT" ]; then
-    sed -i "/^DEV_CONF = {}/c\\
-DEV_CONF = {\\
-$CONFIG_CONTENT\\
-}" $RPM_BUILD_ROOT/opt/subsys-restart-app/subsys-restart-funcs.py
-    echo "Updated DEV_CONF in installed file with configuration from ../../../../%{platform}/%{board}/config.json"
+CONFIG_FILE="../../../../%{platform}/%{board}/config.json"
+TARGET_FILE="$RPM_BUILD_ROOT/opt/subsys-restart-app/subsys-restart-funcs.py"
+if [ -f "$CONFIG_FILE" ]; then
+    # Extract JSON content (removing outer braces)
+    CONFIG_CONTENT=$(sed -n '/^{/,/^}/p' "$CONFIG_FILE" | sed '1d;$d')
+
+    # Create a temporary file for the replacement
+    TEMP_FILE=$(mktemp)
+
+    # Process the target file line by line
+    while IFS= read -r line; do
+        # Check if line starts with DEV_CONF = {}
+        if echo "$line" | grep -q "^DEV_CONF = {}"; then
+            printf '%s\n' "DEV_CONF = {"
+            printf '%s\n' "$CONFIG_CONTENT"
+            printf '%s\n' "}"
+        else
+            printf '%s\n' "$line"
+        fi
+    done < "$TARGET_FILE" > "$TEMP_FILE"
+
+    # Replace the original file
+    mv "$TEMP_FILE" "$TARGET_FILE"
+    echo "Updated DEV_CONF in installed file with configuration from $CONFIG_FILE"
 else
-    echo "Warning: No configuration found in ../../../../%{platform}/%{board}/config.json"
+    echo "Warning: Configuration file not found: $CONFIG_FILE"
 fi
 
 # Install service setup scripts

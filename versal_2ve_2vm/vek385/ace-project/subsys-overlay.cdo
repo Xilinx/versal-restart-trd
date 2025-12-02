@@ -28,8 +28,12 @@ marker 0x64 "LPD_DATA/OCM_ASIL_D_INT"
 # RPU Coherency: --START--
 #   not writing if_rpu0a_intocm_merb___route_bit_cr due to RPU_A0.coherent = 0
 #   not writing if_rpu1a_intocm_merb___route_bit_cr due to RPU_A1.coherent = 0
-#   not writing if_rpu0b_intocm_merb___route_bit_cr due to RPU_B0.coherent = 0
-#   not writing if_rpu1b_intocm_merb___route_bit_cr due to RPU_B1.coherent = 0
+#   Write register if_rpu0b_intocm_merb___route_bit_cr
+#     if_rpu0b_intocm_merb___route_bit_cr = 0x1
+write 0xea571008 0x1
+#   Write register if_rpu1b_intocm_merb___route_bit_cr
+#     if_rpu1b_intocm_merb___route_bit_cr = 0x1
+write 0xea572008 0x1
 #   not writing if_rpu0c_intocm_merb___route_bit_cr due to RPU_C0.coherent = 0
 #   not writing if_rpu1c_intocm_merb___route_bit_cr due to RPU_C1.coherent = 0
 #   not writing if_rpu0d_intocm_merb___route_bit_cr due to RPU_D0.coherent = 0
@@ -347,6 +351,10 @@ begin
     #  -- Add All Subsystems --
     #     add subsystem apu_subsys_linux id 0x1c000006
     pm_add_subsystem 0x1c000006
+    #     add subsystem rpu_subsys_bm id 0x1c000007
+    pm_add_subsystem 0x1c000007
+    #
+    #  -- Add subsystem to subsystem permissions
     # 
     #  -- Start Subsystem apu_subsys_linux Requirements --
     #   Add CPU APU_A0 to subsystem apu_subsys_linux
@@ -825,6 +833,34 @@ begin
     #     qos = 0x64
     pm_add_requirement 0x1c000006 0x182240d7 0x45 0 0x1 0x64
     #  -- End Subsystem apu_subsys_linux Requirements --
+    #
+    #  -- Start Subsystem rpu_subsys_bm Requirements --
+    #   Add CPU RPU_B0 to subsystem rpu_subsys_bm
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     coherent[5] = 0x1
+    #     virtualized[6] = 0x1 due to coherent = 1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000007 0x181100c1 0x42 0 0x61 0x64
+    #   Add CPU RPU_B1 to subsystem rpu_subsys_bm
+    #     allow_secure[2] = 0x0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     coherent[5] = 0x1
+    #     virtualized[6] = 0x1 due to coherent = 1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000007 0x181100c2 0x42 0 0x61 0x64
+    #   Add device IPI2 to subsystem rpu_subsys_bm, aperture 53 in LPD_XPPU
+    #     allow_secure[2] = 0x1 due to secure = 0
+    #     non_shared[0] = 0x2
+    #     requested[6] = 0x1
+    #     requested_full_access[0] = 0x1
+    #     qos = 0x64
+    pm_add_requirement 0x1c000007 0x1822403f 0x46 0 0x1 0x64
+    #  -- End Subsystem rpu_subsys_bm Requirements --
     break 0x2
   end
   log_string "INFO: Skipped SUBSYSTEM_DEFINITION/SUBSYSTEMS execution during in-place PLM update"
