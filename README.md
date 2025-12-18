@@ -7,8 +7,8 @@ SPDX-License-Identifier: MIT
 
 > **[ IMPORTANT ]** <br>
 > Versal VCK190 and Versal VMK180 boards are not supported for 2025.2 release with the new EDF Yocto flow. <br>
-> Both VCK190 and VMK180 still work on the older Petalinux flow and are available under `versal/` directory. <br>
-> Users can also checkout the older tag/commit at **amd/xilinx-v2024.1.1** to build VCK190 and VMK180. <br>
+> Both VCK190 and VMK180 still work on the older Petalinux flow and are available. <br>
+> Users must checkout the older tag/commit at **amd/xilinx-v2024.1.1** to build VCK190 and VMK180. <br>
 
 ## Table of Contents:
 [![Introduction](https://img.shields.io/badge/-1._Introduction-teal)](#introduction)<br>
@@ -21,7 +21,7 @@ A TRD, i.e Technical Reference Design, is a very insightful way to demonstrate w
 Here are some key changes for 2025.2 and onward releases by PM Team:
 - All our TRDs will now be based on the new EDF Yocto Flow.
 - When it comes to pre-built images, users/customers can just download the published .wic image and build PDI using EDF flow as described later in the documents.
-- The standard boot flow is OSPI + SD Card
+- The standard boot flow is OSPI + UFS Card
 
 <br>
 
@@ -65,7 +65,7 @@ The Subsystem Restart TRD demonstrates the capability of PLM Firmware to restart
 
 ### Common Artifacts
 - EDF .wic image: https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html
-- EDF SGTGen Directory: https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1111_1_11112340/external/versal-2ve-2vm-vek385-revb-sdt-seg/
+- EDF SGTGen Directory: https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1115_1_11150857/external/versal-2ve-2vm-vek385-revb-sdt-seg/
 
 ### Installation Steps
 - source vitis / vivado `settings64.sh` script
@@ -84,7 +84,7 @@ Required (choose one):
 Optional:
   -brd <BRD>          Specify board name (default: vek385)
   -cdo <CDO>          Specify overlay CDO file
-  -dir <DIR>          Specify output directory (default: versal-2ve-2vm-vek385_2025.2)
+  -dir <DIR>          Specify output directory (default: versal-2ve-2vm-vek385-revb_2025.2)
   --no-bootbin        Skip EDF bootbin generation (default: false)
   --debug             Enable debug output (default: false)
   --list-boards       List all supported boards
@@ -105,13 +105,13 @@ cd edf-yocto-build
 OR
 ```bash
 cd edf-yocto-build
-./trd-build.sh -xsa <provide-xsa-file-path>  -brd <provide-board-name>
+./trd-build.sh -xsa <provide-xsa-file-path> -brd <provide-board-name>
 ```
 
 - Build rpm package
 ```bash
 cd subsystem-restart-trd/rpmbuild
-./build-package.sh --board <provide-board-name>
+./build-package.sh
 ```
 
 - Install the rpm package on both Versal device and System Controller
@@ -131,7 +131,7 @@ edf-yocto-build-artifacts/
 ├── base-design.pdi
 ├── base-pdi-unique-id-vek385-subsystem-restart-trd.txt
 ├── BOOT_bh.bin
-├── BOOT.bin
+├── BOOT.bin          <--- BOOT PDI file
 ├── bootbin-version-header-vek385-subsystem-restart-trd.bin
 ├── bootbin-version-string-vek385-subsystem-restart-trd.txt
 ├── bootgen.bif

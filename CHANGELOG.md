@@ -1,8 +1,9 @@
 # Changelogs
 
 Copyright (C) 2019 - 2021 Xilinx, Inc. All rights reserved.<br>
-
 Copyright (c) 2022 - 2025 Advanced Micro Devices, Inc.  ALL rights reserved.
+
+SPDX-License-Identifier: MIT
 
 All notable changes to the Subsystem Restart TRD project will be documented in this file.
 
@@ -20,4 +21,4 @@ All notable changes to the Subsystem Restart TRD project will be documented in t
 - Petalinux based build
 
 ### License
-Copyright (C) 2025 Advanced Micro Devices, Inc. All Rights Reserved.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

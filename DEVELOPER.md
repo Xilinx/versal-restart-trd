@@ -1,6 +1,7 @@
 Copyright (C) 2019 - 2021 Xilinx, Inc. All rights reserved.<br>
-
 Copyright (c) 2022 - 2025 Advanced Micro Devices, Inc.  ALL rights reserved.
+
+SPDX-License-Identifier: MIT
 
 # Table of Contents:
 [![Developer's Guide](https://img.shields.io/badge/-1._Developer's_Guide-white)](#developers-guide)<br>
@@ -52,7 +53,7 @@ Copyright (c) 2022 - 2025 Advanced Micro Devices, Inc.  ALL rights reserved.
 ```
 
 ### EDF Yocto Overview
-* Customers directly use SDTGen published here: https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1111_1_11112340/external/versal-2ve-2vm-vek385-revb-sdt-seg/ (but, tool supports usage of .XSA to generate SDTGen if needed).
+* Customers directly use SDTGen published here: [Click Here](https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1115_1_11150857/external/versal-2ve-2vm-vek385-revb-sdt-seg/) (but, tool supports usage of .XSA to generate SDTGen if needed).
 * Overlay CDO will contain all the subsystem customizations and confirations.
 * In EDF Yocto Setup, we create our custom meta layer for TRD(s).
 * With `gen-machine-conf`, we generate our custom machine by inheriting the default `versal-2ve-2vm-vek385-sdt-seg` machine provided by EDF.

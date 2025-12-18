@@ -1,5 +1,10 @@
 # Subsystem Restart TRD for Versal AI Edge Gen2 (vek385)
 
+Copyright (C) 2019 - 2021 Xilinx, Inc. All rights reserved.<br>
+Copyright (C) 2023 - 2025, Advanced Micro Devices, Inc. All rights reserved.<br>
+
+SPDX-License-Identifier: MIT
+
 # Table of Contents:
 [![Introduction](https://img.shields.io/badge/-1._Introduction-teal)](#introduction)<br>
 [![Build Instructions and Artifacts](https://img.shields.io/badge/-2._Build_Instructions_and_Artifacts-darkblue)](#build-instructions-and-artifacts)<br>
@@ -54,7 +59,7 @@ Select an operation ID:
            └── bootbin
                ├── versal-2ve-2vm-apu-subsys.inc
                ├── versal-2ve-2vm-rpu-subsys.inc
-               └── xilinx-bootbin_1.0.bbappend
+               └── xilinx-bootbin_%.bbappend
 
 ```
 
@@ -99,7 +104,7 @@ Following tables describe examples of some peripheral/device permission for APU 
 
 ### EDF Artifacts
 - EDF .wic image: https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools.html
-- EDF SGTGen Directory: https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1111_1_11112340/external/versal-2ve-2vm-vek385-revb-sdt-seg/
+- EDF SGTGen Directory: https://edf.amd.com/sswreleases/rel-v2025.2/sdt/2025.2/2025.2_1115_1_11150857/external/versal-2ve-2vm-vek385-revb-sdt-seg/
 
 ### Installation Steps
 - source vitis / vivado `settings64.sh` script
@@ -112,13 +117,13 @@ cd edf-yocto-build
 OR
 ```bash
 cd edf-yocto-build
-./trd-build.sh -xsa <provide-xsa-file-path>  -brd vek385
+./trd-build.sh -xsa <provide-xsa-file-path> -brd vek385
 ```
 
 - Build rpm package
 ```bash
 cd subsystem-restart-trd/rpmbuild
-./build-package.sh --board vek385
+./build-package.sh
 ```
 
 - Install the rpm package on both Versal2 and System Controller
