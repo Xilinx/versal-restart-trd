@@ -251,6 +251,10 @@ def get_ddr_addr_value(addr, length='l', mode="NON_TOLERANT_READ"):
 def check_if_plm_booted():
         '''Checks whether PLM boot is complete or not'''
 
+        # No need to check PLM Boot status if user-interface running from Versal device
+        if DEV_HOST == "versal2":
+                return "1"
+
         cmd = f"sc_app -c getgpio -t VERSAL_DONE"
         try:
                 ret, stdout = execute_command(cmd)
