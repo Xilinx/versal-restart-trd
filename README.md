@@ -22,6 +22,8 @@ Here are some key changes for 2025.2 and onward releases by PM Team:
 - All our TRDs will now be based on the new EDF Yocto Flow.
 - When it comes to pre-built images, users/customers can just download the published .wic image and build PDI using EDF flow as described later in the documents.
 - The standard boot flow is OSPI + UFS Card
+  - Flashing OSPI (Primary Boot Device): [Click Here](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/3250586284/Board+specific+specifications+and+information#Programing%2Fflashing-the-OSPI-(Primary-boot-device))
+  - Programming UFS/SD (Secondary Boot Device): [Click Here](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/3250586284/Board+specific+specifications+and+information#Programing-the-UFS-%2F-SD-Card(Secondary-Boot-device))
 
 <br>
 
